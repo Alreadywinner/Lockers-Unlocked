@@ -1,0 +1,38 @@
+{
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": [
+    "airbnb",
+    "airbnb-typescript",
+    "eslint:recommended",
+    "plugin:react/recommended",
+    "plugin:import/typescript",
+    "plugin:prettier/recommended",
+    "plugin:@typescript-eslint/recommended"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "overrides": [],
+  "parserOptions": {
+    "ecmaVersion": "latest",
+    "sourceType": "module",
+    "project": "./tsconfig.json"
+  },
+  "plugins": ["react", "@typescript-eslint", "prettier"],
+  //make sure to keep prettier on the end because if some error occur in the first ones that will be override by the prettier
+  "rules": {
+    "no-shadow": "off",
+    "quotes": ["error", "single"],
+    "prettier/prettier": ["error", { "endOfLine": "auto" }]
+  }
+}
+
+// 'react/function-component-definition': [
+//   'error',
+//   {
+//     namedComponents: ['function-declaration', 'arrow-function'],
+//   },
+// ],
+
+// We could also add this rule for allowing arrow functional components as well but since react documentation doesn't use it so is airbnb that why we are following that convention
