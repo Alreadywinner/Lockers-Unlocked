@@ -24,7 +24,8 @@
   "rules": {
     "no-shadow": "off",
     "quotes": ["error", "single"],
-    "prettier/prettier": ["error", { "endOfLine": "auto" }]
+    "prettier/prettier": ["error", { "endOfLine": "auto" }],
+    "react/jsx-props-no-spreading": "off"
   }
 }
 
