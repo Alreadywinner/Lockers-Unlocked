@@ -1,7 +1,12 @@
 import React from 'react';
+import { ButtonPropType } from './types';
 
-function Button() {
-  return <div>index</div>;
+function Button({ text, className, ...rest }: ButtonPropType) {
+  return (
+    <div className={className} {...rest}>
+      {text}
+    </div>
+  );
 }
 
 export default Button;
