@@ -26,7 +26,8 @@
       "@hooks": ["./src/hooks"],
       "@hooks/*": ["./src/hooks/*"],
       "@services": ["./src/services"],
-      "@services/*": ["./src/services/*"]
+      "@services/*": ["./src/services/*"],
+      "@Icon": ["./src/assets/icons/icons"]
     },
     "noEmit": true,
     "jsx": "react-jsx"
