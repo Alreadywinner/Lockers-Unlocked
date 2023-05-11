@@ -9,7 +9,7 @@ const meta: Meta<typeof Button> = {
    * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
    * to learn how to generate automatic titles
    */
-  title: 'Button',
+  title: 'Components/Button',
   component: Button,
 };
 
@@ -20,10 +20,9 @@ type Story = StoryObj<typeof Button>;
 
 export const Template: Story = {
   render: () => (
-    <Button
-      text="SHOP NOW"
-      className="rounded-md text-white px-8 py-2 bg-red uppercase font-gilroy font-bold"
-    />
+    <Button className="rounded-md text-white px-8 py-2 bg-red uppercase font-gilroy font-bold">
+      SHOP NOW
+    </Button>
   ),
 };
 

@@ -1,11 +1,16 @@
 import React from 'react';
 import { ButtonPropType } from './types';
 
-function Button({ text, className, ...rest }: ButtonPropType) {
+function Button({ children, type, className, ...rest }: ButtonPropType) {
   return (
-    <div className={className} {...rest}>
-      {text}
-    </div>
+    <button
+      // eslint-disable-next-line react/button-has-type
+      type={type as 'button' | 'submit' | 'reset'}
+      className={className}
+      {...rest}
+    >
+      {children}
+    </button>
   );
 }
 
