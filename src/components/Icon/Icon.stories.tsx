@@ -10,7 +10,7 @@ const meta: Meta<typeof Icon> = {
    * See https://storybook.js.org/docs/react/configure/overview#configure-story-loading
    * to learn how to generate automatic titles
    */
-  title: 'Icon',
+  title: 'Components/Icon',
   component: Icon,
 };
 
