@@ -10,7 +10,11 @@ export default {
     fontFamily: {
       gilroy: ['Gilroy', 'sans-serif'],
     },
-    extend: {},
+    extend: {
+      backgroundImage: {
+        texture: "url('./src/assets/icons/swirl.svg')",
+      },
+    },
   },
   plugins: [],
 };
