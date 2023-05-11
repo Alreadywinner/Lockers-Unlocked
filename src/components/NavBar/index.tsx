@@ -44,10 +44,9 @@ export default function NavBar() {
                     </Link>
                   );
                 })}
-                <Button
-                  className="py-2  px-4 bg-red text-white rounded-lg hover:font-bold hover:cursor-pointer"
-                  text="Login"
-                />
+                <Button className="py-2  px-4 bg-red text-white rounded-lg hover:font-bold hover:cursor-pointer">
+                  Login
+                </Button>
               </div>
             </div>
           </div>
