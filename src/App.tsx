@@ -1,11 +1,11 @@
-import { Button } from 'components';
+import HomePage from '@containers';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<Button text="testing" className="bg-red" />} />
+      <Route path="/" element={<HomePage />} />
       {/* <Route path="/about" element={<AboutPage />} /> */}
     </Routes>
   );
