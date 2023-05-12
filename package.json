@@ -1,6 +1,6 @@
 {
   "name": "react-starter-kit",
-  "private": true,
+  "private": false,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -15,7 +15,7 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
   },
-  "homepage": "https://Alreadywinner.github.io/Lockers-Unlocked/",
+  "homepage": "https://Alreadywinner.github.io/",
   "dependencies": {
     "@storybook/cli": "^7.0.10",
     "react": "^18.2.0",
