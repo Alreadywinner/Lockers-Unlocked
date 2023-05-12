@@ -24,7 +24,7 @@ export default function Carousel({ slides }: CarouselType) {
       data-carousel="slide"
     >
       {/* Carousel wrapper */}
-      <div className="overflow-hidden rounded-t-lg">
+      <div className="rounded-t-lg relative overflow-hidden">
         {/* Slides */}
         {slides &&
           slides?.map((slide, index) => (
@@ -32,10 +32,14 @@ export default function Carousel({ slides }: CarouselType) {
               key={slide.key}
               className={`${
                 index === currentSlide ? 'block' : 'hidden'
-              } duration-700 ease-in-out`}
+              } transition duration-500 ease-in-out transform hover:scale-110`}
               data-carousel-item
             >
-              <img src={slide.src} className="w-full h-full" alt="..." />
+              <img
+                src={slide.src}
+                className="w-full h-full cursor-pointer object-cover"
+                alt="..."
+              />
             </div>
           ))}
       </div>
