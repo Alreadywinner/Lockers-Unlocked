@@ -13,7 +13,8 @@
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -d dist",
+    "gh-pages-clean": "gh-pages-clean"
   },
   "dependencies": {
     "@storybook/cli": "^7.0.10",
@@ -55,7 +56,6 @@
     "eslint-plugin-react": "^7.32.2",
     "eslint-plugin-react-hooks": "4.3.0",
     "eslint-plugin-storybook": "^0.6.12",
-    "gh-pages": "^5.0.0",
     "husky": "^8.0.0",
     "postcss": "^8.4.23",
     "prettier": "^2.8.7",
