@@ -1,6 +1,6 @@
 {
-  "name": "react-starter-kit",
-  "private": false,
+  "name": "lockers_unlocked",
+  "private": true,
   "version": "0.0.0",
   "type": "module",
   "scripts": {
@@ -12,12 +12,11 @@
     "prepare": "husky install",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist",
-    "gh-pages-clean": "gh-pages-clean"
+    "deploy": "npm run build && firebase deploy"
   },
   "dependencies": {
     "@storybook/cli": "^7.0.10",
+    "firebase": "^9.21.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.1",
