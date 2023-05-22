@@ -33,27 +33,27 @@ export default function HomePageUI({
           </Button>
         </div>
       </section>
-      <section className="rounded bg-gradient-to-br from-white to-gray shadow-xl font-gilroy flex">
+      <section className="rounded bg-gradient-to-br from-white to-gray shadow-xl font-gilroy flex md:flex-row flex-col">
         <div className="w-50 flex items-center justify-center p-8">
           <img
             src="https://cdn.shopify.com/s/files/1/0414/2111/1457/files/showcase_packs-min_720x.png?v=1677086293"
-            className="w-2/3"
+            className="md:w-2/3 w-full"
             alt="nil-trading"
           />
         </div>
-        <div className="w-50 text-black justify-center flex flex-col gap-7">
-          <p className="font-bold uppercase tracking-[.3em]">
+        <div className="w-50 text-black justify-center md:items-start items-center flex flex-col gap-7">
+          <p className="md:font-bold uppercase tracking-[.3em] ">
             OFFICIALLY LICENSED
           </p>
-          <p className="font-extrabold uppercase text-3xl">
+          <p className="md:font-extrabold uppercase md:text-3xl text-xl">
             NIL TRADING CARD PACKS
           </p>
-          <p className="font-bold underline underline-offset-1 uppercase text-lg">
+          <p className="md:font-bold underline underline-offset-1 uppercase md:text-lg text-base md:text-left text-center">
             1 GUARANTEED AUTOGRAPH IN EACH PACK! COLLECT THEM ALL NOW!
           </p>
           <Button
             type="button"
-            className="bg-red w-32 p-3 rounded text-extrabold text-white uppercase"
+            className="bg-red w-32 p-3 rounded text-extrabold text-white uppercase md:mb-0 mb-5"
           >
             Shop Now
           </Button>
@@ -64,27 +64,28 @@ export default function HomePageUI({
         <img
           src="https://cdn.shopify.com/s/files/1/0414/2111/1457/files/Website_1800x.jpg?v=1663375801"
           alt="stars"
+          className="w-full"
         />
       </section>
       {/* find fav player */}
-      <section className="font-gilroy bg-red flex bg-texture flex items-center justify-center gap-5 h-32 text-white">
-        <p className="text-xl font-extrabold uppercase">
+      <section className="font-gilroy bg-red flex bg-texture flex md:flex-row flex-col items-center justify-center gap-5 md:h-32 h-60 text-white">
+        <p className="md:text-xl md:font-extrabold uppercase">
           find your favorite player
         </p>
-        <p className="text-xm">Browse all player trunks</p>
+        <p className="md:text-xm">Browse all player trunks</p>
         <Button type="button" className="bg-black text-white p-3 rounded">
           View All
         </Button>
       </section>
-      {/* Now Live */}
+      {/* Next trunk tops */}
       <section className="flex justify-center items-center mt-5 bg-fcfcfc shadow-2xl p-6 font-gilroy gap-3 flex-col">
-        <p className="text-black uppercase font-extrabold text-3xl">
+        <p className="text-black uppercase font-extrabold md:text-3xl text-xl">
           next trunk drops
         </p>
-        <p className="text-black uppercase font-bold">
+        <p className="text-black uppercase md:font-bold">
           The Wait Is Almost Over
         </p>
-        <Button className="bg-red rounded text-white font-extrabold text-lg p-2">
+        <Button className="bg-red rounded text-white font-extrabold md:text-lg text-base p-2">
           Enter Here
         </Button>
       </section>
@@ -97,22 +98,24 @@ export default function HomePageUI({
       </section>
       {/* Trending */}
       <section className="bg-fcfcfc shadow-2xl flex flex-col p-3 mt-3 mb-5 text-center font-gilroy">
-        <p className="uppercase mt-5 mb-8 font-extrabold text-3xl">trending</p>
+        <p className="uppercase mt-5 mb-8 font-extrabold md:text-3xl text-xl">
+          trending
+        </p>
         <div className="flex gap-5 justify-between">
           {trendingTrunks &&
             trendingTrunks?.map((element) => {
               return (
                 <Card
                   key={element.title}
-                  cardDiv="bg-white rounded-t-lg shadow font-gilroy flex justify-between flex-col hover:cursor-pointer transition-transform duration-300 hover:-translate-y-2"
+                  cardDiv="bg-white rounded-t-lg shadow font-gilroy flex justify-between flex-col hover:cursor-pointer transition-transform duration-300 hover:-translate-y-2 p-4"
                   imgProps={{
                     src: element.imgSrc,
                     img_alt: 'temporary',
-                    className: 'rounded-t-lg w-full h-full',
+                    className: 'rounded-t-lg md:w-full md:h-full h-20',
                   }}
                 >
                   <div className="p-5 bg-white">
-                    <h5 className="mb-2 text-2xl font-bold tracking-tight text-black">
+                    <h5 className="mb-2 md:text-2xl text-base font-bold tracking-tight text-black">
                       {element.title}
                     </h5>
 
@@ -127,11 +130,11 @@ export default function HomePageUI({
         </div>
       </section>
       {/* featured trunks */}
-      <section className="p-10 bg-fcfcfc shadow-2xl text-center font-gilroy">
-        <p className="uppercase mt-5 mb-8 font-extrabold text-3xl">
+      <section className="md:p-10 bg-fcfcfc shadow-2xl text-center font-gilroy">
+        <p className="uppercase md:mt-5 mb-8 mt-10 font-extrabold md:text-3xl text-xl">
           featured trunks
         </p>
-        <div className="flex h-45 justify-center gap-5 mb-6">
+        <div className="flex md:h-45 justify-center gap-5 mb-6">
           {featured_trunks &&
             featured_trunks?.map((element) => {
               return (
