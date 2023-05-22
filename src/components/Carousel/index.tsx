@@ -24,7 +24,7 @@ export default function Carousel({ slides }: CarouselType) {
       data-carousel="slide"
     >
       {/* Carousel wrapper */}
-      <div className="rounded-t-lg relative overflow-hidden">
+      <div className="relative overflow-hidden">
         {/* Slides */}
         {slides &&
           slides?.map((slide, index) => (
