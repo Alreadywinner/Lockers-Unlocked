@@ -27,16 +27,13 @@ export default function Footer() {
               <ul className="text-gray font-semibold">
                 <li className="mb-4">
                   <a href="https://flowbite.com/" className="hover:text-white">
-                    Flowbite
+                    Contact Us
                   </a>
                 </li>
                 <li>
-                  <a
-                    href="https://tailwindcss.com/"
-                    className="hover:text-white"
-                  >
-                    Tailwind CSS
-                  </a>
+                  <Link to="/about" className="hover:text-white">
+                    About Us
+                  </Link>
                 </li>
               </ul>
             </div>
