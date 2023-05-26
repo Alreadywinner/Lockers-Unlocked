@@ -6,6 +6,7 @@ import { ReactComponent as PreviousIcon } from './previous.svg';
 import { ReactComponent as NextIcon } from './next.svg';
 import { ReactComponent as CrossIcon } from './cross.svg';
 import { ReactComponent as BurgerIcon } from './burger-menu.svg';
+import { ReactComponent as BasketBallIcon } from './basketball.svg';
 
 export {
   UserIcon,
@@ -16,4 +17,5 @@ export {
   NextIcon,
   CrossIcon,
   BurgerIcon,
+  BasketBallIcon,
 };
