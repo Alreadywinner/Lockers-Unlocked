@@ -6,6 +6,8 @@ export default {
       white: '#fcfcfc',
       black: '#272d2f',
       gray: '#b9b9b9',
+      cyan: '#0E7490',
+      gray500: '#6B7280',
     },
     fontFamily: {
       gilroy: ['Gilroy', 'sans-serif'],
