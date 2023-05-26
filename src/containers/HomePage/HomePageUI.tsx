@@ -1,4 +1,4 @@
-import { Button, Card, Carousel, Footer, Input, NavBar } from '@components';
+import { Button, Card, Carousel, Input } from '@components';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { HomePageType } from './types';
@@ -10,7 +10,6 @@ export default function HomePageUI({
 }: HomePageType) {
   return (
     <div>
-      <NavBar />
       <Carousel slides={slides.slides} />
       {/* Sign Up and Save */}
       <section className="bg-red font-gilroy flex items-center justify-center flex-col p-4 bg-texture">
@@ -101,25 +100,25 @@ export default function HomePageUI({
         <p className="uppercase mt-5 mb-8 font-extrabold md:text-3xl text-xl">
           trending
         </p>
-        <div className="flex gap-5 justify-between">
+        <div className="flex gap-5 justify-between overflow-y-hidden md:whitespace-nowrap whitespace-nowrap">
           {trendingTrunks &&
             trendingTrunks?.map((element) => {
               return (
                 <Card
                   key={element.title}
-                  cardDiv="bg-white rounded-t-lg shadow font-gilroy flex justify-between flex-col hover:cursor-pointer transition-transform duration-300 hover:-translate-y-2 p-4"
+                  cardDiv="md:w-60 md:p-4 w-40 h-96 rounded-t-lg shadow font-gilroy flex justify-between flex-col hover:cursor-pointer transition-transform duration-300 hover:-translate-y-2"
                   imgProps={{
                     src: element.imgSrc,
                     img_alt: 'temporary',
-                    className: 'rounded-t-lg md:w-full md:h-full h-20',
+                    className: 'rounded-t-lg md:w-full md:h-full h-60',
                   }}
                 >
-                  <div className="p-5 bg-white">
+                  <div className="p-5 bg-white text-ellipsis overflow-hidden">
                     <h5 className="mb-2 md:text-2xl text-base font-bold tracking-tight text-black">
                       {element.title}
                     </h5>
 
-                    <p className="mb-3 font-normal text-gray">
+                    <p className="mb-3 font-normal text-gray hidden md:block">
                       Here are the biggest enterprise technology acquisitions of
                       2021 so far, in reverse chronological order.
                     </p>
@@ -130,18 +129,18 @@ export default function HomePageUI({
         </div>
       </section>
       {/* featured trunks */}
-      <section className="md:p-10 bg-fcfcfc shadow-2xl text-center font-gilroy">
-        <p className="uppercase md:mt-5 mb-8 mt-10 font-extrabold md:text-3xl text-xl">
+      <section className="md:p-10 md:mb-0 mb-10 shadow-2xl text-center font-gilroy">
+        <p className="uppercase md:mt-5 mb-10 mt-10 font-extrabold md:text-3xl text-xl">
           featured trunks
         </p>
-        <div className="flex md:h-45 justify-center gap-5 mb-6">
+        <div className="flex md:h-45 h-60 justify-center gap-5 mb-6 overflow-y-hidden whitespace-nowrap">
           {featured_trunks &&
             featured_trunks?.map((element) => {
               return (
                 <Link
                   to="/"
                   key={element.key}
-                  className="bg-gray-300 p-3 rounded-full shadow-xl flex flex-col justify-between text-center cursor-pointer transition-transform duration-300 hover:-translate-y-2"
+                  className="bg-white p-3 md:mb-0 mb-10 rounded-full shadow-xl flex flex-col justify-between text-center cursor-pointer transition-transform duration-300 hover:-translate-y-2"
                 >
                   <div className="w-full h-full">
                     <img
@@ -157,12 +156,11 @@ export default function HomePageUI({
         </div>
         <Link
           to="/"
-          className="underline underline-offset-1 mt-8 mb-8 font-extrabold text-base"
+          className="underline underline-offset-1 mt-8 mb-10 font-extrabold text-base"
         >
           view all trunks
         </Link>
       </section>
-      <Footer />
     </div>
   );
 }
