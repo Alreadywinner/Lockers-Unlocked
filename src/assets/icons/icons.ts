@@ -7,6 +7,10 @@ import { ReactComponent as NextIcon } from './next.svg';
 import { ReactComponent as CrossIcon } from './cross.svg';
 import { ReactComponent as BurgerIcon } from './burger-menu.svg';
 import { ReactComponent as BasketBallIcon } from './basketball.svg';
+import { ReactComponent as EnvelopeIcon } from './envelope.svg';
+import { ReactComponent as LocationIcon } from './location.svg';
+import { ReactComponent as PhoneIcon } from './phone.svg';
+import { ReactComponent as MainLogoIcon } from './main-logo-white.svg';
 
 export {
   UserIcon,
@@ -18,4 +22,8 @@ export {
   CrossIcon,
   BurgerIcon,
   BasketBallIcon,
+  EnvelopeIcon,
+  LocationIcon,
+  PhoneIcon,
+  MainLogoIcon,
 };
