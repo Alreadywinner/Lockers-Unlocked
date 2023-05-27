@@ -1,0 +1,91 @@
+import React from 'react';
+import { Button, Input } from '@components';
+import { EnvelopeIcon, LocationIcon, PhoneIcon } from 'assets/icons/icons';
+
+function ContactPage() {
+  return (
+    <section className="w-full font-gilroy">
+      <div className="flex flex-col gap-5">
+        <h5 className="text-center text-3xl mt-8 mb-5 font-bold">
+          Get in Touch
+        </h5>
+        <form
+          action="#"
+          className="flex flex-col gap-5 mt-5 lg:ml-80 lg:mr-80 ml-5 mr-5"
+        >
+          <label htmlFor="name">Your name *</label>
+          <Input
+            type="text"
+            name="name"
+            id="name"
+            className="h-9 border-solid border-2 border-red rounded pl-2"
+          />
+          <label htmlFor="email">Email *</label>
+          <Input
+            type="text"
+            name="email"
+            id="email"
+            className="h-9 border-solid border-2 border-red rounded pl-2"
+          />
+
+          <label htmlFor="message">Message *</label>
+          <textarea
+            name="message"
+            id="message"
+            cols={30}
+            rows={8}
+            className="border-solid border-2 border-red rounded pl-2"
+          />
+
+          <Button
+            type="submit"
+            className="bg-red400 text-white hover:bg-red500 rounded h-10 md:w-80 w-full self-center"
+          >
+            Subscribe
+          </Button>
+        </form>
+      </div>
+      <div className="flex flex-col items-center justify-center mt-10 mb-5 leading-relaxed text-gray500">
+        <h5 className="text-2xl font-bold mt-10 mb-4">Contact Information</h5>
+        <p className="text-center mt-10 mb-20 lg:ml-80 lg:mr-80 ml-5 mr-5">
+          Cras ut varius magna. Morbi sed orci id sapien ultricies malesu. Lorem
+          ipsum dolor sit, amet consectetur adipisicing elit. Dicta veritatis
+          soluta, earum doloremque eius consectetur, facere nostrum fugit nam
+          consequuntur quisquam tempore eos! Quisquam, accusamus.
+        </p>
+        <div className="flex items-center justify-between text-center gap-10 flex-col">
+          <div className="flex md:flex-row flex-col items-center gap-10 text-base leading-relaxed text-gray500">
+            <LocationIcon width={100} height={100} />
+            <span>San Francisco, CA , US</span>
+          </div>
+          <div className="flex md:flex-row flex-col items-center gap-10 text-base leading-relaxed text-gray500">
+            <EnvelopeIcon width={100} height={100} />
+
+            <span className="cursor-pointer hover:underline hover:underline-offset-8">
+              <a href="mailto:lockersunlocked@support.com">
+                lockersunlocked@support.com
+              </a>
+            </span>
+          </div>
+          <div className="flex md:flex-row flex-col items-center gap-10 text-base leading-relaxed text-gray500">
+            <PhoneIcon width={100} height={100} />
+            <span>(+92) - 303 005 854</span>
+          </div>
+        </div>
+
+        <h5 className="mt-20 mb-5">Working Hours</h5>
+        <p>Monday - Saturday: 8.am - 6.pm</p>
+      </div>
+      <iframe
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d27972.48941898911!2d-122.45165589542735!3d37.77251754741872!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x80859a6d00690021%3A0x4a501367f076adff!2sSan%20Francisco%2C%20CA%2C%20USA!5e0!3m2!1sen!2s!4v1685122768882!5m2!1sen!2s"
+        title="Map View"
+        width="100%"
+        height="600"
+        allowFullScreen={false}
+        loading="lazy"
+      />
+    </section>
+  );
+}
+
+export default ContactPage;
