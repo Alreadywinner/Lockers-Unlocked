@@ -8,6 +8,8 @@ export default {
       gray: '#b9b9b9',
       cyan: '#0E7490',
       gray500: '#6B7280',
+      red400: '#F77171',
+      red500: '#EF4444',
     },
     fontFamily: {
       gilroy: ['Gilroy', 'sans-serif'],

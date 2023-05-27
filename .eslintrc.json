@@ -25,7 +25,15 @@
     "no-shadow": "off",
     "quotes": ["error", "single"],
     "prettier/prettier": ["error", { "endOfLine": "auto" }],
-    "react/jsx-props-no-spreading": "off"
+    "react/jsx-props-no-spreading": "off",
+    "jsx-a11y/label-has-associated-control": [
+      2,
+      {
+        "labelAttributes": ["label"],
+        "controlComponents": ["Input"],
+        "depth": 3
+      }
+    ]
   }
 }
 
