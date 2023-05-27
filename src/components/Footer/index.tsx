@@ -1,23 +1,21 @@
 import { FacebookIcon, InstagramIcon, TwitterIcon } from '@Icon';
 import React from 'react';
 import { Link } from 'react-router-dom';
+import MainBlackLogoImg from '@Images';
 
 export default function Footer() {
   return (
     <footer className="bg-black font-gilroy text-white">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
-        <div className="md:flex md:justify-between">
+        <div className="md:flex md:justify-between gap-5">
           <div className="mb-6 md:mb-0">
-            <a href="https://flowbite.com/" className="flex items-center">
+            <Link to="/" className="flex items-center hover:cursor-pointer">
               <img
-                src="https://flowbite.com/docs/images/logo.svg"
-                className="h-8 mr-3"
-                alt="FlowBite Logo"
+                src={MainBlackLogoImg}
+                alt="main-logo"
+                className="h-40 mr-3"
               />
-              <span className="self-center text-2xl font-semibold whitespace-nowrap">
-                Lockers Unlocked
-              </span>
-            </a>
+            </Link>
           </div>
           <div className="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
             <div>
@@ -26,9 +24,9 @@ export default function Footer() {
               </h2>
               <ul className="text-gray font-semibold">
                 <li className="mb-4">
-                  <a href="https://flowbite.com/" className="hover:text-white">
+                  <Link to="/contact" className="hover:text-white">
                     Contact Us
-                  </a>
+                  </Link>
                 </li>
                 <li>
                   <Link to="/about" className="hover:text-white">
