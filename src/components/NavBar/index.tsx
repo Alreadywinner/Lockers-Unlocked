@@ -1,4 +1,4 @@
-import { BurgerIcon, CrossIcon } from '@Icon';
+import { BurgerIcon, CrossIcon, MainLogoIcon } from '@Icon';
 import Button from 'components/Button';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -26,19 +26,19 @@ export default function NavBar() {
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between h-16">
           <div className="flex-shrink-0 flex items-center">
-            <Link to="/" className="font-bold text-xl">
-              Lockers Unlocked
+            <Link to="/">
+              <MainLogoIcon width={200} height={200} />
             </Link>
           </div>
           <div className="flex items-center">
-            <div className="hidden sm:block sm:ml-6">
-              <div className="flex">
+            <div className="hidden md:block sm:block sm:ml-6">
+              <div className="flex items-center text-center">
                 {navLinks.map((element) => {
                   return (
                     <Link
                       to={element.routeName}
                       key={element.key}
-                      className="ml-4 px-3 py-2  rounded-md text-sm font-bold text-black hover:text-gray hover:bg-gray-50"
+                      className="md:ml-0 ml-4 px-3 py-2  rounded-md text-sm font-bold text-black hover:text-gray hover:bg-gray-50"
                     >
                       {element.name}
                     </Link>
@@ -69,7 +69,7 @@ export default function NavBar() {
 
       {isOpen && (
         <div className="sm:hidden" id="mobile-menu">
-          <div className="px-2 pt-2 pb-3 space-y-1">
+          <div className="px-2 pt-2 pb-3 space-y-1 flex flex-col items-center justify-center">
             <Link
               to="/"
               className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
@@ -88,6 +88,9 @@ export default function NavBar() {
             >
               Contact
             </Link>
+            <Button className="py-2 px-4 bg-red text-white rounded-lg hover:font-bold hover:cursor-pointer">
+              Login
+            </Button>
           </div>
         </div>
       )}
