@@ -1,4 +1,4 @@
-import { BurgerIcon, CrossIcon, MainLogoIcon } from '@Icon';
+import { BurgerIcon, CrossIcon } from '@Icon';
 import Button from 'components/Button';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
@@ -17,6 +17,7 @@ export default function NavBar() {
     { name: 'College Teams', routeName: '/', key: 5 },
     { name: 'D1 Sports', routeName: '/', key: 6 },
     { name: 'Auctions', routeName: '/', key: 7 },
+    { name: 'Login', routeName: '/', key: 8 },
   ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -24,11 +25,9 @@ export default function NavBar() {
   return (
     <nav className="sticky top-0 z-50 bg-white shadow-md font-gilroy">
       <div className="mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between h-16">
-          <div className="flex-shrink-0 flex items-center">
-            <Link to="/">
-              <MainLogoIcon width={200} height={200} />
-            </Link>
+        <div className="flex md:items-center md:justify-center justify-between h-16">
+          <div className="md:hidden flex items-center justify-center">
+            <p className="font-extrabold text-red text-2xl">Lockers Unlocked</p>
           </div>
           <div className="flex items-center">
             <div className="hidden md:block sm:block sm:ml-6">
@@ -44,9 +43,6 @@ export default function NavBar() {
                     </Link>
                   );
                 })}
-                <Button className="py-2  px-4 bg-red text-white rounded-lg hover:font-bold hover:cursor-pointer">
-                  Login
-                </Button>
               </div>
             </div>
           </div>

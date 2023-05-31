@@ -5,7 +5,7 @@ import MainBlackLogoImg from '@Images';
 
 export default function Footer() {
   return (
-    <footer className="bg-black font-gilroy text-white">
+    <footer className="bg-fullBlack font-gilroy text-white">
       <div className="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
         <div className="md:flex md:justify-between gap-5">
           <div className="mb-6 md:mb-0">
@@ -37,29 +37,6 @@ export default function Footer() {
             </div>
             <div>
               <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">
-                Follow us
-              </h2>
-              <ul className="text-gray font-semibold">
-                <li className="mb-4">
-                  <a
-                    href="https://github.com/themesberg/flowbite"
-                    className="hover:text-white "
-                  >
-                    Github
-                  </a>
-                </li>
-                <li>
-                  <a
-                    href="https://discord.gg/4eeurUVvTy"
-                    className="hover:text-white"
-                  >
-                    Discord
-                  </a>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h2 className="mb-6 text-sm font-semibold text-gray-900 uppercase">
                 Legal
               </h2>
               <ul className="text-gray font-semibold">
@@ -81,22 +58,22 @@ export default function Footer() {
         <div className="sm:flex sm:items-center sm:justify-between">
           <span className="text-sm text-gray-500 sm:text-center dark:text-gray-400">
             © 2023{' '}
-            <a href="https://flowbite.com/" className="hover:text-white">
-              Flowbite™
-            </a>
+            <Link to="/" className="hover:text-white">
+              Lockers Unlocked™
+            </Link>
             . All Rights Reserved.
           </span>
           <div className="flex mt-4 space-x-6 sm:justify-center sm:mt-0">
             <Link to="/" className="text-gray hover:text-gray-900">
-              <FacebookIcon color="black" />
+              <FacebookIcon color="#000000" />
               <span className="sr-only">Facebook page</span>
             </Link>
             <Link to="/" className="text-gray hover:text-gray-900">
-              <InstagramIcon color="white" />
+              <InstagramIcon color="#000000" />
               <span className="sr-only">Instagram page</span>
             </Link>
             <Link to="/" className="text-gray hover:text-gray-900">
-              <TwitterIcon color="#ffc600" />
+              <TwitterIcon color="#000000" />
               <span className="sr-only">Twitter page</span>
             </Link>
           </div>
