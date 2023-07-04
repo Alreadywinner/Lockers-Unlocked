@@ -41,7 +41,7 @@ function ContactPage() {
             type="submit"
             className="bg-red400 text-white hover:bg-red500 rounded h-10 md:w-80 w-full self-center"
           >
-            Subscribe
+            Send
           </Button>
         </form>
       </div>
