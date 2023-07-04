@@ -34,34 +34,34 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
         </Button>
       </section>
       {/* featured trunks */}
-      <section className="md:p-10 md:mb-0 mb-10 shadow-2xl text-center font-gilroy">
-        <p className="uppercase md:mt-5 mb-10 mt-10 font-extrabold md:text-3xl text-xl">
+      <section className="flex flex-col font-gilroy mb-10">
+        <p className="uppercase md:mt-5 mb-10 mt-10 font-extrabold md:text-3xl text-xl text-center">
           featured trunks
         </p>
-        <div className="flex md:h-45 h-60 justify-center gap-5 mb-6 overflow-y-hidden whitespace-nowrap">
+        <div className="flex overflow-x-auto space-x-8 p-2 lg:justify-center">
           {featured_trunks &&
             featured_trunks?.map((element) => {
               return (
                 <Link
-                  to="/"
                   key={element.key}
-                  className="bg-white p-3 md:mb-0 mb-10 rounded-full shadow-xl flex flex-col justify-between text-center cursor-pointer transition-transform duration-300 hover:-translate-y-2"
+                  to="/"
+                  className="flex-shrink-0 bg-white shadow-lg rounded-full text-center p-3 cursor-pointer transition-transform duration-300 hover:-translate-y-2"
                 >
-                  <div className="w-full h-full">
+                  <span>
                     <img
                       src={element.src}
-                      alt="featured"
-                      className="w-full h-full object-fill rounded-full"
+                      className="h-40 w-40 rounded-full "
+                      alt=""
                     />
-                  </div>
-                  <p className="text-black p-3">{element.text}</p>
+                  </span>
+                  <span>{element.text}</span>
                 </Link>
               );
             })}
         </div>
         <Link
           to="/"
-          className="underline underline-offset-1 mt-8 mb-10 font-extrabold text-base"
+          className="underline underline-offset-1 mt-8 mb-10 font-extrabold text-base text-center"
         >
           view all trunks
         </Link>
