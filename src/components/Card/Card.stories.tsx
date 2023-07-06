@@ -31,16 +31,11 @@ export const Template: Story = {
 };
 
 Template.args = {
-  imgProps: {
-    src: 'https://flowbite.com/docs/images/blog/image-1.jpg',
-    img_alt: 'temporary',
-    width: '100%',
-    className: 'rounded-t-lg',
-    // height: 100,
+  item: {
+    currentBid: '100',
+    description: 'He wore this t-shirt in his farewell',
+    imgSrc: 'https://flowbite.com/docs/images/blog/image-1.jpg',
+    startingBid: '50',
+    title: 'Lebron James',
   },
-  //   text: 'Show 655 Homes',
-  //   type: 'Card',
-  //   onClick: () => {
-  //     // do nothing now then pass e: React.MouseEvent<HTMLElement>
-  //   },
 };

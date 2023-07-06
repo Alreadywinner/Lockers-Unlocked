@@ -1,11 +1,10 @@
-import { ReactNode } from 'react';
-
-interface ImagePropType extends React.HTMLProps<HTMLImageElement> {
-  src: string;
-  img_alt: string;
+interface AuctionItems {
+  imgSrc: string;
+  title: string;
+  description: string;
+  currentBid: string;
+  startingBid: string;
 }
 export type CardProps = {
-  cardDiv: string;
-  children: ReactNode;
-  imgProps: ImagePropType;
+  item: AuctionItems;
 };
