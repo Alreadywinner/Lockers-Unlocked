@@ -11,11 +11,11 @@ export default function NavBar() {
       routeName: '/',
       key: 1,
     },
-    { name: 'NFL', routeName: '/', key: 2 },
-    { name: 'NBA', routeName: '/', key: 3 },
-    { name: 'MLB', routeName: '/', key: 4 },
-    { name: 'College Teams', routeName: '/', key: 5 },
-    { name: 'D1 Sports', routeName: '/', key: 6 },
+    { name: 'NFL', routeName: '/nfl', key: 2 },
+    { name: 'NBA', routeName: '/nba', key: 3 },
+    { name: 'MLB', routeName: '/mlb', key: 4 },
+    { name: 'College Teams', routeName: '/college-teams', key: 5 },
+    { name: 'D1 Sports', routeName: '/d1-sports', key: 6 },
     { name: 'Login', routeName: '/', key: 7 },
   ];
 
