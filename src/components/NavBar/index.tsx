@@ -16,8 +16,7 @@ export default function NavBar() {
     { name: 'MLB', routeName: '/', key: 4 },
     { name: 'College Teams', routeName: '/', key: 5 },
     { name: 'D1 Sports', routeName: '/', key: 6 },
-    { name: 'Auctions', routeName: '/', key: 7 },
-    { name: 'Login', routeName: '/', key: 8 },
+    { name: 'Login', routeName: '/', key: 7 },
   ];
 
   const toggleMenu = () => setIsOpen(!isOpen);
