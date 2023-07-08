@@ -7,6 +7,7 @@ import {
   MLBPage,
   D1SportsPage,
   CollegeTeamsPage,
+  AddNewItemsPage,
 } from '@containers';
 import { Footer, NavBar } from 'components';
 import React from 'react';
@@ -25,6 +26,7 @@ function App() {
         <Route path="/mlb" element={<MLBPage />} />
         <Route path="/d1-sports" element={<D1SportsPage />} />
         <Route path="/college-teams" element={<CollegeTeamsPage />} />
+        <Route path="/add-new" element={<AddNewItemsPage />} />
       </Routes>
       <Footer />
     </>

@@ -6,6 +6,7 @@ import NBAPage from './NBAPage/NBAPage';
 import MLBPage from './MLBPage/MLBPage';
 import D1SportsPage from './D1SportsPage/D1SportsPage';
 import CollegeTeamsPage from './CollegeTeamsPage/CollegeTeamsPage';
+import AddNewItemsPage from './AddNewItemsPage/AddNewItemsPage';
 
 export {
   HomePage,
@@ -16,4 +17,5 @@ export {
   NBAPage,
   D1SportsPage,
   CollegeTeamsPage,
+  AddNewItemsPage,
 };
