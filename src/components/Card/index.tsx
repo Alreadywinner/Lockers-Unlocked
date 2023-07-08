@@ -5,7 +5,7 @@ import { CardProps } from './types';
 function Card({ item }: CardProps) {
   const { imgSrc, title, description, currentBid, startingBid } = item;
   return (
-    <div className="max-w-sm rounded overflow-hidden shadow-lg">
+    <div className="max-w-sm rounded overflow-hidden shadow-lg transition-transform duration-300 md:hover:-translate-y-2">
       <Link to="/">
         <img src={imgSrc} alt="temporary" className="rounded-t-lg w-full" />
         <div className="px-6 py-4">
