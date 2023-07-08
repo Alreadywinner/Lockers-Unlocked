@@ -1,7 +1,32 @@
 import { BurgerIcon, CrossIcon } from '@Icon';
-import Button from 'components/Button';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+
+type NavLinkItem = {
+  name: string;
+  routeName: string;
+  key: number;
+};
+
+type NavLinksType = { navLinks: Array<NavLinkItem> };
+
+function NavLinksRender({ navLinks }: NavLinksType) {
+  return (
+    <>
+      {navLinks.map((element) => {
+        return (
+          <Link
+            to={element.routeName}
+            key={element.key}
+            className="md:ml-0 ml-4 px-3 py-2 rounded-md md:text-sm sm:text-base md:font-bold sm:font-medium text-black hover:text-gray hover:bg-gray-50 md:flex sm:block"
+          >
+            {element.name}
+          </Link>
+        );
+      })}
+    </>
+  );
+}
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,17 +56,7 @@ export default function NavBar() {
           <div className="flex items-center">
             <div className="hidden md:block sm:block sm:ml-6">
               <div className="flex items-center text-center">
-                {navLinks.map((element) => {
-                  return (
-                    <Link
-                      to={element.routeName}
-                      key={element.key}
-                      className="md:ml-0 ml-4 px-3 py-2  rounded-md text-sm font-bold text-black hover:text-gray hover:bg-gray-50"
-                    >
-                      {element.name}
-                    </Link>
-                  );
-                })}
+                <NavLinksRender navLinks={navLinks} />
               </div>
             </div>
           </div>
@@ -65,27 +80,7 @@ export default function NavBar() {
       {isOpen && (
         <div className="sm:hidden" id="mobile-menu">
           <div className="px-2 pt-2 pb-3 space-y-1 flex flex-col items-center justify-center">
-            <Link
-              to="/"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-            >
-              Home
-            </Link>
-            <Link
-              to="/about"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-            >
-              About
-            </Link>
-            <Link
-              to="/contact"
-              className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-            >
-              Contact
-            </Link>
-            <Button className="py-2 px-4 bg-red text-white rounded-lg hover:font-bold hover:cursor-pointer">
-              Login
-            </Button>
+            <NavLinksRender navLinks={navLinks} />
           </div>
         </div>
       )}
