@@ -33,7 +33,7 @@
     "noEmit": true,
     "jsx": "react-jsx"
   },
-  "include": ["src", ".eslintrc.json"],
+  "include": ["src", "./react-modal.d.ts", ".eslintrc.json"],
   "exclude": ["node_modules"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
