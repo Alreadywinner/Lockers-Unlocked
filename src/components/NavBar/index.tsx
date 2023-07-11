@@ -1,5 +1,5 @@
 import { BurgerIcon, CrossIcon } from '@Icon';
-import { Button, LoginForm } from '@components';
+import { Auth, Button } from '@components';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -11,11 +11,11 @@ type NavLinkItem = {
 
 type NavLinksType = {
   navLinks: Array<NavLinkItem>;
-  setLoginModal: React.Dispatch<React.SetStateAction<boolean>>;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  onButtonPress: () => void;
 };
 
-function NavLinksRender({ navLinks, setLoginModal, setIsOpen }: NavLinksType) {
+function NavLinksRender({ navLinks, setIsOpen, onButtonPress }: NavLinksType) {
   return (
     <>
       {navLinks.map((element) => {
@@ -32,10 +32,7 @@ function NavLinksRender({ navLinks, setLoginModal, setIsOpen }: NavLinksType) {
       })}
       <Button
         className="md:ml-0 ml-4 px-3 py-2 rounded-md md:text-sm sm:text-base md:font-bold sm:font-medium text-black hover:text-gray hover:bg-gray-50 md:flex sm:block hover:cursor-pointer"
-        onClick={() => {
-          setLoginModal(true);
-          setIsOpen(false);
-        }}
+        onClick={onButtonPress}
       >
         Login
       </Button>
@@ -45,7 +42,7 @@ function NavLinksRender({ navLinks, setLoginModal, setIsOpen }: NavLinksType) {
 
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
-  const [loginModal, setLoginModal] = useState(false);
+  const [auth, setAuth] = useState(false);
   const navLinks = [
     {
       name: 'Home',
@@ -61,14 +58,17 @@ export default function NavBar() {
 
   const toggleMenu = () => setIsOpen(!isOpen);
 
+  const onButtonPress = () => {
+    setAuth(!auth);
+    setIsOpen(false);
+  };
+
   return (
     <>
-      {loginModal && (
-        <LoginForm loginModal={loginModal} setLoginModal={setLoginModal} />
-      )}
+      {auth && <Auth />}
       <nav
         className={`${
-          loginModal ? 'z-0' : 'z-10'
+          auth ? 'z-0' : 'z-10'
         } sticky top-0 bg-white shadow-md font-gilroy`}
       >
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
@@ -83,7 +83,7 @@ export default function NavBar() {
                 <div className="flex items-center text-center">
                   <NavLinksRender
                     navLinks={navLinks}
-                    setLoginModal={setLoginModal}
+                    onButtonPress={onButtonPress}
                     setIsOpen={setIsOpen}
                   />
                 </div>
@@ -111,7 +111,7 @@ export default function NavBar() {
             <div className="px-2 pt-2 pb-3 space-y-1 flex flex-col items-center justify-center">
               <NavLinksRender
                 navLinks={navLinks}
-                setLoginModal={setLoginModal}
+                onButtonPress={onButtonPress}
                 setIsOpen={setIsOpen}
               />
             </div>

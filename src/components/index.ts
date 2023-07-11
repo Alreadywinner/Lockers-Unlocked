@@ -6,7 +6,10 @@ import NavBar from './NavBar';
 import Footer from './Footer';
 import Carousel from './Carousel';
 import LoginForm from './LoginForm';
+import SignUpForm from './SignUpForm';
 import CustomModal from './CustomModal';
+import Auth from './Auth';
+import ScrollToTop from './ScrollToTop';
 
 export {
   Button,
@@ -18,4 +21,7 @@ export {
   Carousel,
   LoginForm,
   CustomModal,
+  SignUpForm,
+  Auth,
+  ScrollToTop,
 };
