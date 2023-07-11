@@ -1,10 +1,11 @@
 import React from 'react';
-import { Button, Input } from '@components';
+import { Button, Input, ScrollToTop } from '@components';
 import { EnvelopeIcon, LocationIcon, PhoneIcon } from 'assets/icons/icons';
 
 function ContactPage() {
   return (
     <section className="w-full font-gilroy">
+      <ScrollToTop />
       <div className="flex flex-col gap-5">
         <h5 className="text-center text-3xl mt-8 mb-5 font-bold">
           Get in Touch

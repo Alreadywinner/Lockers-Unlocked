@@ -1,9 +1,11 @@
 import { BasketBallIcon } from '@Icon';
+import { ScrollToTop } from '@components';
 import React from 'react';
 
 function AboutPage() {
   return (
     <div className="font-gilroy flex flex-col items-center mt-10 mb-10">
+      <ScrollToTop />
       <p className="text-center mb-10 text-4xl font-extrabold">About Us</p>
       <BasketBallIcon width={300} height={300} />
       <p className="mt-16 text-center max-w-xl text-lg leading-normal text-gray500 lg:text-xl">
