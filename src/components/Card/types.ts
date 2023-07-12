@@ -7,4 +7,5 @@ interface AuctionItems {
 }
 export type CardProps = {
   item: AuctionItems;
+  onClick?: () => void;
 };
