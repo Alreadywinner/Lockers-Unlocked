@@ -1,11 +1,11 @@
 import HomePage from './HomePage';
 import AboutPage from './AboutPage/AboutPage';
 import ContactPage from './ContactPage/ContactPage';
-import NFLPage from './NFLPage/NFLPage';
-import NBAPage from './NBAPage/NBAPage';
-import MLBPage from './MLBPage/MLBPage';
-import D1SportsPage from './D1SportsPage/D1SportsPage';
-import CollegeTeamsPage from './CollegeTeamsPage/CollegeTeamsPage';
+import NFLPage from './NFLPage';
+import NBAPage from './NBAPage';
+import MLBPage from './MLBPage';
+import D1SportsPage from './D1SportsPage';
+import CollegeTeamsPage from './CollegeTeamsPage';
 import AddNewItemsPage from './AddNewItemsPage/AddNewItemsPage';
 
 export {

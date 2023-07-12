@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
-import CollegeTeamsPage from './CollegeTeamsPage';
+import CollegeTeamsPage from './index';
 
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
 
