@@ -14,7 +14,7 @@ function SignUpForm({
         <form className="flex flex-col gap-3 md:mt-8 mt-5 lg:ml-12 lg:mr-12 md:p-5">
           {/* Email */}
           <div className="md:flex md:flex-col md:mb-4">
-            <div className="mb-2 block md:ml-24">
+            <div className="mb-2 block md:ml-20 lg:ml-32">
               <label htmlFor="email2">Your Email *</label>
             </div>
             <Input
@@ -28,7 +28,7 @@ function SignUpForm({
           </div>
           {/* Password */}
           <div className="md:flex md:flex-col">
-            <div className="mb-2 block md:ml-24">
+            <div className="mb-2 block md:ml-20 lg:ml-32">
               <label htmlFor="password2">Your Password *</label>
             </div>
             <Input
