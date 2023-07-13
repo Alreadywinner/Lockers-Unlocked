@@ -24,8 +24,10 @@ function CollegeTeamsUI({
           </Button>
         </Link>
       </div>
-      <h1 className="text-4xl font-bold text-center">College Teams Items</h1>
-      <div className="mt-14 mb-5 flex gap-5 flex-wrap justify-center">
+      <h1 className="md:text-4xl text-3xl md:mt-0 mt-6 font-bold text-center">
+        College Teams Items
+      </h1>
+      <div className="mt-14 mb-5 ml-2 mr-2 flex gap-5 flex-wrap justify-center">
         {collegeTeamsData &&
           collegeTeamsData.length > 0 &&
           collegeTeamsData.map((element) => {

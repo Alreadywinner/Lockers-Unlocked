@@ -21,8 +21,10 @@ function D1SportsPageUI({ D1TeamsData, handleItemPress }: D1TeamsProps) {
           </Button>
         </Link>
       </div>
-      <h1 className="text-4xl font-bold text-center">D1 Sports Items</h1>
-      <div className="mt-14 mb-5 flex gap-5 flex-wrap justify-center">
+      <h1 className="md:text-4xl text-3xl md:mt-0 mt-6 font-bold text-center">
+        D1 Sports Items
+      </h1>
+      <div className="mt-14 mb-5 ml-2 mr-2 flex gap-5 flex-wrap justify-center">
         {D1TeamsData &&
           D1TeamsData.length > 0 &&
           D1TeamsData.map((element) => {
