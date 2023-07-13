@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { TeamsDataType } from '@types';
-import { useNavigate } from 'react-router-dom';
+import { Toast } from '@components';
 import CollegeTeamsUI from './CollegeTeamsUI';
 
 function CollegeTeamsPage() {
-  const navigate = useNavigate();
   const collegeTeamsData = [
     {
       currentBid: '100',
@@ -47,15 +46,30 @@ function CollegeTeamsPage() {
       id: 5,
     },
   ];
+  const [toast, setToast] = useState({
+    visible: false,
+    text: '',
+  });
   const handleItemPress = (item: TeamsDataType): void => {
-    // TODO: handle the item here
-    navigate(`detail/${item.id}`);
+    setToast({
+      visible: !toast.visible,
+      text: `${item.title}`,
+    });
   };
   return (
-    <CollegeTeamsUI
-      collegeTeamsData={collegeTeamsData}
-      handleItemPress={handleItemPress}
-    />
+    <>
+      {toast.visible && (
+        <Toast
+          text={toast.text}
+          visible={toast.visible}
+          setVisible={setToast}
+        />
+      )}
+      <CollegeTeamsUI
+        collegeTeamsData={collegeTeamsData}
+        handleItemPress={handleItemPress}
+      />
+    </>
   );
 }
 

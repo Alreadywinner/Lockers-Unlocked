@@ -10,6 +10,7 @@ import SignUpForm from './SignUpForm';
 import CustomModal from './CustomModal';
 import Auth from './Auth';
 import ScrollToTop from './ScrollToTop';
+import Toast from './Toast';
 
 export {
   Button,
@@ -24,4 +25,5 @@ export {
   SignUpForm,
   Auth,
   ScrollToTop,
+  Toast,
 };
