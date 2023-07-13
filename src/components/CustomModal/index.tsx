@@ -48,13 +48,13 @@ function CustomModal({ children, isOpen, onClose }: CustomModalPropType) {
   // Adjust the width and height based on screen sizes
   if (isMobile) {
     customStyles.content.width = '90%';
-    customStyles.content.height = '30rem';
+    customStyles.content.height = '40rem';
   } else if (isTablet) {
     customStyles.content.width = '60rem';
-    customStyles.content.height = '30rem';
+    customStyles.content.height = '40rem';
   } else {
     customStyles.content.width = '80rem';
-    customStyles.content.height = '30rem';
+    customStyles.content.height = '40rem';
   }
 
   Modal.setAppElement('#root');
