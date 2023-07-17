@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import { TeamsDataType } from '@types';
 import { Toast } from '@components';
+import { DetailPage } from '@containers';
 import CollegeTeamsUI from './CollegeTeamsUI';
 
 function CollegeTeamsPage() {
@@ -50,11 +51,11 @@ function CollegeTeamsPage() {
     visible: false,
     text: '',
   });
+  const currentItemRef = useRef<TeamsDataType | null>(null);
+  const [detailModal, setDetailModal] = useState(false);
   const handleItemPress = (item: TeamsDataType): void => {
-    setToast({
-      visible: !toast.visible,
-      text: `${item.title}`,
-    });
+    setDetailModal(!detailModal);
+    currentItemRef.current = item;
   };
   return (
     <>
@@ -63,6 +64,13 @@ function CollegeTeamsPage() {
           text={toast.text}
           visible={toast.visible}
           setVisible={setToast}
+        />
+      )}
+      {detailModal && (
+        <DetailPage
+          detailModal={detailModal}
+          setDetailModal={setDetailModal}
+          item={currentItemRef.current}
         />
       )}
       <CollegeTeamsUI
