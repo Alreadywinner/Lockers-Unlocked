@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useRef, useState } from 'react';
 import { TeamsDataType } from '@types';
-import { useNavigate } from 'react-router-dom';
+import { DetailPage } from '@containers';
+import { Toast } from 'components';
 import D1SportsPageUI from './D1SportsPageUI';
 
 function D1SportsPage() {
-  const navigate = useNavigate();
+  const [toast, setToast] = useState({
+    visible: false,
+    text: '',
+  });
+  const currentItemRef = useRef<TeamsDataType | null>(null);
+  const [detailModal, setDetailModal] = useState(false);
+  const handleItemPress = (item: TeamsDataType): void => {
+    setDetailModal(!detailModal);
+    currentItemRef.current = item;
+  };
   const D1TeamsData = [
     {
       currentBid: '100',
@@ -47,15 +57,27 @@ function D1SportsPage() {
       id: 5,
     },
   ];
-  const handleItemPress = (item: TeamsDataType): void => {
-    // TODO: handle the item here
-    navigate(`detail/${item.id}`);
-  };
   return (
-    <D1SportsPageUI
-      D1TeamsData={D1TeamsData}
-      handleItemPress={handleItemPress}
-    />
+    <>
+      {toast.visible && (
+        <Toast
+          text={toast.text}
+          visible={toast.visible}
+          setVisible={setToast}
+        />
+      )}
+      {detailModal && (
+        <DetailPage
+          detailModal={detailModal}
+          setDetailModal={setDetailModal}
+          item={currentItemRef.current}
+        />
+      )}
+      <D1SportsPageUI
+        D1TeamsData={D1TeamsData}
+        handleItemPress={handleItemPress}
+      />
+    </>
   );
 }
 

@@ -1,10 +1,10 @@
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import { TeamsDataType } from '@types';
-import { useNavigate } from 'react-router-dom';
+import { Toast } from '@components';
+import { DetailPage } from '@containers';
 import MLBPageUI from './MLBPageUI';
 
 function MLBPage() {
-  const navigate = useNavigate();
   const MLBTeamsData = [
     {
       currentBid: '100',
@@ -47,12 +47,37 @@ function MLBPage() {
       id: 5,
     },
   ];
+  const [toast, setToast] = useState({
+    visible: false,
+    text: '',
+  });
+  const currentItemRef = useRef<TeamsDataType | null>(null);
+  const [detailModal, setDetailModal] = useState(false);
   const handleItemPress = (item: TeamsDataType): void => {
-    // TODO: handle the item here
-    navigate(`detail/${item.id}`);
+    setDetailModal(!detailModal);
+    currentItemRef.current = item;
   };
   return (
-    <MLBPageUI MLBTeamsData={MLBTeamsData} handleItemPress={handleItemPress} />
+    <>
+      {toast.visible && (
+        <Toast
+          text={toast.text}
+          visible={toast.visible}
+          setVisible={setToast}
+        />
+      )}
+      {detailModal && (
+        <DetailPage
+          detailModal={detailModal}
+          setDetailModal={setDetailModal}
+          item={currentItemRef.current}
+        />
+      )}
+      <MLBPageUI
+        MLBTeamsData={MLBTeamsData}
+        handleItemPress={handleItemPress}
+      />
+    </>
   );
 }
 
