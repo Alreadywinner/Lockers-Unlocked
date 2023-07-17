@@ -10,6 +10,8 @@ export default {
       cyan: '#0E7490',
       gray500: '#6B7280',
       lightGray: '#F1F5F9',
+      purple400: '#C084FC',
+      blue400: '#60A5FA',
       red400: '#F77171',
       red500: '#EF4444',
     },

@@ -66,11 +66,7 @@ export default function NavBar() {
   return (
     <>
       {auth && <Auth />}
-      <nav
-        className={`${
-          auth ? 'z-0' : 'z-10'
-        } sticky top-0 bg-white shadow-md font-gilroy`}
-      >
+      <nav className="sticky top-0 bg-white shadow-md font-gilroy z-10">
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex md:items-center md:justify-center justify-between h-16">
             <div className="md:hidden flex items-center justify-center">

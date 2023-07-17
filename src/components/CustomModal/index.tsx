@@ -19,6 +19,7 @@ function CustomModal({ children, isOpen, onClose }: CustomModalPropType) {
       display: 'flex',
       flexDirection: 'column',
       justifyContent: 'center',
+      overflow: 'scroll',
     },
     closeButton: {
       position: 'absolute' as const,
@@ -29,6 +30,7 @@ function CustomModal({ children, isOpen, onClose }: CustomModalPropType) {
       color: '#000',
       cursor: 'pointer',
     },
+    overlay: { zIndex: 1000 },
   };
   useEffect(() => {
     const handleResize = () => {
