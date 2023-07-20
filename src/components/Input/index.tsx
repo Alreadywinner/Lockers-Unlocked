@@ -1,8 +1,20 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { InputProps } from './types';
 
-function Input({ placeHolder, className, ...rest }: InputProps) {
-  return <input placeholder={placeHolder} className={className} {...rest} />;
-}
+const Input = forwardRef<HTMLInputElement, InputProps>(function InputComponent(
+  { placeHolder, className, ...rest },
+  ref,
+) {
+  return (
+    <input
+      placeholder={placeHolder}
+      className={className}
+      ref={ref}
+      {...rest}
+    />
+  );
+});
+
+Input.displayName = 'Input'; // Add the display name here
 
 export default Input;

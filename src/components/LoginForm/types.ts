@@ -3,3 +3,8 @@ export type LoginPropType = {
   setLoginModal: React.Dispatch<React.SetStateAction<boolean>>;
   onSignUpClick: () => void;
 };
+
+export type FormDataType = {
+  email: string;
+  password: string;
+};
