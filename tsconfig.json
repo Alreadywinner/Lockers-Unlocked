@@ -29,7 +29,8 @@
       "@services/*": ["./src/services/*"],
       "@Icon": ["./src/assets/icons/icons"],
       "@Images": ["./src/assets/images/images"],
-      "@types": ["./src/containers/types"]
+      "@types": ["./src/containers/types"],
+      "@utils": ["./src/utils/*"]
     },
     "noEmit": true,
     "jsx": "react-jsx"

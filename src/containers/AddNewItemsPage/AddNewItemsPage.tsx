@@ -1,9 +1,48 @@
 import { Button, Input } from '@components';
-import React from 'react';
+import React, { useRef, useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
+import TeamTypeData from 'utils/teamTypeData';
+import { AddNewItemType } from './types';
 
 function AddNewItemsPage() {
   const navigate = useNavigate();
+  const titleRef = useRef<HTMLInputElement>(null);
+  const startingBidRef = useRef<HTMLInputElement>(null);
+  const fileInputRef = useRef<HTMLInputElement>(null);
+  const descriptionRef = useRef<HTMLTextAreaElement>(null);
+  const teamSelectRef = useRef<HTMLSelectElement>(null);
+
+  const [fileData, setFileData] = useState<FileList | null>(null);
+
+  const addNewFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const temp = event.target.files;
+    setFileData(temp);
+  };
+  const validateData = (data: AddNewItemType): boolean => {
+    if (
+      data.description === '' ||
+      data.startingBid === '' ||
+      data.teamSelect === '' ||
+      data.title === ''
+    ) {
+      // TODO: Display error toast
+      return false;
+    }
+    return true;
+  };
+  const handleUploadItem = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const data = {
+      title: titleRef.current?.value || '',
+      startingBid: startingBidRef.current?.value || '',
+      description: descriptionRef.current?.value || '',
+      teamSelect: teamSelectRef.current?.value || '',
+      fileData: fileData || null,
+    };
+    if (validateData(data)) {
+      // TODO: make a backend call here
+    }
+  };
   return (
     <section className="w-full font-gilroy mt-8 mb-10 flex flex-col">
       <div>
@@ -20,11 +59,12 @@ function AddNewItemsPage() {
           Add New Item For Auction
         </h5>
         <form
-          action="#"
           className="flex flex-col gap-5 mt-5 lg:ml-80 lg:mr-80 ml-5 mr-5"
+          onSubmit={handleUploadItem}
         >
           <label htmlFor="title">Title *</label>
           <Input
+            ref={titleRef}
             type="text"
             name="title"
             id="title"
@@ -32,6 +72,7 @@ function AddNewItemsPage() {
           />
           <label htmlFor="starting_bid">Starting Bid *</label>
           <Input
+            ref={startingBidRef}
             type="number"
             name="starting_bid"
             id="starting_bid"
@@ -52,7 +93,8 @@ function AddNewItemsPage() {
               accept="image/*"
               name="item_image"
               id="item_image"
-              // onChange={handleImageChange}
+              onChange={addNewFiles}
+              ref={fileInputRef}
             />
           </div>
           <label htmlFor="select_team">Select Team *</label>
@@ -60,10 +102,19 @@ function AddNewItemsPage() {
             <select
               className="block appearance-none w-full bg-white border-solid border-2 border-red rounded px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline"
               name="select_team"
+              ref={teamSelectRef}
+              onChange={() => {
+                if (teamSelectRef.current) {
+                  const selectedOption = teamSelectRef.current.value;
+                  // Do something with the selected option, e.g., update the ref
+                  console.log('Selected Option:', selectedOption);
+                }
+              }}
             >
               <option>Select Team Type</option>
-              <option>Option 2</option>
-              <option>Option 3</option>
+              {TeamTypeData.map((element) => (
+                <option key={element.id}>{element.name}</option>
+              ))}
             </select>
             <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
               <svg
@@ -83,6 +134,7 @@ function AddNewItemsPage() {
             cols={30}
             rows={8}
             className="border-solid border-2 border-red rounded pl-2"
+            ref={descriptionRef}
           />
 
           <Button
