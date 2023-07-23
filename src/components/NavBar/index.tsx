@@ -2,7 +2,10 @@ import { BurgerIcon, CrossIcon } from '@Icon';
 import { Auth, Button } from '@components';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getLocalStorageItem } from 'utils/localStorage';
+import {
+  getLocalStorageItem,
+  removeLocalStorageItem,
+} from 'utils/localStorage';
 
 type NavLinkItem = {
   name: string;
@@ -14,14 +17,23 @@ type NavLinksType = {
   navLinks: Array<NavLinkItem>;
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   onButtonPress: () => void;
+  onLogoutClick: () => void;
+  userData: { id: string; email: string } | null;
 };
 
-const userData = getLocalStorageItem('user', null);
-
-function NavLinksRender({ navLinks, setIsOpen, onButtonPress }: NavLinksType) {
+function NavLinksRender({
+  navLinks,
+  setIsOpen,
+  onButtonPress,
+  userData,
+  onLogoutClick,
+}: NavLinksType) {
+  const updatedNavLinks = userData
+    ? [...navLinks, { name: 'Profile', routeName: '/profile', key: 7 }]
+    : navLinks;
   return (
     <>
-      {navLinks.map((element) => {
+      {updatedNavLinks.map((element) => {
         return (
           <Link
             to={element.routeName}
@@ -33,12 +45,19 @@ function NavLinksRender({ navLinks, setIsOpen, onButtonPress }: NavLinksType) {
           </Link>
         );
       })}
-      {!userData && (
+      {!userData ? (
         <Button
           className="md:ml-0 ml-4 px-3 py-2 rounded-md md:text-sm sm:text-base md:font-bold sm:font-medium text-black hover:text-gray hover:bg-gray-50 md:flex sm:block hover:cursor-pointer"
           onClick={onButtonPress}
         >
           Login
+        </Button>
+      ) : (
+        <Button
+          className="md:ml-0 ml-4 px-3 py-2 rounded-md md:text-sm sm:text-base md:font-bold sm:font-medium text-black hover:text-gray hover:bg-gray-50 md:flex sm:block hover:cursor-pointer"
+          onClick={onLogoutClick}
+        >
+          Logout
         </Button>
       )}
     </>
@@ -48,6 +67,7 @@ function NavLinksRender({ navLinks, setIsOpen, onButtonPress }: NavLinksType) {
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [auth, setAuth] = useState(false);
+  const userData = getLocalStorageItem('user', null);
   const navLinks = [
     {
       name: 'Home',
@@ -61,15 +81,15 @@ export default function NavBar() {
     { name: 'D1 Sports', routeName: '/d1-sports', key: 6 },
   ];
 
-  if (userData !== null) {
-    navLinks.push({ name: 'Profile', routeName: '/profile', key: 7 });
-  }
-
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const onButtonPress = () => {
     setAuth(!auth);
     setIsOpen(false);
+  };
+
+  const onLogoutClick = async () => {
+    await removeLocalStorageItem('user');
   };
   return (
     <>
@@ -89,6 +109,8 @@ export default function NavBar() {
                     navLinks={navLinks}
                     onButtonPress={onButtonPress}
                     setIsOpen={setIsOpen}
+                    userData={userData}
+                    onLogoutClick={onLogoutClick}
                   />
                 </div>
               </div>
@@ -117,6 +139,8 @@ export default function NavBar() {
                 navLinks={navLinks}
                 onButtonPress={onButtonPress}
                 setIsOpen={setIsOpen}
+                userData={userData}
+                onLogoutClick={onLogoutClick}
               />
             </div>
           </div>
