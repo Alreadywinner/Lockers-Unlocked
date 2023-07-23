@@ -11,6 +11,7 @@ import CustomModal from './CustomModal';
 import Auth from './Auth';
 import ScrollToTop from './ScrollToTop';
 import Toast from './Toast';
+import Loader from './Loader';
 
 export {
   Button,
@@ -26,4 +27,5 @@ export {
   Auth,
   ScrollToTop,
   Toast,
+  Loader,
 };
