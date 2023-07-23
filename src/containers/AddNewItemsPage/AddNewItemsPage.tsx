@@ -104,11 +104,11 @@ function AddNewItemsPage() {
               name="select_team"
               ref={teamSelectRef}
               onChange={() => {
-                if (teamSelectRef.current) {
-                  const selectedOption = teamSelectRef.current.value;
-                  // Do something with the selected option, e.g., update the ref
-                  console.log('Selected Option:', selectedOption);
-                }
+                // if (teamSelectRef.current) {
+                //   const selectedOption = teamSelectRef.current.value;
+                //   // Do something with the selected option, e.g., update the ref
+                //   console.log('Selected Option:', selectedOption);
+                // }
               }}
             >
               <option>Select Team Type</option>
