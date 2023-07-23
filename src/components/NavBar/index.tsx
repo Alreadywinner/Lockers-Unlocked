@@ -2,6 +2,7 @@ import { BurgerIcon, CrossIcon } from '@Icon';
 import { Auth, Button } from '@components';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import { getLocalStorageItem } from 'utils/localStorage';
 
 type NavLinkItem = {
   name: string;
@@ -14,6 +15,8 @@ type NavLinksType = {
   setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
   onButtonPress: () => void;
 };
+
+const userData = getLocalStorageItem('user', null);
 
 function NavLinksRender({ navLinks, setIsOpen, onButtonPress }: NavLinksType) {
   return (
@@ -30,12 +33,14 @@ function NavLinksRender({ navLinks, setIsOpen, onButtonPress }: NavLinksType) {
           </Link>
         );
       })}
-      <Button
-        className="md:ml-0 ml-4 px-3 py-2 rounded-md md:text-sm sm:text-base md:font-bold sm:font-medium text-black hover:text-gray hover:bg-gray-50 md:flex sm:block hover:cursor-pointer"
-        onClick={onButtonPress}
-      >
-        Login
-      </Button>
+      {!userData && (
+        <Button
+          className="md:ml-0 ml-4 px-3 py-2 rounded-md md:text-sm sm:text-base md:font-bold sm:font-medium text-black hover:text-gray hover:bg-gray-50 md:flex sm:block hover:cursor-pointer"
+          onClick={onButtonPress}
+        >
+          Login
+        </Button>
+      )}
     </>
   );
 }
@@ -56,13 +61,16 @@ export default function NavBar() {
     { name: 'D1 Sports', routeName: '/d1-sports', key: 6 },
   ];
 
+  if (userData !== null) {
+    navLinks.push({ name: 'Profile', routeName: '/profile', key: 7 });
+  }
+
   const toggleMenu = () => setIsOpen(!isOpen);
 
   const onButtonPress = () => {
     setAuth(!auth);
     setIsOpen(false);
   };
-
   return (
     <>
       {auth && <Auth />}

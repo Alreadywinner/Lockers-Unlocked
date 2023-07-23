@@ -9,6 +9,7 @@ export type FormDataType = {
   email: string;
   password: string;
   repeatPassword: string;
+  agree: boolean;
 };
 
 export type InputValue = string;

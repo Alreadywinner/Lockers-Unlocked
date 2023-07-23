@@ -1,6 +1,8 @@
 import React, { useRef, useState, FormEvent } from 'react';
-import { Button, CustomModal, Input, Toast } from '@components';
+import { Button, CustomModal, Input, Loader, Toast } from '@components';
 import { Link } from 'react-router-dom';
+import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from 'firebase';
 import { FormDataType, SignUpPropType } from './types';
 
 function SignUpForm({
@@ -12,11 +14,13 @@ function SignUpForm({
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
   const repeatPasswordRef = useRef<HTMLInputElement>(null);
+  const agreeRef = useRef<HTMLInputElement>(null);
 
   const [showToast, setShowToast] = useState({
     visible: false,
     text: '',
   });
+  const [loading, setLoading] = useState(false);
 
   const isValidData = (data: FormDataType): boolean => {
     const emailReg =
@@ -46,18 +50,61 @@ function SignUpForm({
       });
       return false;
     }
+    if (!data.agree) {
+      setShowToast({
+        visible: true,
+        text: 'Please agree terms and conditions',
+      });
+      return false;
+    }
     return true;
   };
-  const makeRequest = (e: FormEvent<HTMLFormElement>) => {
+  const makeRequest = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
+    const email = emailRef?.current?.value.trim() || '';
+
+    // First, check if the email already exists in the collection
+    const emailQuery = query(
+      collection(db, 'users'),
+      where('email', '==', email),
+    );
+    const emailSnapshot = await getDocs(emailQuery);
+
+    if (!emailSnapshot.empty) {
+      // Email already exists, show an error message or take appropriate action
+      setShowToast({
+        visible: true,
+        text: 'Email already exists. Please use a different email.',
+      });
+      setLoading(false);
+      return;
+    }
     const data = {
       name: nameRef.current?.value.trim() || '',
-      email: emailRef?.current?.value.trim() || '',
+      email,
       password: passwordRef?.current?.value.trim() || '',
       repeatPassword: repeatPasswordRef?.current?.value.trim() || '',
+      agree: agreeRef.current?.checked || false,
     };
-    if (isValidData(data)) {
-      // TODO: make backend request
+    try {
+      if (isValidData(data)) {
+        await addDoc(collection(db, 'users'), {
+          ...data,
+        });
+        setShowToast({
+          visible: true,
+          text: 'User Registered Successfully',
+        });
+        setSignUpModal(false);
+      }
+    } catch (err) {
+      setShowToast({
+        visible: true,
+        text: 'Unexpected error occurred',
+      });
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -135,7 +182,7 @@ function SignUpForm({
           </div>
           {/* Checkbox */}
           <div className="flex items-center justify-center gap-3">
-            <input type="checkbox" id="agree" />
+            <input type="checkbox" id="agree" ref={agreeRef} />
             <label htmlFor="agree">
               I agree with the &nbsp;
               <Link
@@ -149,9 +196,10 @@ function SignUpForm({
           <div className="flex justify-center mt-5">
             <Button
               type="submit"
+              disabled={loading}
               className="bg-red400 text-white hover:bg-red500 md:w-3/12 w-full rounded p-2"
             >
-              Sign Up
+              {loading ? <Loader /> : 'Sign Up'}
             </Button>
           </div>
         </form>
@@ -161,6 +209,7 @@ function SignUpForm({
             type="button"
             className="bg-red400 text-white hover:bg-red500 md:w-3/12 w-full rounded p-2"
             onClick={onLoginClick}
+            disabled={loading}
           >
             Login
           </Button>

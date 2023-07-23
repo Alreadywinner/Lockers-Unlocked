@@ -1,6 +1,9 @@
 import React, { useRef, useState, FormEvent } from 'react';
-import { Button, CustomModal, Input, Toast } from '@components';
-import { FormDataType, LoginPropType } from './types';
+import { Button, CustomModal, Input, Loader, Toast } from '@components';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from 'firebase';
+import { setLocalStorageItem } from 'utils/localStorage';
+import { FirebaseErrorType, FormDataType, LoginPropType } from './types';
 
 function LoginForm({
   loginModal,
@@ -9,6 +12,7 @@ function LoginForm({
 }: LoginPropType) {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const [loading, setLoading] = useState(false);
   const [showToast, setShowToast] = useState({
     visible: false,
     text: '',
@@ -32,14 +36,49 @@ function LoginForm({
     }
     return true;
   };
-  const makeRequest = (e: FormEvent<HTMLFormElement>) => {
+  const makeRequest = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+    setLoading(true);
     const data = {
       email: emailRef?.current?.value.trim() || '',
       password: passwordRef?.current?.value.trim() || '',
     };
     if (isValidData(data)) {
-      // TODO: make backend request
+      try {
+        // Query Firestore for the user with matching email and password
+        const querySnapshot = await getDocs(
+          query(
+            collection(db, 'users'),
+            where('email', '==', data.email),
+            where('password', '==', data.password),
+          ),
+        );
+        if (!querySnapshot.empty) {
+          const user = querySnapshot.docs[0];
+          setShowToast({
+            visible: true,
+            text: 'User Logged In successfully',
+          });
+          await setLocalStorageItem('user', {
+            email: user.data().email,
+            id: user.id,
+          });
+          setLoginModal(false);
+        } else {
+          setShowToast({
+            visible: true,
+            text: 'User Not Found ! Try again',
+          });
+        }
+      } catch (error) {
+        const authError = error as FirebaseErrorType;
+        setShowToast({
+          visible: true,
+          text: `Error : ${authError.message}`,
+        });
+      } finally {
+        setLoading(false);
+      }
     }
   };
   return (
@@ -89,8 +128,9 @@ function LoginForm({
             <Button
               type="submit"
               className="bg-red400 text-white hover:bg-red500 md:w-3/12 w-full rounded p-2"
+              disabled={loading}
             >
-              Login
+              {loading ? <Loader /> : 'Login'}
             </Button>
           </div>
         </form>
@@ -100,6 +140,7 @@ function LoginForm({
             type="button"
             className="bg-red400 text-white hover:bg-red500 md:w-3/12 w-full rounded p-2"
             onClick={onSignUpClick}
+            disabled={loading}
           >
             Sign Up
           </Button>
