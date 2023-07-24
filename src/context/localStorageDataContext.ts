@@ -1,5 +1,5 @@
 // LocalStorageDataContext.tsx
-import React, { createContext, useContext } from 'react';
+import { createContext, useContext } from 'react';
 
 export type LocalStorageDataType = {
   email: string;
