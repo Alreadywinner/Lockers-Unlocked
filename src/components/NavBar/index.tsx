@@ -26,7 +26,7 @@ function NavLinksRender({
   userData,
   onLogoutClick,
 }: NavLinksType) {
-  const profileRoute = { name: 'Profile', routeName: '/profile', key: 7 };
+  const profileRoute = { name: 'Profile', routeName: '/profile', key: 6 };
   return (
     <>
       {navLinks.map((element) => {
@@ -87,7 +87,6 @@ export default function NavBar() {
     { name: 'NBA', routeName: '/nba', key: 3 },
     { name: 'MLB', routeName: '/mlb', key: 4 },
     { name: 'College Teams', routeName: '/college-teams', key: 5 },
-    { name: 'D1 Sports', routeName: '/d1-sports', key: 6 },
   ];
 
   const toggleMenu = () => setIsOpen(!isOpen);

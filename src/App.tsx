@@ -5,7 +5,6 @@ import {
   NFLPage,
   NBAPage,
   MLBPage,
-  D1SportsPage,
   CollegeTeamsPage,
   AddNewItemsPage,
 } from '@containers';
@@ -25,7 +24,6 @@ function App() {
         <Route path="/nfl" element={<NFLPage />} />
         <Route path="/nba" element={<NBAPage />} />
         <Route path="/mlb" element={<MLBPage />} />
-        <Route path="/d1-sports" element={<D1SportsPage />} />
         <Route path="/college-teams" element={<CollegeTeamsPage />} />
         <Route path="/add-new" element={<AddNewItemsPage />} />
       </Routes>
