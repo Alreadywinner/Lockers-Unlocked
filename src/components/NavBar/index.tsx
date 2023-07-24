@@ -1,11 +1,9 @@
 import { BurgerIcon, CrossIcon } from '@Icon';
 import { Auth, Button } from '@components';
+import useLocalStorage from '@hooks';
+import { useLocalStorageDataContext } from '@context';
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-  getLocalStorageItem,
-  removeLocalStorageItem,
-} from 'utils/localStorage';
 
 type NavLinkItem = {
   name: string;
@@ -28,12 +26,10 @@ function NavLinksRender({
   userData,
   onLogoutClick,
 }: NavLinksType) {
-  const updatedNavLinks = userData
-    ? [...navLinks, { name: 'Profile', routeName: '/profile', key: 7 }]
-    : navLinks;
+  const profileRoute = { name: 'Profile', routeName: '/profile', key: 7 };
   return (
     <>
-      {updatedNavLinks.map((element) => {
+      {navLinks.map((element) => {
         return (
           <Link
             to={element.routeName}
@@ -45,6 +41,16 @@ function NavLinksRender({
           </Link>
         );
       })}
+      {userData && (
+        <Link
+          to={profileRoute.routeName}
+          key={profileRoute.key}
+          onClick={() => setIsOpen(false)}
+          className="md:ml-0 ml-4 px-3 py-2 rounded-md md:text-sm sm:text-base md:font-bold sm:font-medium text-black hover:text-gray hover:bg-gray-50 md:flex sm:block"
+        >
+          {profileRoute.name}
+        </Link>
+      )}
       {!userData ? (
         <Button
           className="md:ml-0 ml-4 px-3 py-2 rounded-md md:text-sm sm:text-base md:font-bold sm:font-medium text-black hover:text-gray hover:bg-gray-50 md:flex sm:block hover:cursor-pointer"
@@ -67,7 +73,10 @@ function NavLinksRender({
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [auth, setAuth] = useState(false);
-  const userData = getLocalStorageItem('user', null);
+  const { removeLocalStorageItem } = useLocalStorage('user', null);
+  const { localStorageData, removeLocalStorageData } =
+    useLocalStorageDataContext();
+
   const navLinks = [
     {
       name: 'Home',
@@ -89,7 +98,8 @@ export default function NavBar() {
   };
 
   const onLogoutClick = async () => {
-    await removeLocalStorageItem('user');
+    removeLocalStorageItem();
+    removeLocalStorageData();
   };
   return (
     <>
@@ -109,7 +119,7 @@ export default function NavBar() {
                     navLinks={navLinks}
                     onButtonPress={onButtonPress}
                     setIsOpen={setIsOpen}
-                    userData={userData}
+                    userData={localStorageData}
                     onLogoutClick={onLogoutClick}
                   />
                 </div>
@@ -139,7 +149,7 @@ export default function NavBar() {
                 navLinks={navLinks}
                 onButtonPress={onButtonPress}
                 setIsOpen={setIsOpen}
-                userData={userData}
+                userData={localStorageData}
                 onLogoutClick={onLogoutClick}
               />
             </div>

@@ -2,7 +2,8 @@ import React, { useRef, useState, FormEvent } from 'react';
 import { Button, CustomModal, Input, Loader, Toast } from '@components';
 import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from 'firebase';
-import { setLocalStorageItem } from 'utils/localStorage';
+import useLocalStorage from '@hooks';
+import { useLocalStorageDataContext } from '@context';
 import { FirebaseErrorType, FormDataType, LoginPropType } from './types';
 
 function LoginForm({
@@ -17,6 +18,11 @@ function LoginForm({
     visible: false,
     text: '',
   });
+  const { setLocalStorageItem } = useLocalStorage<{
+    email: string;
+    id: string;
+  }>('user', { email: '', id: '' });
+  const { setLocalStorageData } = useLocalStorageDataContext();
   const isValidData = (data: FormDataType): boolean => {
     const emailReg =
       /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -59,10 +65,14 @@ function LoginForm({
             visible: true,
             text: 'User Logged In successfully',
           });
-          await setLocalStorageItem('user', {
+
+          setLocalStorageItem({
             email: user.data().email,
             id: user.id,
           });
+
+          setLocalStorageData({ email: user.data().email, id: user.id });
+
           setLoginModal(false);
         } else {
           setShowToast({
