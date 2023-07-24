@@ -1,7 +1,11 @@
-import { Button, Input } from '@components';
+import { Button, Input, Loader, Toast } from '@components';
 import React, { useRef, useState, FormEvent } from 'react';
 import { useNavigate } from 'react-router-dom';
 import TeamTypeData from 'utils/teamTypeData';
+import { db, storage } from 'firebase';
+import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import { FirebaseErrorType } from '@components/LoginForm/types';
+import { addDoc, collection } from 'firebase/firestore';
 import { AddNewItemType } from './types';
 
 function AddNewItemsPage() {
@@ -13,7 +17,11 @@ function AddNewItemsPage() {
   const teamSelectRef = useRef<HTMLSelectElement>(null);
 
   const [fileData, setFileData] = useState<FileList | null>(null);
-
+  const [loading, setLoading] = useState(false);
+  const [showToast, setShowToast] = useState({
+    visible: false,
+    text: '',
+  });
   const addNewFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
     const temp = event.target.files;
     setFileData(temp);
@@ -23,14 +31,19 @@ function AddNewItemsPage() {
       data.description === '' ||
       data.startingBid === '' ||
       data.teamSelect === '' ||
-      data.title === ''
+      data.title === '' ||
+      data.fileData === null
     ) {
-      // TODO: Display error toast
+      setShowToast({
+        visible: true,
+        text: 'Please enter all fields',
+      });
       return false;
     }
     return true;
   };
-  const handleUploadItem = (e: FormEvent<HTMLFormElement>) => {
+  const handleUploadItem = async (e: FormEvent<HTMLFormElement>) => {
+    setLoading(true);
     e.preventDefault();
     const data = {
       title: titleRef.current?.value || '',
@@ -38,13 +51,49 @@ function AddNewItemsPage() {
       description: descriptionRef.current?.value || '',
       teamSelect: teamSelectRef.current?.value || '',
       fileData: fileData || null,
+      fileSrc: '',
     };
     if (validateData(data)) {
-      // TODO: make a backend call here
+      try {
+        if (data.fileData !== null) {
+          const fileBlob = new Blob([data.fileData.item(0) as File]);
+          const storageRef = ref(
+            storage,
+            `files/${data.fileData.item(0)?.name}`,
+          );
+          const snapshot = await uploadBytes(storageRef, fileBlob);
+          const downloadURL = await getDownloadURL(snapshot.ref);
+          const { fileData: dataFileData, ...dataWithoutFileData } = data;
+          dataWithoutFileData.fileSrc = downloadURL;
+
+          await addDoc(collection(db, 'items'), {
+            ...dataWithoutFileData,
+          });
+          setShowToast({
+            visible: true,
+            text: 'User Registered Successfully',
+          });
+        }
+      } catch (err) {
+        const Error = err as FirebaseErrorType;
+        setShowToast({
+          visible: true,
+          text: `${Error.message}`,
+        });
+      } finally {
+        setLoading(false);
+      }
     }
   };
   return (
     <section className="w-full font-gilroy mt-8 mb-10 flex flex-col">
+      {showToast.visible && (
+        <Toast
+          text={showToast.text}
+          visible={showToast.visible}
+          setVisible={setShowToast}
+        />
+      )}
       <div>
         <Button
           className="bg-red text-white p-3 rounded float-right hover:bg-red500 mr-3"
@@ -69,6 +118,7 @@ function AddNewItemsPage() {
             name="title"
             id="title"
             className="h-9 border-solid border-2 border-red rounded pl-2"
+            required
           />
           <label htmlFor="starting_bid">Starting Bid *</label>
           <Input
@@ -77,6 +127,7 @@ function AddNewItemsPage() {
             name="starting_bid"
             id="starting_bid"
             className="h-9 border-solid border-2 border-red rounded pl-2"
+            required
           />
           <label htmlFor="item_image">Item Image *</label>
           <div className="block">
@@ -95,6 +146,7 @@ function AddNewItemsPage() {
               id="item_image"
               onChange={addNewFiles}
               ref={fileInputRef}
+              required
             />
           </div>
           <label htmlFor="select_team">Select Team *</label>
@@ -103,15 +155,8 @@ function AddNewItemsPage() {
               className="block appearance-none w-full bg-white border-solid border-2 border-red rounded px-4 py-2 pr-8 rounded leading-tight focus:outline-none focus:shadow-outline"
               name="select_team"
               ref={teamSelectRef}
-              onChange={() => {
-                // if (teamSelectRef.current) {
-                //   const selectedOption = teamSelectRef.current.value;
-                //   // Do something with the selected option, e.g., update the ref
-                //   console.log('Selected Option:', selectedOption);
-                // }
-              }}
             >
-              <option>Select Team Type</option>
+              <option value="">Select Team Type</option>
               {TeamTypeData.map((element) => (
                 <option key={element.id}>{element.name}</option>
               ))}
@@ -135,13 +180,15 @@ function AddNewItemsPage() {
             rows={8}
             className="border-solid border-2 border-red rounded pl-2"
             ref={descriptionRef}
+            required
           />
 
           <Button
             type="submit"
             className="bg-red400 text-white hover:bg-red500 rounded h-10 md:w-80 w-full self-center"
+            disabled={loading}
           >
-            Add Item
+            {loading ? <Loader /> : 'Add Item'}
           </Button>
         </form>
       </div>
