@@ -73,7 +73,7 @@ function NavLinksRender({
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [auth, setAuth] = useState(false);
-  const { removeLocalStorageItem } = useLocalStorage('user', null);
+  const { value, removeLocalStorageItem } = useLocalStorage('user', null);
   const { localStorageData, removeLocalStorageData } =
     useLocalStorageDataContext();
 
@@ -119,7 +119,7 @@ export default function NavBar() {
                     navLinks={navLinks}
                     onButtonPress={onButtonPress}
                     setIsOpen={setIsOpen}
-                    userData={localStorageData}
+                    userData={localStorageData || value}
                     onLogoutClick={onLogoutClick}
                   />
                 </div>
@@ -149,7 +149,7 @@ export default function NavBar() {
                 navLinks={navLinks}
                 onButtonPress={onButtonPress}
                 setIsOpen={setIsOpen}
-                userData={localStorageData}
+                userData={localStorageData || value}
                 onLogoutClick={onLogoutClick}
               />
             </div>

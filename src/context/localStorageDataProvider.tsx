@@ -14,10 +14,7 @@ export default function LocalStorageDataProvider({
   children,
 }: LocalStorageDataProviderProps) {
   const [localStorageData, setLocalStorageDataState] =
-    useState<LocalStorageDataType | null>({
-      email: '',
-      id: '',
-    });
+    useState<LocalStorageDataType | null>(null);
 
   const setLocalStorageData = (data: LocalStorageDataType) => {
     setLocalStorageDataState(data);
