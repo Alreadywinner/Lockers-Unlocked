@@ -25,6 +25,8 @@
       "@hoc/*": ["./src/hoc/*"],
       "@hooks": ["./src/hooks"],
       "@hooks/*": ["./src/hooks/*"],
+      "@context": ["./src/context"],
+      "@context/*": ["./src/context/*"],
       "@services": ["./src/services"],
       "@services/*": ["./src/services/*"],
       "@Icon": ["./src/assets/icons/icons"],

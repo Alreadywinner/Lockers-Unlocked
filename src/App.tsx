@@ -10,12 +10,13 @@ import {
   AddNewItemsPage,
 } from '@containers';
 import { Footer, NavBar } from 'components';
+import { LocalStorageDataProvider } from '@context';
 import React from 'react';
 import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <>
+    <LocalStorageDataProvider>
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -29,7 +30,7 @@ function App() {
         <Route path="/add-new" element={<AddNewItemsPage />} />
       </Routes>
       <Footer />
-    </>
+    </LocalStorageDataProvider>
   );
 }
 
