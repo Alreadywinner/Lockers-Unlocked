@@ -7,6 +7,7 @@ import MLBPage from './MLBPage';
 import CollegeTeamsPage from './CollegeTeamsPage';
 import AddNewItemsPage from './AddNewItemsPage/AddNewItemsPage';
 import DetailPage from './DetailPage';
+import PrivateRoute from './ProtectedRoute';
 
 export {
   HomePage,
@@ -18,4 +19,5 @@ export {
   CollegeTeamsPage,
   AddNewItemsPage,
   DetailPage,
+  PrivateRoute,
 };

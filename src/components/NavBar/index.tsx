@@ -3,7 +3,7 @@ import { Auth, Button } from '@components';
 import useLocalStorage from '@hooks';
 import { useLocalStorageDataContext } from '@context';
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 type NavLinkItem = {
   name: string;
@@ -73,6 +73,7 @@ function NavLinksRender({
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [auth, setAuth] = useState(false);
+  const navigate = useNavigate();
   const { value, removeLocalStorageItem } = useLocalStorage('user', {
     email: '',
     id: '',
@@ -109,6 +110,7 @@ export default function NavBar() {
   const onLogoutClick = async () => {
     removeLocalStorageItem();
     removeLocalStorageData();
+    navigate('/');
   };
   const isValidUser = value.email !== '' && value.id !== '';
   return (
