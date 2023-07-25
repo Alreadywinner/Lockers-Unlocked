@@ -6,6 +6,7 @@ import { db, storage } from 'firebase';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
 import { FirebaseErrorType } from '@components/LoginForm/types';
 import { addDoc, collection } from 'firebase/firestore';
+import { useLocalStorageDataContext } from '@context';
 import { AddNewItemType } from './types';
 
 function AddNewItemsPage() {
@@ -15,7 +16,7 @@ function AddNewItemsPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const teamSelectRef = useRef<HTMLSelectElement>(null);
-
+  const { localStorageData } = useLocalStorageDataContext();
   const [fileData, setFileData] = useState<FileList | null>(null);
   const [loading, setLoading] = useState(false);
   const [showToast, setShowToast] = useState({
@@ -40,6 +41,13 @@ function AddNewItemsPage() {
       });
       return false;
     }
+    if (Number(data.startingBid) < 0) {
+      setShowToast({
+        visible: true,
+        text: 'Starting Bid should be at least 1$',
+      });
+      return false;
+    }
     return true;
   };
   const handleUploadItem = async (e: FormEvent<HTMLFormElement>) => {
@@ -52,9 +60,10 @@ function AddNewItemsPage() {
       teamSelect: teamSelectRef.current?.value || '',
       fileData: fileData || null,
       fileSrc: '',
+      user_id: localStorageData?.id || '',
     };
-    if (validateData(data)) {
-      try {
+    try {
+      if (validateData(data)) {
         if (data.fileData !== null) {
           const fileBlob = new Blob([data.fileData.item(0) as File]);
           const storageRef = ref(
@@ -71,18 +80,34 @@ function AddNewItemsPage() {
           });
           setShowToast({
             visible: true,
-            text: 'User Registered Successfully',
+            text: 'Item Added Successfully',
           });
+          if (titleRef.current) {
+            titleRef.current.value = '';
+          }
+          if (startingBidRef.current) {
+            startingBidRef.current.value = '';
+          }
+          if (descriptionRef.current) {
+            descriptionRef.current.value = '';
+          }
+          if (teamSelectRef.current) {
+            teamSelectRef.current.value = '';
+          }
+          if (fileInputRef.current) {
+            fileInputRef.current.value = '';
+          }
+          setFileData(null);
         }
-      } catch (err) {
-        const Error = err as FirebaseErrorType;
-        setShowToast({
-          visible: true,
-          text: `${Error.message}`,
-        });
-      } finally {
-        setLoading(false);
       }
+    } catch (err) {
+      const Error = err as FirebaseErrorType;
+      setShowToast({
+        visible: true,
+        text: `${Error.message}`,
+      });
+    } finally {
+      setLoading(false);
     }
   };
   return (
@@ -117,6 +142,7 @@ function AddNewItemsPage() {
             type="text"
             name="title"
             id="title"
+            placeHolder="Enter Title"
             className="h-9 border-solid border-2 border-red rounded pl-2"
             required
           />
@@ -126,6 +152,7 @@ function AddNewItemsPage() {
             type="number"
             name="starting_bid"
             id="starting_bid"
+            placeHolder="Enter Number"
             className="h-9 border-solid border-2 border-red rounded pl-2"
             required
           />
@@ -179,6 +206,7 @@ function AddNewItemsPage() {
             cols={30}
             rows={8}
             className="border-solid border-2 border-red rounded pl-2"
+            placeholder="Enter details about Item"
             ref={descriptionRef}
             required
           />

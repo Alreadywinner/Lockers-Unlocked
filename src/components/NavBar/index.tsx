@@ -2,7 +2,7 @@ import { BurgerIcon, CrossIcon } from '@Icon';
 import { Auth, Button } from '@components';
 import useLocalStorage from '@hooks';
 import { useLocalStorageDataContext } from '@context';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 type NavLinkItem = {
@@ -73,9 +73,19 @@ function NavLinksRender({
 export default function NavBar() {
   const [isOpen, setIsOpen] = useState(false);
   const [auth, setAuth] = useState(false);
-  const { value, removeLocalStorageItem } = useLocalStorage('user', null);
-  const { localStorageData, removeLocalStorageData } =
+  const { value, removeLocalStorageItem } = useLocalStorage('user', {
+    email: '',
+    id: '',
+  });
+  const { localStorageData, removeLocalStorageData, setLocalStorageData } =
     useLocalStorageDataContext();
+
+  useEffect(() => {
+    if (value && value.email !== '' && value.id !== '') {
+      const localData = { email: value.email, id: value.id };
+      setLocalStorageData({ ...localData });
+    }
+  }, [value]);
 
   const navLinks = [
     {
@@ -100,6 +110,7 @@ export default function NavBar() {
     removeLocalStorageItem();
     removeLocalStorageData();
   };
+  const isValidUser = value.email !== '' && value.id !== '';
   return (
     <>
       {auth && <Auth />}
@@ -118,7 +129,7 @@ export default function NavBar() {
                     navLinks={navLinks}
                     onButtonPress={onButtonPress}
                     setIsOpen={setIsOpen}
-                    userData={localStorageData || value}
+                    userData={localStorageData || (isValidUser ? value : null)}
                     onLogoutClick={onLogoutClick}
                   />
                 </div>
@@ -148,7 +159,7 @@ export default function NavBar() {
                 navLinks={navLinks}
                 onButtonPress={onButtonPress}
                 setIsOpen={setIsOpen}
-                userData={localStorageData || value}
+                userData={localStorageData || (isValidUser ? value : null)}
                 onLogoutClick={onLogoutClick}
               />
             </div>

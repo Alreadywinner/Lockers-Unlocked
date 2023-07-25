@@ -5,4 +5,5 @@ export type AddNewItemType = {
   teamSelect: string;
   fileData: FileList | null;
   fileSrc?: string;
+  user_id: string;
 };
