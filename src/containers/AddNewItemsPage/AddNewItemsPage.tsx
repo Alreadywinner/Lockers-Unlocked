@@ -77,6 +77,7 @@ function AddNewItemsPage() {
 
           await addDoc(collection(db, 'items'), {
             ...dataWithoutFileData,
+            status: 'live',
           });
           setShowToast({
             visible: true,
