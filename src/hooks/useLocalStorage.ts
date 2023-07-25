@@ -3,7 +3,7 @@ import { useState } from 'react';
 function useLocalStorage<T>(key: string, defaultValue: T) {
   // Get the initial value from localStorage or use the defaultValue
   const storedValue = localStorage.getItem(key);
-  const initialValue =
+  const initialValue: T =
     storedValue !== null ? JSON.parse(storedValue) : defaultValue;
 
   // Create a state to hold the current value
