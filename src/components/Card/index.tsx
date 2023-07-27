@@ -2,7 +2,7 @@ import React from 'react';
 import { CardProps } from './types';
 
 function Card({ item, onClick }: CardProps) {
-  const { imgSrc, title, description, currentBid, startingBid } = item;
+  const { fileSrc, title, description, currentBid, startingBid } = item;
   return (
     <div
       className="max-w-sm rounded overflow-hidden shadow-lg transition-transform duration-300 md:hover:-translate-y-2"
@@ -11,7 +11,7 @@ function Card({ item, onClick }: CardProps) {
       tabIndex={0}
       onKeyDown={onClick}
     >
-      <img src={imgSrc} alt="temporary" className="rounded-t-lg w-full" />
+      <img src={fileSrc} alt="temporary" className="rounded-t-lg w-full" />
       <div className="px-6 py-4">
         <div className="font-bold text-xl mb-2">{title}</div>
         <p className="text-gray-700 text-base">{description}</p>

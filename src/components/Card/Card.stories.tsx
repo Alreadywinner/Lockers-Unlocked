@@ -34,8 +34,13 @@ Template.args = {
   item: {
     currentBid: '100',
     description: 'He wore this t-shirt in his farewell',
-    imgSrc: 'https://flowbite.com/docs/images/blog/image-1.jpg',
+    fileSrc: 'https://flowbite.com/docs/images/blog/image-1.jpg',
     startingBid: '50',
     title: 'Lebron James',
+    status: 'live',
+    teamSelect: 'NBA',
+    id: '',
+    user_id: '',
+    bids: [],
   },
 };

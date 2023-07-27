@@ -1,11 +1,6 @@
-interface AuctionItems {
-  imgSrc: string;
-  title: string;
-  description: string;
-  currentBid: string;
-  startingBid: string;
-}
+import { TeamsDataType } from 'containers/types';
+
 export type CardProps = {
-  item: AuctionItems;
+  item: TeamsDataType;
   onClick?: () => void;
 };
