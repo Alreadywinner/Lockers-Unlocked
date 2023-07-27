@@ -21,10 +21,6 @@ const TeamTypeData: TeamDataTypes = [
     id: 4,
     name: 'College Teams',
   },
-  {
-    id: 5,
-    name: 'D1 Sports',
-  },
 ];
 
 export default TeamTypeData;
