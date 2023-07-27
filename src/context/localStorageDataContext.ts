@@ -1,4 +1,5 @@
 // LocalStorageDataContext.tsx
+import { TeamsDataType } from 'containers/types';
 import { createContext, useContext } from 'react';
 
 export type LocalStorageDataType = {
@@ -10,6 +11,13 @@ export type LocalStorageDataContextType = {
   localStorageData: LocalStorageDataType | null;
   setLocalStorageData: (data: LocalStorageDataType) => void;
   removeLocalStorageData: () => void;
+  fetchAllItems: () => void;
+  AllNFLItems: TeamsDataType[] | null | false;
+  AllNBAItems: TeamsDataType[] | null | false;
+  AllMLBItems: TeamsDataType[] | null | false;
+  AllCollegeItems: TeamsDataType[] | null | false;
+  AllCurrentUserSoldItems?: TeamsDataType[] | null | false;
+  AllCurrentUserLiveItems?: TeamsDataType[] | null | false;
 };
 
 const LocalStorageDataContext =
