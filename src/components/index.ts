@@ -12,6 +12,8 @@ import Auth from './Auth';
 import ScrollToTop from './ScrollToTop';
 import Toast from './Toast';
 import Loader from './Loader';
+import SidePanel from './SidePanel';
+import StatusList from './StatusList';
 
 export {
   Button,
@@ -28,4 +30,6 @@ export {
   ScrollToTop,
   Toast,
   Loader,
+  SidePanel,
+  StatusList,
 };
