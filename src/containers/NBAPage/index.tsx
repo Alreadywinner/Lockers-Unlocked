@@ -2,51 +2,11 @@ import React, { useRef, useState } from 'react';
 import { TeamsDataType } from '@types';
 import { Toast } from '@components';
 import { DetailPage } from '@containers';
+import { useLocalStorageDataContext } from '@context';
 import NBAPageUI from './NBAPageUI';
 
 function MLBPage() {
-  const NBATeamsData = [
-    {
-      currentBid: '100',
-      description: 'He wore this t-shirt in his farewell',
-      imgSrc: 'https://flowbite.com/docs/images/blog/image-1.jpg',
-      startingBid: '50',
-      title: 'Lebron James',
-      id: 1,
-    },
-    {
-      currentBid: '100',
-      description: 'He wore this t-shirt in his farewell',
-      imgSrc: 'https://flowbite.com/docs/images/blog/image-1.jpg',
-      startingBid: '50',
-      title: 'Lebron James',
-      id: 2,
-    },
-    {
-      currentBid: '100',
-      description: 'He wore this t-shirt in his farewell',
-      imgSrc: 'https://flowbite.com/docs/images/blog/image-1.jpg',
-      startingBid: '50',
-      title: 'Lebron James',
-      id: 3,
-    },
-    {
-      currentBid: '100',
-      description: 'He wore this t-shirt in his farewell',
-      imgSrc: 'https://flowbite.com/docs/images/blog/image-1.jpg',
-      startingBid: '50',
-      title: 'Lebron James',
-      id: 4,
-    },
-    {
-      currentBid: '100',
-      description: 'He wore this t-shirt in his farewell',
-      imgSrc: 'https://flowbite.com/docs/images/blog/image-1.jpg',
-      startingBid: '50',
-      title: 'Lebron James',
-      id: 5,
-    },
-  ];
+  const { AllNBAItems: NBATeamsData } = useLocalStorageDataContext();
   const [toast, setToast] = useState({
     visible: false,
     text: '',

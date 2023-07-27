@@ -16,7 +16,7 @@ function AddNewItemsPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const teamSelectRef = useRef<HTMLSelectElement>(null);
-  const { localStorageData } = useLocalStorageDataContext();
+  const { localStorageData, fetchAllItems } = useLocalStorageDataContext();
   const [fileData, setFileData] = useState<FileList | null>(null);
   const [loading, setLoading] = useState(false);
   const [showToast, setShowToast] = useState({
@@ -78,7 +78,14 @@ function AddNewItemsPage() {
           await addDoc(collection(db, 'items'), {
             ...dataWithoutFileData,
             status: 'live',
+            bids: [
+              {
+                id: localStorageData?.id,
+                bid: data.startingBid,
+              },
+            ],
           });
+          fetchAllItems();
           setShowToast({
             visible: true,
             text: 'Item Added Successfully',

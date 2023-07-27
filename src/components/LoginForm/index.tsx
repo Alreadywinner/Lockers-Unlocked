@@ -22,7 +22,7 @@ function LoginForm({
     email: string;
     id: string;
   }>('user', { email: '', id: '' });
-  const { setLocalStorageData } = useLocalStorageDataContext();
+  const { setLocalStorageData, fetchAllItems } = useLocalStorageDataContext();
   const isValidData = (data: FormDataType): boolean => {
     const emailReg =
       /^(([^<>()\\[\]\\.,;:\s@"]+(\.[^<>()\\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -72,6 +72,8 @@ function LoginForm({
           });
 
           setLocalStorageData({ email: user.data().email, id: user.id });
+
+          fetchAllItems();
 
           setLoginModal(false);
         } else {

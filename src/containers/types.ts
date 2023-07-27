@@ -1,8 +1,16 @@
+type BidDataType = {
+  id: string;
+  bid: string;
+};
 export interface TeamsDataType {
   currentBid: string;
   description: string;
-  imgSrc: string;
+  fileSrc: string;
   startingBid: string;
+  status: string;
+  teamSelect: string;
   title: string;
-  id: number;
+  id: string;
+  user_id: string;
+  bids: Array<BidDataType>;
 }

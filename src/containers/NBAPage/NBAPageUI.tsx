@@ -4,7 +4,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 type NBATeamsProps = {
-  NBATeamsData: TeamsDataType[];
+  NBATeamsData: TeamsDataType[] | null | false;
   handleItemPress: (item: TeamsDataType) => void;
 };
 
@@ -25,8 +25,7 @@ function NBAPageUI({ NBATeamsData, handleItemPress }: NBATeamsProps) {
         NBA Teams Items
       </h1>
       <div className="mt-14 mb-5 ml-2 mr-2 flex gap-5 flex-wrap justify-center">
-        {NBATeamsData &&
-          NBATeamsData.length > 0 &&
+        {NBATeamsData && NBATeamsData.length > 0 ? (
           NBATeamsData.map((element) => {
             return (
               <Card
@@ -37,7 +36,14 @@ function NBAPageUI({ NBATeamsData, handleItemPress }: NBATeamsProps) {
                 }}
               />
             );
-          })}
+          })
+        ) : (
+          <div className="h-screen">
+            <p className="md:text-3xl text-2xl md:mt-0 mt-6 font-bold text-center">
+              No Items Found Please Add New
+            </p>
+          </div>
+        )}
       </div>
     </div>
   );

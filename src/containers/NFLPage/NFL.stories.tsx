@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react';
 import React from 'react';
 import { MemoryRouter } from 'react-router-dom';
+import { LocalStorageDataProvider } from '@context';
 import NFLPage from './index';
 
 // More on args: https://storybook.js.org/docs/react/writing-stories/args
@@ -15,7 +16,9 @@ const meta: Meta<typeof NFLPage> = {
   decorators: [
     (Story) => (
       <MemoryRouter>
-        <Story />
+        <LocalStorageDataProvider>
+          <Story />
+        </LocalStorageDataProvider>
       </MemoryRouter>
     ),
   ], // Wrapping the story inside the router

@@ -78,13 +78,18 @@ export default function NavBar() {
     email: '',
     id: '',
   });
-  const { localStorageData, removeLocalStorageData, setLocalStorageData } =
-    useLocalStorageDataContext();
+  const {
+    localStorageData,
+    removeLocalStorageData,
+    setLocalStorageData,
+    fetchAllItems,
+  } = useLocalStorageDataContext();
 
   useEffect(() => {
     if (value && value.email !== '' && value.id !== '') {
       const localData = { email: value.email, id: value.id };
       setLocalStorageData({ ...localData });
+      fetchAllItems();
     }
   }, [value]);
 

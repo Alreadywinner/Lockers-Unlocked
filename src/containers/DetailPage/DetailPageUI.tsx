@@ -13,7 +13,7 @@ function DetailPageUI({
         Product Details:
       </p>
       <div className="flex md:flex-row flex-col">
-        <img src={item?.imgSrc} alt="item" width={650} height={650} />
+        <img src={item?.fileSrc} alt="item" width={650} height={650} />
         <div className="flex flex-col w-full md:ml-5">
           <div>
             <p className="text-4xl md:mt-0 mt-5">{item?.title}</p>
