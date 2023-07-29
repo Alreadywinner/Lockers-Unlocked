@@ -48,12 +48,6 @@ function ContactPage() {
       </div>
       <div className="flex flex-col items-center justify-center mt-10 mb-5 leading-relaxed text-gray500">
         <h5 className="text-2xl font-bold mt-10 mb-4">Contact Information</h5>
-        <p className="text-center mt-10 mb-20 lg:ml-80 lg:mr-80 ml-5 mr-5">
-          Cras ut varius magna. Morbi sed orci id sapien ultricies malesu. Lorem
-          ipsum dolor sit, amet consectetur adipisicing elit. Dicta veritatis
-          soluta, earum doloremque eius consectetur, facere nostrum fugit nam
-          consequuntur quisquam tempore eos! Quisquam, accusamus.
-        </p>
         <div className="flex items-center justify-between text-center gap-10 flex-col">
           <div className="flex md:flex-row flex-col items-center gap-10 text-base leading-relaxed text-gray500">
             <LocationIcon width={100} height={100} />
