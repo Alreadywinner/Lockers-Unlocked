@@ -22,18 +22,10 @@ function App() {
         <Route path="/" element={<HomePage />} />
         <Route path="/about" element={<AboutPage />} />
         <Route path="/contact" element={<ContactPage />} />
-        <Route path="" element={<PrivateRoute />}>
-          <Route path="/nfl" element={<NFLPage />} />
-        </Route>
-        <Route path="" element={<PrivateRoute />}>
-          <Route path="/nba" element={<NBAPage />} />
-        </Route>
-        <Route path="" element={<PrivateRoute />}>
-          <Route path="/mlb" element={<MLBPage />} />
-        </Route>
-        <Route path="" element={<PrivateRoute />}>
-          <Route path="/college-teams" element={<CollegeTeamsPage />} />
-        </Route>
+        <Route path="/nfl" element={<NFLPage />} />
+        <Route path="/nba" element={<NBAPage />} />
+        <Route path="/mlb" element={<MLBPage />} />
+        <Route path="/college-teams" element={<CollegeTeamsPage />} />
         <Route path="" element={<PrivateRoute />}>
           <Route path="/add-new" element={<AddNewItemsPage />} />
         </Route>

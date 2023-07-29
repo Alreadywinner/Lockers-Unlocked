@@ -6,7 +6,8 @@ import { useLocalStorageDataContext } from '@context';
 import NFLPageUI from './NFLPageUI';
 
 function NFLPage() {
-  const { AllNFLItems: NFLTeamsData } = useLocalStorageDataContext();
+  const { AllNFLItems: NFLTeamsData, localStorageData } =
+    useLocalStorageDataContext();
   const [toast, setToast] = useState({
     visible: false,
     text: '',
@@ -14,8 +15,15 @@ function NFLPage() {
   const currentItemRef = useRef<TeamsDataType | null>(null);
   const [detailModal, setDetailModal] = useState(false);
   const handleItemPress = (item: TeamsDataType): void => {
-    setDetailModal(!detailModal);
-    currentItemRef.current = item;
+    if (localStorageData && localStorageData?.id !== '') {
+      setDetailModal(!detailModal);
+      currentItemRef.current = item;
+    } else {
+      setToast({
+        text: 'Please Login to continue',
+        visible: true,
+      });
+    }
   };
   return (
     <>

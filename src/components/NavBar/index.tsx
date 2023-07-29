@@ -86,10 +86,12 @@ export default function NavBar() {
   } = useLocalStorageDataContext();
 
   useEffect(() => {
+    fetchAllItems();
+  }, []);
+  useEffect(() => {
     if (value && value.email !== '' && value.id !== '') {
       const localData = { email: value.email, id: value.id };
       setLocalStorageData({ ...localData });
-      fetchAllItems();
     }
   }, [value]);
 
