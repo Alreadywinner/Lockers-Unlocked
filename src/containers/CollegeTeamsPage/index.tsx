@@ -3,9 +3,11 @@ import { TeamsDataType } from '@types';
 import { Toast } from '@components';
 import { DetailPage } from '@containers';
 import { useLocalStorageDataContext } from '@context';
+import { useNavigate } from 'react-router-dom';
 import CollegeTeamsUI from './CollegeTeamsUI';
 
 function CollegeTeamsPage() {
+  const navigate = useNavigate();
   const { AllCollegeItems: collegeTeamsData, localStorageData } =
     useLocalStorageDataContext();
   const [toast, setToast] = useState({
@@ -18,6 +20,16 @@ function CollegeTeamsPage() {
     if (localStorageData && localStorageData?.id !== '') {
       setDetailModal(!detailModal);
       currentItemRef.current = item;
+    } else {
+      setToast({
+        text: 'Please Login to continue',
+        visible: true,
+      });
+    }
+  };
+  const handleAddNewClick = (): void => {
+    if (localStorageData && localStorageData.id !== '') {
+      navigate('/add-new');
     } else {
       setToast({
         text: 'Please Login to continue',
@@ -44,6 +56,7 @@ function CollegeTeamsPage() {
       <CollegeTeamsUI
         collegeTeamsData={collegeTeamsData}
         handleItemPress={handleItemPress}
+        handleAddNewClick={handleAddNewClick}
       />
     </>
   );

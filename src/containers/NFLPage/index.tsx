@@ -3,9 +3,11 @@ import { TeamsDataType } from '@types';
 import { Toast } from '@components';
 import { DetailPage } from '@containers';
 import { useLocalStorageDataContext } from '@context';
+import { useNavigate } from 'react-router-dom';
 import NFLPageUI from './NFLPageUI';
 
 function NFLPage() {
+  const navigate = useNavigate();
   const { AllNFLItems: NFLTeamsData, localStorageData } =
     useLocalStorageDataContext();
   const [toast, setToast] = useState({
@@ -18,6 +20,16 @@ function NFLPage() {
     if (localStorageData && localStorageData?.id !== '') {
       setDetailModal(!detailModal);
       currentItemRef.current = item;
+    } else {
+      setToast({
+        text: 'Please Login to continue',
+        visible: true,
+      });
+    }
+  };
+  const handleAddNewClick = (): void => {
+    if (localStorageData && localStorageData.id !== '') {
+      navigate('/add-new');
     } else {
       setToast({
         text: 'Please Login to continue',
@@ -44,6 +56,7 @@ function NFLPage() {
       <NFLPageUI
         NFLTeamsData={NFLTeamsData}
         handleItemPress={handleItemPress}
+        handleAddNewClick={handleAddNewClick}
       />
     </>
   );
