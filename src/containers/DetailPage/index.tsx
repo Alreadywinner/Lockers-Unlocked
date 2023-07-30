@@ -127,18 +127,18 @@ function DetailPage({ detailModal, setDetailModal, item }: DetailPagePropType) {
       });
     }
   };
-  const onWithdrawClick = () => {
+  const onWithdrawClick = async () => {
     setWithdrawLoading(true);
     try {
       if (item?.bids && item.bids.length > 1) {
         const allBids = item.bids.filter(
           (bid) => bid.id !== localStorageData?.id,
         );
-        makeBackendRequest(allBids, true);
+        await makeBackendRequest(allBids, true);
       } else if (item?.bids && item.bids.length === 1) {
         const allBids = item.bids;
         allBids[0].bid = item.startingBid;
-        makeBackendRequest(allBids, true);
+        await makeBackendRequest(allBids, true);
       }
     } catch (err) {
       setShowToast({ text: 'Unknown Error occurred', visible: true });
@@ -154,12 +154,17 @@ function DetailPage({ detailModal, setDetailModal, item }: DetailPagePropType) {
       const newBid = newBidRef.current?.value || '';
       const [itemExistOrNot] =
         item?.bids.filter((bids) => bids.id === localStorageData?.id) ?? [];
+
       if (Number(currentBidRef.current?.bid) >= Number(newBid)) {
         setShowToast({
           text: `Bid should be greater than : ${currentBidRef.current?.bid} $`,
           visible: true,
         });
-      } else if (itemExistOrNot.id !== '' && itemExistOrNot.bid !== '') {
+      } else if (
+        itemExistOrNot &&
+        itemExistOrNot.id !== '' &&
+        itemExistOrNot.bid !== ''
+      ) {
         allBids = [
           ...(item?.bids?.filter((bid) => bid.id !== itemExistOrNot.id) || []),
           {
