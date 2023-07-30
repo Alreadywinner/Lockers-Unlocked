@@ -1,4 +1,4 @@
-import { SidePanel, StatusList } from '@components';
+import { ScrollToTop, SidePanel, StatusList } from '@components';
 import { useLocalStorageDataContext } from '@context';
 import { TeamsDataType } from 'containers/types';
 import React, { useEffect, useState } from 'react';
@@ -39,6 +39,7 @@ function Profile() {
   };
   return (
     <div className="font-gilroy p-4">
+      <ScrollToTop />
       <div className="flex md:flex-row flex-col gap-4 mt-10">
         <div className="md:w-1/5 w-100 bg-white-500 shadow-lg shadow-white-500/50 rounded h-full">
           <SidePanel

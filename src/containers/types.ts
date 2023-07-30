@@ -1,4 +1,4 @@
-type BidDataType = {
+export type BidDataType = {
   id: string;
   bid: string;
 };

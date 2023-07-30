@@ -19,10 +19,10 @@ function DetailPageUI({
             <p className="text-4xl md:mt-0 mt-5">{item?.title}</p>
             <p className="text-gray500 mt-5 mb-5">{item?.description}</p>
             <span className="flex md:justify-normal justify-center md:gap-6 gap-2 mt-2 mb-5">
-              <p className="rounded-full bg-blue400 p-2 md:text-sm text-xs">
+              <p className="rounded-full bg-red400 text-white p-2 md:text-sm text-xs">
                 Starting Bid: {item?.startingBid}$
               </p>
-              <p className="rounded-full bg-purple400 p-2 md:text-sm text-xs">
+              <p className="rounded-full bg-red400 text-white p-2 md:text-sm text-xs">
                 Current Bid: {item?.currentBid}$
               </p>
             </span>
@@ -31,7 +31,7 @@ function DetailPageUI({
             <Button
               type="button"
               onClick={onWithdrawClick}
-              className="bg-red400 text-white hover:bg-red500 rounded p-2"
+              className="bg-black text-white rounded p-2"
             >
               Withdraw Bid
             </Button>

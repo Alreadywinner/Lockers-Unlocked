@@ -103,7 +103,9 @@ function LoginForm({
         />
       )}
       <div className="font-gilroy">
-        <h1 className="text-3xl font-bold text-center">Login</h1>
+        <h1 className="text-3xl font-bold text-center md:p-0 p-3 md:mt-0 mt-5">
+          Login
+        </h1>
         <form
           className="flex flex-col gap-3 md:mt-8 mt-5 lg:ml-12 lg:mr-12 md:p-5"
           onSubmit={makeRequest}
