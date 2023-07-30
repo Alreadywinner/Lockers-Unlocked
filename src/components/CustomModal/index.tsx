@@ -13,12 +13,11 @@ function CustomModal({ children, isOpen, onClose }: CustomModalPropType) {
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
       width: '80%',
-      maxWidth: '80rem',
+      // maxWidth: '80rem',
       height: 'auto',
       maxHeight: '90%',
       display: 'flex',
       flexDirection: 'column',
-      justifyContent: 'center',
       overflow: 'scroll',
     },
     closeButton: {
