@@ -6,13 +6,14 @@ export type DetailPageAllPropType = {
   item: TeamsDataType | null;
   onBidClick: () => void;
   onWithdrawClick?: () => void;
+  withdrawLoading: boolean;
 };
 
 export type DetailPagePropType = Omit<
   DetailPageAllPropType,
-  'onBidClick' | 'onWithdrawClick'
+  'onBidClick' | 'onWithdrawClick' | 'withdrawLoading'
 >;
 export type DetailPageUIPropType = Pick<
   DetailPageAllPropType,
-  'onBidClick' | 'item' | 'onWithdrawClick'
+  'onBidClick' | 'item' | 'onWithdrawClick' | 'withdrawLoading'
 >;

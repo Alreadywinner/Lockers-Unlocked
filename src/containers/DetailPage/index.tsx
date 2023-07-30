@@ -4,6 +4,7 @@ import { BidDataType } from 'containers/types';
 import { useLocalStorageDataContext } from 'context';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from 'firebase';
+import EvaluateHighestBid from 'utils/highestBid';
 import { DetailPagePropType } from './types';
 import DetailPageUI from './DetailPageUI';
 
@@ -78,6 +79,7 @@ function BidEntry({
 function DetailPage({ detailModal, setDetailModal, item }: DetailPagePropType) {
   const [bidEntry, setBidEntry] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
+  const [withdrawLoading, setWithdrawLoading] = useState(false);
   const [showToast, setShowToast] = useState({
     visible: false,
     text: '',
@@ -95,28 +97,53 @@ function DetailPage({ detailModal, setDetailModal, item }: DetailPagePropType) {
       currentBidRef.current = currentBid;
     }
   };
-  const makeBackendRequest = async (allBids: BidDataType[]) => {
+  const makeBackendRequest = async (
+    allBids: BidDataType[],
+    withdraw?: boolean,
+  ) => {
     try {
       const docRef = doc(db, 'items', item?.id ? item.id : '');
       const docSnap = await getDoc(docRef);
+      const currentHighestBid = EvaluateHighestBid(allBids);
       if (docSnap.exists()) {
         const existingItem = docSnap.data();
         // Step 2: Update the bids array in the fetched document
         existingItem.bids = allBids;
-
+        existingItem.currentBid = currentHighestBid.bid;
         // Step 3: Save the updated document back to Firestore
         await updateDoc(docRef, existingItem);
         await fetchAllItems();
         setShowToast({
-          text: 'Bid registered successfully',
+          text: withdraw
+            ? 'Your Bid Withdrawn successfully'
+            : 'Bid registered successfully',
           visible: true,
         });
       }
     } catch (err) {
       setShowToast({
-        text: 'Failed to Update Toast',
+        text: 'Failed to Update Bid',
         visible: true,
       });
+    }
+  };
+  const onWithdrawClick = () => {
+    setWithdrawLoading(true);
+    try {
+      if (item?.bids && item.bids.length > 1) {
+        const allBids = item.bids.filter(
+          (bid) => bid.id !== localStorageData?.id,
+        );
+        makeBackendRequest(allBids, true);
+      } else if (item?.bids && item.bids.length === 1) {
+        const allBids = item.bids;
+        allBids[0].bid = item.startingBid;
+        makeBackendRequest(allBids, true);
+      }
+    } catch (err) {
+      setShowToast({ text: 'Unknown Error occurred', visible: true });
+    } finally {
+      setWithdrawLoading(false);
     }
   };
   const submitBid = async (e: FormEvent<HTMLFormElement>) => {
@@ -185,7 +212,8 @@ function DetailPage({ detailModal, setDetailModal, item }: DetailPagePropType) {
         <DetailPageUI
           item={item}
           onBidClick={onBidClick}
-          onWithdrawClick={() => {}}
+          onWithdrawClick={onWithdrawClick}
+          withdrawLoading={withdrawLoading}
         />
       </CustomModal>
     </>

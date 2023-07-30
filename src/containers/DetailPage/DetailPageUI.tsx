@@ -1,11 +1,12 @@
 import React from 'react';
-import { Button } from '@components';
+import { Button, Loader } from '@components';
 import { DetailPageUIPropType } from './types';
 
 function DetailPageUI({
   item,
   onBidClick,
   onWithdrawClick,
+  withdrawLoading,
 }: DetailPageUIPropType) {
   return (
     <div className="font-gilroy">
@@ -31,14 +32,16 @@ function DetailPageUI({
             <Button
               type="button"
               onClick={onWithdrawClick}
-              className="bg-black text-white rounded p-2"
+              disabled={withdrawLoading}
+              className="bg-black text-white md:w-3/12 w-1/2 rounded p-2"
             >
-              Withdraw Bid
+              {withdrawLoading ? <Loader /> : 'Withdraw Bid'}
             </Button>
             <Button
               type="button"
               onClick={onBidClick}
-              className="bg-red400 text-white hover:bg-red500 rounded p-2"
+              disabled={withdrawLoading}
+              className="bg-red400 text-white md:w-3/12 w-1/2 hover:bg-red500 rounded p-2"
             >
               Make Bid
             </Button>
