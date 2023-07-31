@@ -9,13 +9,19 @@ function DetailPageUI({
   withdrawLoading,
 }: DetailPageUIPropType) {
   return (
-    <div className="font-gilroy">
+    <div className="font-gilroy w-full h-full">
       <p className="text-center text-3xl font-bold mt-3 mb-10">
         Product Details:
       </p>
       <div className="flex md:flex-row flex-col">
-        <img src={item?.fileSrc} alt="item" width={650} height={650} />
-        <div className="flex flex-col w-full md:ml-5">
+        <img
+          src={item?.fileSrc}
+          alt="item"
+          className="md:w-1/2 w-full h-96 object-cover"
+          width={650}
+          height={650}
+        />
+        <div className="flex flex-col md:w-1/2 w-full md:ml-5">
           <div>
             <p className="text-4xl md:mt-0 mt-5">{item?.title}</p>
             <p className="text-gray500 mt-5 mb-5">{item?.description}</p>
@@ -28,12 +34,12 @@ function DetailPageUI({
               </p>
             </span>
           </div>
-          <div className="flex gap-5 justify-center mt-10">
+          <div className="flex gap-5 justify-center mt-10 mb-3">
             <Button
               type="button"
               onClick={onWithdrawClick}
               disabled={withdrawLoading}
-              className="bg-black text-white md:w-3/12 w-1/2 rounded p-2"
+              className="bg-black text-white lg:w-3/12 w-1/2 rounded p-2"
             >
               {withdrawLoading ? <Loader /> : 'Withdraw Bid'}
             </Button>
@@ -41,7 +47,7 @@ function DetailPageUI({
               type="button"
               onClick={onBidClick}
               disabled={withdrawLoading}
-              className="bg-red400 text-white md:w-3/12 w-1/2 hover:bg-red500 rounded p-2"
+              className="bg-red400 text-white lg:w-3/12 w-1/2 hover:bg-red500 rounded p-2"
             >
               Make Bid
             </Button>

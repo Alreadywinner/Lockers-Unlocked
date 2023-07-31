@@ -18,7 +18,9 @@ function CustomModal({ children, isOpen, onClose }: CustomModalPropType) {
       maxHeight: '90%',
       display: 'flex',
       flexDirection: 'column',
-      overflow: 'scroll',
+      overflowY: 'scroll',
+      scrollbarWidth: 'none',
+      scrollbarColor: '#f1f1f1 lightgray',
     },
     closeButton: {
       position: 'absolute' as const,
@@ -44,14 +46,18 @@ function CustomModal({ children, isOpen, onClose }: CustomModalPropType) {
   }, []);
 
   const isMobile = windowWidth <= 768;
-  const isTablet = windowWidth > 768 && windowWidth <= 1024;
+  const isTablet = windowWidth > 768 && windowWidth <= 1200;
+  const isSmallLaptop = windowWidth > 1200 && windowWidth <= 1330;
 
   // Adjust the width and height based on screen sizes
   if (isMobile) {
     customStyles.content.width = '90%';
     customStyles.content.height = '40rem';
   } else if (isTablet) {
-    customStyles.content.width = '60rem';
+    customStyles.content.width = '80%';
+    customStyles.content.height = '40rem';
+  } else if (isSmallLaptop) {
+    customStyles.content.width = '65rem';
     customStyles.content.height = '40rem';
   } else {
     customStyles.content.width = '80rem';

@@ -78,6 +78,7 @@ function AddNewItemsPage() {
           await addDoc(collection(db, 'items'), {
             ...dataWithoutFileData,
             status: 'live',
+            currentBid: startingBidRef.current?.value,
             bids: [
               {
                 id: localStorageData?.id,
@@ -132,6 +133,7 @@ function AddNewItemsPage() {
           className="bg-red text-white p-3 rounded float-right hover:bg-red500 mr-3"
           type="button"
           onClick={() => navigate(-1)}
+          disabled={loading}
         >
           Go Back
         </Button>
