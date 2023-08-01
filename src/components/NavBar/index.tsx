@@ -77,6 +77,7 @@ export default function NavBar() {
   const { value, removeLocalStorageItem } = useLocalStorage('user', {
     email: '',
     id: '',
+    userType: '',
   });
   const {
     localStorageData,
@@ -89,8 +90,17 @@ export default function NavBar() {
     fetchAllItems();
   }, []);
   useEffect(() => {
-    if (value && value.email !== '' && value.id !== '') {
-      const localData = { email: value.email, id: value.id };
+    if (
+      value &&
+      value.email !== '' &&
+      value.id !== '' &&
+      value.userType !== ''
+    ) {
+      const localData = {
+        email: value.email,
+        id: value.id,
+        userType: value.userType,
+      };
       setLocalStorageData({ ...localData });
     }
   }, [value]);

@@ -3,6 +3,7 @@ import { Button, CustomModal, Input, Loader, Toast } from '@components';
 import { Link } from 'react-router-dom';
 import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from 'firebase';
+import UserTypeData from 'utils/UserTypeList';
 import { FormDataType, SignUpPropType } from './types';
 
 function SignUpForm({
@@ -15,6 +16,7 @@ function SignUpForm({
   const passwordRef = useRef<HTMLInputElement>(null);
   const repeatPasswordRef = useRef<HTMLInputElement>(null);
   const agreeRef = useRef<HTMLInputElement>(null);
+  const userTypeRef = useRef<HTMLSelectElement>(null);
 
   const [showToast, setShowToast] = useState({
     visible: false,
@@ -35,7 +37,8 @@ function SignUpForm({
     if (
       data.name === '' ||
       data.password === '' ||
-      data.repeatPassword === ''
+      data.repeatPassword === '' ||
+      data.userType === ''
     ) {
       setShowToast({
         visible: true,
@@ -85,6 +88,7 @@ function SignUpForm({
       email,
       password: passwordRef?.current?.value.trim() || '',
       repeatPassword: repeatPasswordRef?.current?.value.trim() || '',
+      userType: userTypeRef.current?.value.toLowerCase() || '',
       agree: agreeRef.current?.checked || false,
     };
     try {
@@ -179,6 +183,31 @@ function SignUpForm({
               required
               className="h-9 border-solid border-2 border-red rounded pl-2 md:w-9/12 md:self-center w-full"
             />
+          </div>
+          {/* User Type */}
+          <div className="md:flex md:flex-col">
+            <div className="mb-1 block md:ml-20 xl:ml-36 lg:ml-28">
+              <label htmlFor="select_team">User Type *</label>
+            </div>
+            <select
+              className="h-9 border-solid border-2 border-red rounded pl-2 md:w-9/12 md:self-center w-full"
+              name="select_team"
+              ref={userTypeRef}
+            >
+              <option value="">Select User Type</option>
+              {UserTypeData.map((element) => (
+                <option key={element.id}>{element.name}</option>
+              ))}
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+              <svg
+                className="fill-current h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+              </svg>
+            </div>
           </div>
           {/* Checkbox */}
           <div className="flex items-center justify-center gap-3">

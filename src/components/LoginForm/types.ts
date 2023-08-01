@@ -9,6 +9,7 @@ export type LoginPropType = {
 export type FormDataType = {
   email: string;
   password: string;
+  userType: string;
 };
 
 export type FirebaseErrorType = {

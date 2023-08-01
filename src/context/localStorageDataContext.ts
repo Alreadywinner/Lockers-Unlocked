@@ -5,6 +5,7 @@ import { createContext, useContext } from 'react';
 export type LocalStorageDataType = {
   email: string;
   id: string;
+  userType: string;
 };
 
 export type LocalStorageDataContextType = {

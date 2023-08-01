@@ -4,6 +4,7 @@ import { collection, getDocs, query, where } from 'firebase/firestore';
 import { db } from 'firebase';
 import useLocalStorage from '@hooks';
 import { useLocalStorageDataContext } from '@context';
+import UserTypeData from 'utils/UserTypeList';
 import { FirebaseErrorType, FormDataType, LoginPropType } from './types';
 
 function LoginForm({
@@ -13,6 +14,7 @@ function LoginForm({
 }: LoginPropType) {
   const emailRef = useRef<HTMLInputElement>(null);
   const passwordRef = useRef<HTMLInputElement>(null);
+  const userTypeRef = useRef<HTMLSelectElement>(null);
   const [loading, setLoading] = useState(false);
   const [showToast, setShowToast] = useState({
     visible: false,
@@ -21,7 +23,8 @@ function LoginForm({
   const { setLocalStorageItem } = useLocalStorage<{
     email: string;
     id: string;
-  }>('user', { email: '', id: '' });
+    userType: string;
+  }>('user', { email: '', id: '', userType: '' });
   const { setLocalStorageData, fetchAllItems } = useLocalStorageDataContext();
   const isValidData = (data: FormDataType): boolean => {
     const emailReg =
@@ -33,7 +36,7 @@ function LoginForm({
       });
       return false;
     }
-    if (data.email === '' || data.password === '') {
+    if (data.email === '' || data.password === '' || data.userType === '') {
       setShowToast({
         visible: true,
         text: 'Please enter all fields',
@@ -48,6 +51,7 @@ function LoginForm({
     const data = {
       email: emailRef?.current?.value.trim() || '',
       password: passwordRef?.current?.value.trim() || '',
+      userType: userTypeRef.current?.value.toLowerCase() || '',
     };
     if (isValidData(data)) {
       try {
@@ -57,6 +61,7 @@ function LoginForm({
             collection(db, 'users'),
             where('email', '==', data.email),
             where('password', '==', data.password),
+            where('userType', '==', data.userType),
           ),
         );
         if (!querySnapshot.empty) {
@@ -66,12 +71,17 @@ function LoginForm({
             text: 'User Logged In successfully',
           });
 
-          setLocalStorageItem({
+          const toSetLocalData = {
             email: user.data().email,
             id: user.id,
+            userType: user.data().userType,
+          };
+
+          setLocalStorageItem({
+            ...toSetLocalData,
           });
 
-          setLocalStorageData({ email: user.data().email, id: user.id });
+          setLocalStorageData({ ...toSetLocalData });
 
           fetchAllItems();
 
@@ -137,6 +147,31 @@ function LoginForm({
               required
               className="h-9 border-solid border-2 border-red rounded pl-2 md:w-9/12 md:self-center w-full"
             />
+          </div>
+          {/* User Type */}
+          <div className="md:flex md:flex-col">
+            <div className="mb-2 block md:ml-20 lg:ml-32">
+              <label htmlFor="select_team">User Type *</label>
+            </div>
+            <select
+              className="h-9 border-solid border-2 border-red rounded pl-2 md:w-9/12 md:self-center w-full"
+              name="select_team"
+              ref={userTypeRef}
+            >
+              <option value="">Select User Type</option>
+              {UserTypeData.map((element) => (
+                <option key={element.id}>{element.name}</option>
+              ))}
+            </select>
+            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+              <svg
+                className="fill-current h-4 w-4"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 20 20"
+              >
+                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
+              </svg>
+            </div>
           </div>
           <div className="flex justify-center mt-5">
             <Button

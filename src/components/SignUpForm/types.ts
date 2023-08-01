@@ -10,6 +10,7 @@ export type FormDataType = {
   password: string;
   repeatPassword: string;
   agree: boolean;
+  userType: string;
 };
 
 export type InputValue = string;
