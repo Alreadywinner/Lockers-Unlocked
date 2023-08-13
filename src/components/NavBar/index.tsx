@@ -26,6 +26,7 @@ function NavLinksRender({
   userData,
   onLogoutClick,
 }: NavLinksType) {
+  const { localStorageData } = useLocalStorageDataContext();
   const profileRoute = { name: 'Profile', routeName: '/profile', key: 6 };
   return (
     <>
@@ -41,7 +42,7 @@ function NavLinksRender({
           </Link>
         );
       })}
-      {userData && (
+      {userData && localStorageData?.userType === 'seller' && (
         <Link
           to={profileRoute.routeName}
           key={profileRoute.key}
