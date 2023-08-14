@@ -9,6 +9,7 @@ import AddNewItemsPage from './AddNewItemsPage/AddNewItemsPage';
 import DetailPage from './DetailPage';
 import PrivateRoute from './ProtectedRoute';
 import Profile from './Profile';
+import SellerDetailPage from './SellerDetailPage';
 
 export {
   HomePage,
@@ -22,4 +23,5 @@ export {
   DetailPage,
   PrivateRoute,
   Profile,
+  SellerDetailPage,
 };

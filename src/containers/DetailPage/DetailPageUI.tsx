@@ -7,6 +7,7 @@ function DetailPageUI({
   onBidClick,
   onWithdrawClick,
   withdrawLoading,
+  onSellerClick,
 }: DetailPageUIPropType) {
   return (
     <div className="font-gilroy w-full h-full">
@@ -50,6 +51,16 @@ function DetailPageUI({
               className="bg-red400 text-white lg:w-3/12 w-1/2 hover:bg-red500 rounded p-2"
             >
               Make Bid
+            </Button>
+          </div>
+          {/* About Seller */}
+          <div className="flex justify-center mt-5">
+            <Button
+              type="button"
+              className="bg-red400 text-white lg:w-3/12 w-1/2 hover:bg-red500 rounded p-2"
+              onClick={onSellerClick}
+            >
+              About Seller
             </Button>
           </div>
         </div>

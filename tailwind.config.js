@@ -14,6 +14,8 @@ export default {
       blue400: '#60A5FA',
       red400: '#F77171',
       red500: '#EF4444',
+      lightPurple: '#d22756',
+      lightPurpleHover: '#db5277',
     },
     fontFamily: {
       gilroy: ['Gilroy', 'sans-serif'],

@@ -5,6 +5,7 @@ import { useLocalStorageDataContext } from 'context';
 import { doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from 'firebase';
 import EvaluateHighestBid from 'utils/highestBid';
+import { SellerDetailPage } from '@containers';
 import { DetailPagePropType } from './types';
 import DetailPageUI from './DetailPageUI';
 
@@ -80,6 +81,7 @@ function DetailPage({ detailModal, setDetailModal, item }: DetailPagePropType) {
   const [bidEntry, setBidEntry] = useState(false);
   const [submitLoading, setSubmitLoading] = useState(false);
   const [withdrawLoading, setWithdrawLoading] = useState(false);
+  const [sellerDetail, setSellerDetail] = useState(false);
   const [showToast, setShowToast] = useState({
     visible: false,
     text: '',
@@ -194,6 +196,9 @@ function DetailPage({ detailModal, setDetailModal, item }: DetailPagePropType) {
   const onBidClose = () => {
     setBidEntry(!bidEntry);
   };
+  const onSellerClick = () => {
+    setSellerDetail(!sellerDetail);
+  };
   return (
     <>
       {showToast.visible && (
@@ -201,6 +206,13 @@ function DetailPage({ detailModal, setDetailModal, item }: DetailPagePropType) {
           visible={showToast.visible}
           setVisible={setShowToast}
           text={showToast.text}
+        />
+      )}
+      {sellerDetail && (
+        <SellerDetailPage
+          item={item}
+          sellerModal={sellerDetail}
+          setSellerModal={setSellerDetail}
         />
       )}
       <CustomModal isOpen={detailModal} onClose={() => setDetailModal(false)}>
@@ -219,6 +231,7 @@ function DetailPage({ detailModal, setDetailModal, item }: DetailPagePropType) {
           onBidClick={onBidClick}
           onWithdrawClick={onWithdrawClick}
           withdrawLoading={withdrawLoading}
+          onSellerClick={onSellerClick}
         />
       </CustomModal>
     </>

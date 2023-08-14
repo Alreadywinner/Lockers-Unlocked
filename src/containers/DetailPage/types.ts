@@ -7,13 +7,18 @@ export type DetailPageAllPropType = {
   onBidClick: () => void;
   onWithdrawClick?: () => void;
   withdrawLoading: boolean;
+  onSellerClick: () => void;
 };
 
 export type DetailPagePropType = Omit<
   DetailPageAllPropType,
-  'onBidClick' | 'onWithdrawClick' | 'withdrawLoading'
+  'onBidClick' | 'onWithdrawClick' | 'withdrawLoading' | 'onSellerClick'
 >;
 export type DetailPageUIPropType = Pick<
   DetailPageAllPropType,
-  'onBidClick' | 'item' | 'onWithdrawClick' | 'withdrawLoading'
+  | 'onBidClick'
+  | 'item'
+  | 'onWithdrawClick'
+  | 'withdrawLoading'
+  | 'onSellerClick'
 >;
