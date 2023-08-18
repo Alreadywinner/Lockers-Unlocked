@@ -78,6 +78,7 @@ export default function NavBar() {
     email: '',
     id: '',
     userType: '',
+    name: '',
   });
   const {
     localStorageData,
@@ -94,12 +95,14 @@ export default function NavBar() {
       value &&
       value.email !== '' &&
       value.id !== '' &&
-      value.userType !== ''
+      value.userType !== '' &&
+      value.name !== ''
     ) {
       const localData = {
         email: value.email,
         id: value.id,
         userType: value.userType,
+        name: value.name,
       };
       setLocalStorageData({ ...localData });
     }

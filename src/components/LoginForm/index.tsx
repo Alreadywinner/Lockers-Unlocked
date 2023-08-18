@@ -5,6 +5,7 @@ import { db } from 'firebase';
 import useLocalStorage from '@hooks';
 import { useLocalStorageDataContext } from '@context';
 import UserTypeData from 'utils/UserTypeList';
+import { LocalStorageDataType } from 'context/localStorageDataContext';
 import { FirebaseErrorType, FormDataType, LoginPropType } from './types';
 
 function LoginForm({
@@ -20,11 +21,10 @@ function LoginForm({
     visible: false,
     text: '',
   });
-  const { setLocalStorageItem } = useLocalStorage<{
-    email: string;
-    id: string;
-    userType: string;
-  }>('user', { email: '', id: '', userType: '' });
+  const { setLocalStorageItem } = useLocalStorage<LocalStorageDataType>(
+    'user',
+    { email: '', id: '', userType: '', name: '' },
+  );
   const { setLocalStorageData, fetchAllItems } = useLocalStorageDataContext();
   const isValidData = (data: FormDataType): boolean => {
     const emailReg =
@@ -75,6 +75,7 @@ function LoginForm({
             email: user.data().email,
             id: user.id,
             userType: user.data().userType,
+            name: user.data().name,
           };
 
           setLocalStorageItem({
