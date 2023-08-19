@@ -20,6 +20,9 @@ export type LocalStorageDataContextType = {
   AllCollegeItems: TeamsDataType[] | null | false;
   AllCurrentUserSoldItems?: TeamsDataType[] | null | false;
   AllCurrentUserLiveItems?: TeamsDataType[] | null | false;
+  AllLiveItems?: TeamsDataType[] | null | false;
+  AllSoldItems?: TeamsDataType[] | null | false;
+  loading: boolean;
 };
 
 const LocalStorageDataContext =

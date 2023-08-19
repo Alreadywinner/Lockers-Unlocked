@@ -18,6 +18,7 @@ export default function LocalStorageDataProvider({
 }: LocalStorageDataProviderProps) {
   const [localStorageData, setLocalStorageDataState] =
     useState<LocalStorageDataType | null>(null);
+  const [loading, setLoading] = useState(false);
 
   const [allItems, setAllItems] = useState<Array<TeamsDataType> | null>(null);
 
@@ -69,7 +70,16 @@ export default function LocalStorageDataProvider({
     );
   }, [allItems]);
 
+  const AllLiveItems = useMemo(() => {
+    return allItems?.filter((item) => item.status === 'live');
+  }, [allItems]);
+
+  const AllSoldItems = useMemo(() => {
+    return allItems?.filter((item) => item.status === 'sold');
+  }, [allItems]);
+
   const fetchAllItems = async () => {
+    setLoading(true);
     try {
       const querySnapshot = await getDocs(collection(db, 'items'));
       const items: TeamsDataType[] = querySnapshot.docs.map(
@@ -78,6 +88,8 @@ export default function LocalStorageDataProvider({
       setAllItems(items);
     } catch (err) {
       // Handle error here
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -101,6 +113,9 @@ export default function LocalStorageDataProvider({
       AllCollegeItems,
       AllCurrentUserSoldItems,
       AllCurrentUserLiveItems,
+      AllLiveItems,
+      AllSoldItems,
+      loading,
     }),
     [
       localStorageData,
@@ -113,6 +128,9 @@ export default function LocalStorageDataProvider({
       AllCollegeItems,
       AllCurrentUserSoldItems,
       AllCurrentUserLiveItems,
+      AllLiveItems,
+      AllSoldItems,
+      loading,
     ],
   );
 
