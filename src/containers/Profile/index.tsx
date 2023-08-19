@@ -1,7 +1,7 @@
 import { ScrollToTop, SidePanel, StatusList } from '@components';
 import { useLocalStorageDataContext } from '@context';
 import { TeamsDataType } from 'containers/types';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 function Profile() {
   const sidePanelItems = [
@@ -19,17 +19,23 @@ function Profile() {
     },
   ];
   const [selectedItem, setSelectedItem] = useState(1);
-  const { AllCurrentUserLiveItems, AllCurrentUserSoldItems } =
+  const { AllCurrentUserLiveItems, AllCurrentUserSoldItems, localStorageData } =
     useLocalStorageDataContext();
   const [selectedStatusList, setSelectedStatusList] = useState<
     TeamsDataType[] | null | false
   >();
+  const personalInfo = useRef<typeof localStorageData>();
 
   useEffect(() => {
     if (selectedItem === 1) {
+      personalInfo.current = null;
       setSelectedStatusList(AllCurrentUserLiveItems);
     } else if (selectedItem === 2) {
+      personalInfo.current = null;
       setSelectedStatusList(AllCurrentUserSoldItems);
+    } else if (selectedItem === 3) {
+      setSelectedStatusList(null);
+      personalInfo.current = localStorageData;
     }
   }, [selectedItem]);
   const updateStatus = (key: number) => {
@@ -48,8 +54,12 @@ function Profile() {
             selectedItem={selectedItem}
           />
         </div>
+
         <div className="md:w-4/5 w-100">
-          <StatusList listItems={selectedStatusList} />
+          <StatusList
+            listItems={selectedStatusList}
+            personalInfo={personalInfo.current}
+          />
         </div>
       </div>
     </div>
