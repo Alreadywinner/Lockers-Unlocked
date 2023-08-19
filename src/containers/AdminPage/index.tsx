@@ -2,14 +2,24 @@ import useLocalStorage from '@hooks';
 import { AdminLoginForm } from '@components';
 import React, { useState, useEffect, useRef, FormEvent } from 'react';
 import { FormDataType } from 'components/AdminLoginForm/types';
+import { collection, getDocs, query, where } from 'firebase/firestore';
+import { db } from 'firebase';
+import { FirebaseErrorType } from 'components/LoginForm/types';
+import { useLocalStorageDataContext } from '@context';
+import { AdminDashboard } from '@containers';
 
 export default function AdminPage() {
-  const { value } = useLocalStorage('user', {
+  const { value, setLocalStorageItem } = useLocalStorage('user', {
     email: '',
     id: '',
     userType: '',
     name: '',
   });
+  const {
+    setLocalStorageData,
+    fetchAllItems,
+    loading: apiLoading,
+  } = useLocalStorageDataContext();
   const [loggedIn, setLoggedIn] = useState(false);
   const [loading, setLoading] = useState(false);
   const [showToast, setShowToast] = useState({
@@ -39,17 +49,70 @@ export default function AdminPage() {
     return true;
   };
 
-  const makeRequest = (e: FormEvent) => {
+  const makeRequest = async (e: FormEvent) => {
     e.preventDefault();
     const data = {
       email: emailRef?.current?.value.trim() || '',
       password: passwordRef?.current?.value.trim() || '',
+      userType: 'admin',
     };
-    isValidData(data);
+    if (isValidData(data)) {
+      try {
+        // Query Firestore for the user with matching email and password
+        const querySnapshot = await getDocs(
+          query(
+            collection(db, 'users'),
+            where('email', '==', data.email),
+            where('password', '==', data.password),
+            where('userType', '==', data.userType),
+          ),
+        );
+        if (!querySnapshot.empty) {
+          const user = querySnapshot.docs[0];
+          setShowToast({
+            visible: true,
+            text: 'User Logged In successfully',
+          });
+
+          const toSetLocalData = {
+            email: user.data().email,
+            id: user.id,
+            userType: user.data().userType,
+            name: user.data().name,
+          };
+
+          setLocalStorageItem({
+            ...toSetLocalData,
+          });
+
+          setLocalStorageData({ ...toSetLocalData });
+
+          fetchAllItems();
+        } else {
+          setShowToast({
+            visible: true,
+            text: 'User Not Found ! Try again',
+          });
+        }
+      } catch (error) {
+        const authError = error as FirebaseErrorType;
+        setShowToast({
+          visible: true,
+          text: `Error : ${authError.message}`,
+        });
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+  const loginUser = async () => {
+    await fetchAllItems();
+    setLoggedIn(true);
   };
   useEffect(() => {
+    setLoading(true);
     if (value && value.userType === 'admin') {
-      setLoggedIn(true);
+      loginUser();
     } else if (!value) {
       setLoggedIn(false);
     }
@@ -57,13 +120,13 @@ export default function AdminPage() {
   }, [value]);
   return (
     <div className="font-gilroy">
-      {loggedIn ? (
-        <p>User Is Logged In</p>
+      {loggedIn && !loading && !apiLoading ? (
+        <AdminDashboard />
       ) : (
         <AdminLoginForm
           onSubmit={makeRequest}
           emailRef={emailRef}
-          loading={loading}
+          loading={loading || apiLoading}
           passwordRef={passwordRef}
           setShowToast={setShowToast}
           showToast={showToast}

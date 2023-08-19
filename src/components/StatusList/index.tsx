@@ -2,7 +2,11 @@ import React from 'react';
 import { Card } from '@components';
 import { StatusListPropType } from './types';
 
-function StatusList({ listItems, personalInfo }: StatusListPropType) {
+function StatusList({
+  listItems,
+  personalInfo,
+  handleItemPress,
+}: StatusListPropType) {
   return (
     <div className="mt-14 mb-5 ml-2 mr-2">
       {!personalInfo ? (
@@ -13,9 +17,7 @@ function StatusList({ listItems, personalInfo }: StatusListPropType) {
                 <Card
                   key={element.id}
                   item={element}
-                  onClick={() => {
-                    // handleItemPress(element);
-                  }}
+                  onClick={() => handleItemPress && handleItemPress(element)}
                 />
               );
             })

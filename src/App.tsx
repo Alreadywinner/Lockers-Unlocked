@@ -9,6 +9,7 @@ import {
   AddNewItemsPage,
   PrivateRoute,
   Profile,
+  AdminPage,
 } from '@containers';
 import { Footer, NavBar } from 'components';
 import React from 'react';
@@ -31,6 +32,9 @@ function App() {
         </Route>
         <Route path="" element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />} />
+        </Route>
+        <Route path="" element={<PrivateRoute />}>
+          <Route path="/admin" element={<AdminPage />} />
         </Route>
       </Routes>
       <Footer />

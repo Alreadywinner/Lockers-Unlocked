@@ -14,6 +14,8 @@ import Toast from './Toast';
 import Loader from './Loader';
 import SidePanel from './SidePanel';
 import StatusList from './StatusList';
+import AdminLoginForm from './AdminLoginForm';
+import AdminItemModal from './AdminItemModal';
 
 export {
   Button,
@@ -32,4 +34,6 @@ export {
   Loader,
   SidePanel,
   StatusList,
+  AdminLoginForm,
+  AdminItemModal,
 };

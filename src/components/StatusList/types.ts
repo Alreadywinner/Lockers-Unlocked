@@ -4,4 +4,5 @@ import { LocalStorageDataType } from 'context/localStorageDataContext';
 export type StatusListPropType = {
   listItems?: Array<TeamsDataType> | null | false;
   personalInfo?: LocalStorageDataType | null;
+  handleItemPress?: (element: TeamsDataType) => void;
 };

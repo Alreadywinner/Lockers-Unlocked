@@ -10,6 +10,8 @@ import DetailPage from './DetailPage';
 import PrivateRoute from './ProtectedRoute';
 import Profile from './Profile';
 import SellerDetailPage from './SellerDetailPage';
+import AdminPage from './AdminPage';
+import AdminDashboard from './AdminDashboard';
 
 export {
   HomePage,
@@ -24,4 +26,6 @@ export {
   PrivateRoute,
   Profile,
   SellerDetailPage,
+  AdminPage,
+  AdminDashboard,
 };
