@@ -16,6 +16,8 @@ import SidePanel from './SidePanel';
 import StatusList from './StatusList';
 import AdminLoginForm from './AdminLoginForm';
 import AdminItemModal from './AdminItemModal';
+import BidsTable from './BidsTable';
+import DropDownButton from './DropDownButton';
 
 export {
   Button,
@@ -36,4 +38,6 @@ export {
   StatusList,
   AdminLoginForm,
   AdminItemModal,
+  BidsTable,
+  DropDownButton,
 };
