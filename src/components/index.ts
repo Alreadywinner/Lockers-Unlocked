@@ -17,7 +17,6 @@ import StatusList from './StatusList';
 import AdminLoginForm from './AdminLoginForm';
 import AdminItemModal from './AdminItemModal';
 import BidsTable from './BidsTable';
-import DropDownButton from './DropDownButton';
 
 export {
   Button,
@@ -39,5 +38,4 @@ export {
   AdminLoginForm,
   AdminItemModal,
   BidsTable,
-  DropDownButton,
 };
