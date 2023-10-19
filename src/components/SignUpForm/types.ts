@@ -11,6 +11,8 @@ export type FormDataType = {
   repeatPassword: string;
   agree: boolean;
   userType: string;
+  fileData: FileList | null;
+  fileSrc?: string;
 };
 
 export type InputValue = string;
