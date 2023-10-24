@@ -23,7 +23,7 @@ function LoginForm({
   });
   const { setLocalStorageItem } = useLocalStorage<LocalStorageDataType>(
     'user',
-    { email: '', id: '', userType: '', name: '' },
+    { email: '', id: '', userType: '', name: '', fileSrc: '' },
   );
   const { setLocalStorageData, fetchAllItems } = useLocalStorageDataContext();
   const isValidData = (data: FormDataType): boolean => {
@@ -47,13 +47,13 @@ function LoginForm({
   };
   const makeRequest = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    setLoading(true);
     const data = {
       email: emailRef?.current?.value.trim() || '',
       password: passwordRef?.current?.value.trim() || '',
       userType: userTypeRef.current?.value.toLowerCase() || '',
     };
     if (isValidData(data)) {
+      setLoading(true);
       try {
         // Query Firestore for the user with matching email and password
         const querySnapshot = await getDocs(
@@ -76,6 +76,7 @@ function LoginForm({
             id: user.id,
             userType: user.data().userType,
             name: user.data().name,
+            fileSrc: user.data().fileSrc || '',
           };
 
           setLocalStorageItem({
@@ -100,6 +101,7 @@ function LoginForm({
           text: `Error : ${authError.message}`,
         });
       } finally {
+        console.log('In else');
         setLoading(false);
       }
     }

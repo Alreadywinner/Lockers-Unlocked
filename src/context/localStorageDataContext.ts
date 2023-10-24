@@ -7,6 +7,7 @@ export type LocalStorageDataType = {
   id: string;
   userType: string;
   name: string;
+  fileSrc?: string;
 };
 
 export type LocalStorageDataContextType = {

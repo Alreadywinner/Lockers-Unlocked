@@ -3,7 +3,16 @@ import './profileCard.css';
 import { Input } from '@components';
 import { ProfileCardPropTypes } from './types';
 
-function ImgUpload({ onChange, src }) {
+type ImageUploadPropType = {
+  onChange: () => void;
+  src: string;
+};
+type EditProfilePropType = {
+  onSubmit: () => void;
+  children: React.ReactNode;
+};
+
+function ImgUpload({ onChange, src }: ImageUploadPropType) {
   return (
     <label
       htmlFor="item_image"
@@ -44,7 +53,7 @@ function Name() {
   );
 }
 
-function Status({ onChange, value }) {
+function Status() {
   return (
     <div className="w-full flex items-center justify-center">
       <label
@@ -88,31 +97,7 @@ function UserEmail() {
   );
 }
 
-function Profile({ onSubmit, src, name, status }) {
-  return (
-    <div className="card">
-      <form onSubmit={onSubmit} className="profile-form">
-        <label className="profile-label custom-file-upload fas">
-          <div className="img-wrap">
-            <img
-              htmlFor="photo-upload"
-              alt="something"
-              className="form-img"
-              src={src}
-            />
-          </div>
-        </label>
-        <div className="name">{name}</div>
-        <div className="status">{status}</div>
-        <button type="submit" className="edit form-button">
-          Edit Profile{' '}
-        </button>
-      </form>
-    </div>
-  );
-}
-
-function Edit({ onSubmit, children }) {
+function Edit({ onSubmit, children }: EditProfilePropType) {
   return (
     <div className="card">
       <form
@@ -143,7 +128,7 @@ function ProfileCard({ personalInfo }: ProfileCardPropTypes) {
         <ImgUpload onChange={() => {}} src={imagePreviewUrl} />
         <Name />
         <UserEmail />
-        <Status onChange={() => {}} value={status} />
+        <Status />
       </Edit>
     </div>
   );

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card } from '@components';
+import { Card, ProfileCard } from '@components';
 import { StatusListPropType } from './types';
 
 function StatusList({
@@ -30,7 +30,19 @@ function StatusList({
       ) : (
         <div>
           {personalInfo && (
-            <div className="h-screen flex justify-center gap-5">
+            <div className="h-screen">
+              <ProfileCard personalInfo={personalInfo} />
+            </div>
+          )}
+        </div>
+      )}
+    </div>
+  );
+}
+
+export default StatusList;
+
+/* <div className="h-screen flex justify-center gap-5">
               <div className="flex flex-col gap-5">
                 <p className="md:text-3xl text-start text-2xl md:mt-0 mt-6 font-bold text-center">
                   Name
@@ -40,6 +52,9 @@ function StatusList({
                 </p>
                 <p className="md:text-3xl text-2xl text-start md:mt-0 mt-6 font-bold text-center">
                   User Type
+                </p>
+                <p className="md:text-3xl text-2xl text-start md:mt-0 mt-6 font-bold text-center">
+                  Profile Image
                 </p>
               </div>
               <div className="flex flex-col gap-5">
@@ -52,13 +67,13 @@ function StatusList({
                 <p className="md:text-3xl text-2xl text-start md:mt-0 mt-6 font-bold text-center">
                   :&nbsp;&nbsp;&nbsp;{personalInfo.userType}
                 </p>
+                <span className="w-1/2 h-1/2">
+                  &nbsp;&nbsp;&nbsp;
+                  <img
+                    src={`${personalInfo.fileSrc}`}
+                    alt="profile-img"
+                    className="w-1/2 h-1/2"
+                  />
+                </span>
               </div>
-            </div>
-          )}
-        </div>
-      )}
-    </div>
-  );
-}
-
-export default StatusList;
+            </div> */
