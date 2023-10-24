@@ -17,6 +17,7 @@ import StatusList from './StatusList';
 import AdminLoginForm from './AdminLoginForm';
 import AdminItemModal from './AdminItemModal';
 import BidsTable from './BidsTable';
+import ProfileCard from './ProfileCard';
 
 export {
   Button,
@@ -38,4 +39,5 @@ export {
   AdminLoginForm,
   AdminItemModal,
   BidsTable,
+  ProfileCard,
 };
