@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import './profileCard.css';
 import { Input } from '@components';
 import { ProfileCardPropTypes } from './types';
@@ -10,6 +10,15 @@ type ImageUploadPropType = {
 type EditProfilePropType = {
   onSubmit: () => void;
   children: React.ReactNode;
+};
+type UserTypePropType = {
+  type: string;
+};
+type UserEmailPropType = {
+  email: string;
+};
+type NamePropTypes = {
+  name: string;
 };
 
 function ImgUpload({ onChange, src }: ImageUploadPropType) {
@@ -31,17 +40,18 @@ function ImgUpload({ onChange, src }: ImageUploadPropType) {
     </label>
   );
 }
-function Name() {
+function Name({ name }: NamePropTypes) {
   return (
     <div className="w-full flex items-center justify-center">
       <label
         htmlFor="title"
         className="text-uppercase font-semibold text-gray-600 w-1/6 text-center"
       >
-        Title *
+        Name *
       </label>
       <Input
         // ref={titleRef}
+        value={name}
         type="text"
         name="title"
         id="title"
@@ -53,7 +63,7 @@ function Name() {
   );
 }
 
-function Status() {
+function UserType({ type }: UserTypePropType) {
   return (
     <div className="w-full flex items-center justify-center">
       <label
@@ -64,6 +74,7 @@ function Status() {
       </label>
       <Input
         // ref={statusRef}
+        value={type}
         type="text"
         name="status"
         id="status"
@@ -75,7 +86,7 @@ function Status() {
   );
 }
 
-function UserEmail() {
+function UserEmail({ email }: UserEmailPropType) {
   return (
     <div className="w-full flex items-center justify-center">
       <label
@@ -86,6 +97,7 @@ function UserEmail() {
       </label>
       <Input
         // ref={emailRef}
+        value={email}
         type="text"
         name="email"
         id="email"
@@ -106,7 +118,7 @@ function Edit({ onSubmit, children }: EditProfilePropType) {
       >
         {children}
         <button type="submit" className="save form-button">
-          Save{' '}
+          Edit{' '}
         </button>
       </form>
     </div>
@@ -114,21 +126,13 @@ function Edit({ onSubmit, children }: EditProfilePropType) {
 }
 
 function ProfileCard({ personalInfo }: ProfileCardPropTypes) {
-  const [name, setName] = useState('kilogram');
-  const [status, setStatus] = useState('');
-  const [active, setActive] = useState('edit');
-  const [file, setFile] = useState('');
-  const [imagePreviewUrl, setImagePreviewUrl] = useState(
-    'https://github.com/OlgaKoplik/CodePen/blob/master/profile.jpg?raw=true',
-  );
-
   return (
     <div className="main-profile-div font-gilroy">
       <Edit onSubmit={() => {}}>
-        <ImgUpload onChange={() => {}} src={imagePreviewUrl} />
-        <Name />
-        <UserEmail />
-        <Status />
+        <ImgUpload onChange={() => {}} src={personalInfo?.fileSrc || ''} />
+        <Name name={personalInfo?.name || ''} />
+        <UserEmail email={personalInfo?.email || ''} />
+        <UserType type={personalInfo?.userType || ''} />
       </Edit>
     </div>
   );

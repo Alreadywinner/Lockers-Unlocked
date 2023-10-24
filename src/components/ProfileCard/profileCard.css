@@ -82,8 +82,9 @@
   opacity: 1;
 }
 .form-img {
-  width: auto;
+  width: 100%;
   height: 100%;
+  overflow: hidden;
 }
 
 .profile-label {
