@@ -101,7 +101,6 @@ function LoginForm({
           text: `Error : ${authError.message}`,
         });
       } finally {
-        console.log('In else');
         setLoading(false);
       }
     }
