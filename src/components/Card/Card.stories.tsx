@@ -42,5 +42,9 @@ Template.args = {
     id: '',
     user_id: '',
     bids: [],
+    user: {
+      name: 'Uploader',
+      fileSrc: '',
+    },
   },
 };
