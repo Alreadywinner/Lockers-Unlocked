@@ -58,6 +58,7 @@ function Name({ name }: NamePropTypes) {
         placeHolder="Enter Title"
         className="h-9 border-solid border-2 border-red rounded pl-2 w-1/2"
         required
+        readOnly
       />
     </div>
   );
@@ -81,6 +82,7 @@ function UserType({ type }: UserTypePropType) {
         placeHolder="Enter Status"
         className="h-9 border-solid border-2 border-red rounded pl-2 w-1/2"
         required
+        readOnly
       />
     </div>
   );
@@ -104,6 +106,7 @@ function UserEmail({ email }: UserEmailPropType) {
         placeHolder="Enter Status"
         className="h-9 border-solid border-2 border-red rounded pl-2 w-1/2"
         required
+        readOnly
       />
     </div>
   );

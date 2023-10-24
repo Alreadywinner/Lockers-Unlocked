@@ -5,7 +5,7 @@ function Card({ item, onClick }: CardProps) {
   const { fileSrc, title, description, currentBid, startingBid } = item;
   return (
     <div
-      className="lg:w-80 lg:h-[30rem] w-96 h-96 rounded overflow-hidden shadow-lg transition-transform duration-300 md:hover:-translate-y-2 flex flex-col justify-between"
+      className="lg:w-80 lg:h-[35rem] w-96 h-96 rounded overflow-hidden shadow-lg transition-transform duration-300 md:hover:-translate-y-2 flex flex-col justify-between"
       onClick={onClick}
       role="button"
       tabIndex={0}
@@ -32,6 +32,18 @@ function Card({ item, onClick }: CardProps) {
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-2">
             Starting Bid: {startingBid} $
           </span>
+        </div>
+        <div className="flex items-center">
+          <div className="flex flex-row items-center justify-around">
+            <img
+              alt="user_pic"
+              src={item.user.fileSrc}
+              className="w-8 h-8 rounded-full object-cover"
+            />
+            <span className="text-sm font-semibold ml-2">
+              Uploaded By: {item.user.name}
+            </span>
+          </div>
         </div>
       </div>
     </div>

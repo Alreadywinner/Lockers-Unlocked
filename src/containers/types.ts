@@ -2,6 +2,10 @@ export type BidDataType = {
   id: string;
   bid: string;
 };
+export type UserDetailsType = {
+  name: string;
+  fileSrc: string;
+};
 export interface TeamsDataType {
   currentBid: string;
   description: string;
@@ -13,4 +17,5 @@ export interface TeamsDataType {
   id: string;
   user_id: string;
   bids: Array<BidDataType>;
+  user: UserDetailsType;
 }

@@ -1,6 +1,6 @@
 // LocalStorageDataProvider.tsx
 import React, { useState, useMemo } from 'react';
-import { TeamsDataType } from 'containers/types';
+import { TeamsDataType, UserDetailsType } from 'containers/types';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from 'firebase';
 import {
@@ -78,13 +78,38 @@ export default function LocalStorageDataProvider({
     return allItems?.filter((item) => item.status === 'sold');
   }, [allItems]);
 
+  async function fetchUserDetails(user_id: string): Promise<UserDetailsType> {
+    const querySnapshot = await getDocs(collection(db, 'users'));
+
+    const userDoc = querySnapshot.docs.find((doc) => doc.id === user_id);
+
+    if (userDoc) {
+      return {
+        name: userDoc.data().name,
+        fileSrc: userDoc.data().fileSrc,
+      };
+    }
+
+    // If no matching document is found, return default values
+    return {
+      name: '',
+      fileSrc: '',
+    };
+  }
+
   const fetchAllItems = async () => {
     setLoading(true);
     try {
       const querySnapshot = await getDocs(collection(db, 'items'));
-      const items: TeamsDataType[] = querySnapshot.docs.map(
-        (doc) => ({ id: doc.id, ...doc.data() } as TeamsDataType),
-      );
+
+      const itemPromises = querySnapshot.docs.map(async (doc) => {
+        const teamData = { id: doc.id, ...doc.data() } as TeamsDataType;
+        teamData.user = await fetchUserDetails(teamData.user_id);
+        return teamData;
+      });
+
+      const items = await Promise.all(itemPromises);
+
       setAllItems(items);
     } catch (err) {
       // Handle error here
