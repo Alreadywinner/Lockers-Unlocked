@@ -1,10 +1,15 @@
-import React, { useRef, useState, FormEvent } from 'react';
+import React, { useRef, useState, FormEvent, useEffect } from 'react';
 import { Button, CustomModal, Input, Loader, Toast } from '@components';
 import { Link } from 'react-router-dom';
 import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
-import { db, storage } from 'firebase';
+import { auth, db, storage } from 'firebase';
 import UserTypeData from 'utils/UserTypeList';
 import { getDownloadURL, ref, uploadBytes } from 'firebase/storage';
+import {
+  createUserWithEmailAndPassword,
+  sendEmailVerification,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
 import { FormDataType, SignUpPropType } from './types';
 
 function SignUpForm({
@@ -26,7 +31,7 @@ function SignUpForm({
     text: '',
   });
   const [loading, setLoading] = useState(false);
-
+  const [showProceedButton, setShowProceedButton] = useState(false);
   const addNewFiles = (event: React.ChangeEvent<HTMLInputElement>) => {
     const temp = event.target.files;
     setFileData(temp);
@@ -71,6 +76,56 @@ function SignUpForm({
     }
     return true;
   };
+
+  const ProceedToSaveUser = async () => {
+    const data = {
+      name: nameRef.current?.value.trim() || '',
+      email: emailRef.current?.value.trim() || '',
+      password: passwordRef?.current?.value.trim() || '',
+      repeatPassword: repeatPasswordRef?.current?.value.trim() || '',
+      userType: userTypeRef.current?.value.toLowerCase() || '',
+      fileData: fileData || null,
+      fileSrc: '',
+      agree: agreeRef.current?.checked || false,
+    };
+    signInWithEmailAndPassword(auth, data.email, data.password)
+      .then(async (userCredential) => {
+        setLoading(true);
+        if (data.fileData !== null && userCredential.user.emailVerified) {
+          const fileBlob = new Blob([data.fileData.item(0) as File]);
+          const storageRef = ref(
+            storage,
+            `profile/${data.fileData.item(0)?.name}`,
+          );
+          const snapshot = await uploadBytes(storageRef, fileBlob);
+          const downloadURL = await getDownloadURL(snapshot.ref);
+          const { fileData: dataFileData, ...dataWithoutFileData } = data;
+          dataWithoutFileData.fileSrc = downloadURL;
+          await addDoc(collection(db, 'users'), {
+            ...dataWithoutFileData,
+          });
+          setShowToast({
+            visible: true,
+            text: 'User Registered Successfully',
+          });
+          setSignUpModal(false);
+        } else {
+          setShowToast({
+            text: 'Please verify your email first',
+            visible: true,
+          });
+        }
+      })
+      .catch((error) => {
+        setShowToast({
+          text: `${error}`,
+          visible: true,
+        });
+      })
+      .finally(() => {
+        setLoading(false);
+      });
+  };
   const makeRequest = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);
@@ -104,30 +159,33 @@ function SignUpForm({
     };
     try {
       if (isValidData(data)) {
-        if (data.fileData !== null) {
-          const fileBlob = new Blob([data.fileData.item(0) as File]);
-          const storageRef = ref(
-            storage,
-            `profile/${data.fileData.item(0)?.name}`,
-          );
-          const snapshot = await uploadBytes(storageRef, fileBlob);
-          const downloadURL = await getDownloadURL(snapshot.ref);
-          const { fileData: dataFileData, ...dataWithoutFileData } = data;
-          dataWithoutFileData.fileSrc = downloadURL;
-          await addDoc(collection(db, 'users'), {
-            ...dataWithoutFileData,
+        // Create the user account in Firebase Authentication (unverified)
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          data.email,
+          data.password,
+        );
+
+        // Send an email verification link to the user
+        sendEmailVerification(userCredential.user)
+          .then(() => {
+            setShowToast({
+              text: 'A Verification Email has been sent to the email',
+              visible: true,
+            });
+          })
+          .catch((err) => {
+            setShowToast({
+              text: `Error : ${err}`,
+              visible: true,
+            });
           });
-          setShowToast({
-            visible: true,
-            text: 'User Registered Successfully',
-          });
-          setSignUpModal(false);
-        }
+        setShowProceedButton(true);
       }
     } catch (err) {
       setShowToast({
         visible: true,
-        text: 'Unexpected error occurred',
+        text: `Unexpected error occurred ${err}`,
       });
     } finally {
       setLoading(false);
@@ -261,13 +319,24 @@ function SignUpForm({
             </label>
           </div>
           <div className="flex justify-center mt-5">
-            <Button
-              type="submit"
-              disabled={loading}
-              className="bg-red400 text-white hover:bg-red500 md:w-3/12 w-full rounded p-2"
-            >
-              {loading ? <Loader /> : 'Sign Up'}
-            </Button>
+            {showProceedButton ? (
+              <Button
+                type="button"
+                disabled={loading}
+                onClick={ProceedToSaveUser}
+                className="bg-red400 text-white hover:bg-red500 md:w-3/12 w-full rounded p-2"
+              >
+                {loading ? <Loader /> : 'Proceed'}
+              </Button>
+            ) : (
+              <Button
+                type="submit"
+                disabled={loading}
+                className="bg-red400 text-white hover:bg-red500 md:w-3/12 w-full rounded p-2"
+              >
+                {loading ? <Loader /> : 'Sign Up'}
+              </Button>
+            )}
           </div>
         </form>
         <div className="flex flex-col justify-center items-center p-3 font-gilroy">
