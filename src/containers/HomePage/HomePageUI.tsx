@@ -1,4 +1,4 @@
-import { Button, Carousel } from '@components';
+import { Button, Carousel, ScrollToTop } from '@components';
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { HomePageType } from './types';
@@ -6,6 +6,7 @@ import { HomePageType } from './types';
 export default function HomePageUI({ featured_trunks }: HomePageType) {
   return (
     <div>
+      <ScrollToTop />
       <Carousel />
       {/* About Us */}
       <section className="flex justify-center items-center md:p-10 bg-lightGray p-6 font-gilroy gap-3 flex-col">
