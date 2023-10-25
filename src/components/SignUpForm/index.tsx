@@ -1,4 +1,4 @@
-import React, { useRef, useState, FormEvent, useEffect } from 'react';
+import React, { useRef, useState, FormEvent } from 'react';
 import { Button, CustomModal, Input, Loader, Toast } from '@components';
 import { Link } from 'react-router-dom';
 import { addDoc, collection, getDocs, query, where } from 'firebase/firestore';
