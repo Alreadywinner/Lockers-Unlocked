@@ -17,7 +17,7 @@
   "parserOptions": {
     "ecmaVersion": "latest",
     "sourceType": "module",
-    "project": "./tsconfig.json"
+    "project": ["./tsconfig.json", "./functions/tsconfig.functions.json"]
   },
   "plugins": ["react", "@typescript-eslint", "prettier"],
   //make sure to keep prettier on the end because if some error occur in the first ones that will be override by the prettier
