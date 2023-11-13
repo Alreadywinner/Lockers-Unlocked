@@ -38,6 +38,6 @@
     "jsx": "react-jsx"
   },
   "include": ["src", "./react-modal.d.ts", "./css.d.ts", ".eslintrc.json"],
-  "exclude": ["node_modules"],
+  "exclude": ["node_modules", "functions"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
