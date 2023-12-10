@@ -8,6 +8,9 @@ function DetailPageUI({
   onWithdrawClick,
   withdrawLoading,
   onSellerClick,
+  canDeleteItem,
+  onDeleteClick,
+  deleteLoading,
 }: DetailPageUIPropType) {
   return (
     <div className="font-gilroy w-full h-full">
@@ -54,7 +57,7 @@ function DetailPageUI({
             </Button>
           </div>
           {/* About Seller */}
-          <div className="flex justify-center mt-5">
+          <div className="flex justify-center gap-3 mt-5">
             <Button
               type="button"
               className="bg-red400 text-white lg:w-3/12 w-1/2 hover:bg-red500 rounded p-2"
@@ -62,6 +65,15 @@ function DetailPageUI({
             >
               About Seller
             </Button>
+            {canDeleteItem && (
+              <Button
+                type="button"
+                className="bg-black text-white lg:w-3/12 w-1/2 hover:bg-red500 rounded p-2"
+                onClick={onDeleteClick}
+              >
+                {deleteLoading ? <Loader /> : 'Delete Item'}
+              </Button>
+            )}
           </div>
         </div>
       </div>

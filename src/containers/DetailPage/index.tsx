@@ -2,7 +2,7 @@ import React, { useRef, useState, FormEvent, RefObject } from 'react';
 import { Button, CustomModal, Input, Loader, Toast } from '@components';
 import { BidDataType } from 'containers/types';
 import { useLocalStorageDataContext } from 'context';
-import { doc, getDoc, updateDoc } from 'firebase/firestore';
+import { deleteDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from 'firebase';
 import EvaluateHighestBid from 'utils/highestBid';
 import { SellerDetailPage } from '@containers';
@@ -82,6 +82,7 @@ function DetailPage({ detailModal, setDetailModal, item }: DetailPagePropType) {
   const [submitLoading, setSubmitLoading] = useState(false);
   const [withdrawLoading, setWithdrawLoading] = useState(false);
   const [sellerDetail, setSellerDetail] = useState(false);
+  const [deleteLoading, setDeleteLoading] = useState(false);
   const [showToast, setShowToast] = useState({
     visible: false,
     text: '',
@@ -91,6 +92,9 @@ function DetailPage({ detailModal, setDetailModal, item }: DetailPagePropType) {
 
   const currentBidRef = useRef<BidDataType>();
   const newBidRef = useRef<HTMLInputElement>(null);
+  const canDeleteItem =
+    localStorageData?.userType === 'seller' &&
+    item?.user_id === localStorageData.id;
 
   const onBidClick = () => {
     setBidEntry(!bidEntry);
@@ -199,6 +203,22 @@ function DetailPage({ detailModal, setDetailModal, item }: DetailPagePropType) {
   const onSellerClick = () => {
     setSellerDetail(!sellerDetail);
   };
+  const onDeleteClick = async () => {
+    try {
+      setDeleteLoading(true);
+      const itemDataRef = doc(db, 'items', `${item?.id}`);
+      await deleteDoc(itemDataRef);
+      await fetchAllItems();
+      setDetailModal(!detailModal);
+    } catch (err) {
+      setShowToast({
+        text: 'Error Occurred While Deleting',
+        visible: true,
+      });
+    } finally {
+      setDeleteLoading(false);
+    }
+  };
   return (
     <>
       {showToast.visible && (
@@ -232,6 +252,9 @@ function DetailPage({ detailModal, setDetailModal, item }: DetailPagePropType) {
           onWithdrawClick={onWithdrawClick}
           withdrawLoading={withdrawLoading}
           onSellerClick={onSellerClick}
+          canDeleteItem={canDeleteItem}
+          onDeleteClick={onDeleteClick}
+          deleteLoading={deleteLoading}
         />
       </CustomModal>
     </>
