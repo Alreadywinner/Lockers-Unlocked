@@ -6,4 +6,5 @@ export type AddNewItemType = {
   fileData: FileList | null;
   fileSrc?: string;
   user_id: string;
+  endDate: string;
 };

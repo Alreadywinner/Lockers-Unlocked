@@ -16,6 +16,7 @@ function AddNewItemsPage() {
   const fileInputRef = useRef<HTMLInputElement>(null);
   const descriptionRef = useRef<HTMLTextAreaElement>(null);
   const teamSelectRef = useRef<HTMLSelectElement>(null);
+  const endDateRef = useRef<HTMLInputElement>(null);
   const { localStorageData, fetchAllItems } = useLocalStorageDataContext();
   const [fileData, setFileData] = useState<FileList | null>(null);
   const [loading, setLoading] = useState(false);
@@ -33,7 +34,8 @@ function AddNewItemsPage() {
       data.startingBid === '' ||
       data.teamSelect === '' ||
       data.title === '' ||
-      data.fileData === null
+      data.fileData === null ||
+      data.endDate === ''
     ) {
       setShowToast({
         visible: true,
@@ -45,6 +47,27 @@ function AddNewItemsPage() {
       setShowToast({
         visible: true,
         text: 'Starting Bid should be at least 1$',
+      });
+      return false;
+    }
+    const currentDate = new Date();
+    const selectedEndDate = new Date(`${data.endDate}T00:00:00Z`);
+
+    if (selectedEndDate < currentDate) {
+      setShowToast({
+        visible: true,
+        text: 'End date should be greater than Todays Date',
+      });
+      return false;
+    }
+
+    const twoWeeksForward = new Date();
+    twoWeeksForward.setDate(currentDate.getDate() + 14);
+
+    if (selectedEndDate > twoWeeksForward) {
+      setShowToast({
+        text: 'End date should be within two weeks from now',
+        visible: true,
       });
       return false;
     }
@@ -61,6 +84,7 @@ function AddNewItemsPage() {
       fileData: fileData || null,
       fileSrc: '',
       user_id: localStorageData?.id || '',
+      endDate: endDateRef.current?.value || '',
     };
     try {
       if (validateData(data)) {
@@ -105,6 +129,9 @@ function AddNewItemsPage() {
           }
           if (fileInputRef.current) {
             fileInputRef.current.value = '';
+          }
+          if (endDateRef.current) {
+            endDateRef.current.value = '';
           }
           setFileData(null);
         }
@@ -218,6 +245,16 @@ function AddNewItemsPage() {
             className="border-solid border-2 border-red rounded pl-2"
             placeholder="Enter details about Item"
             ref={descriptionRef}
+            required
+          />
+
+          <label htmlFor="end_date">End Date *</label>
+          <Input
+            ref={endDateRef}
+            type="date"
+            name="end_date"
+            id="end_date"
+            className="h-9 border-solid border-2 border-red rounded pl-2"
             required
           />
 
