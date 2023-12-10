@@ -6,6 +6,10 @@ export type ItemModalTypes = {
   currentSelectedStatus: TeamsDataType | null;
 };
 
+export type EmailResponseType = {
+  msg: string;
+};
+
 export interface UserBidsArrayType extends BidDataType {
   name: string;
   email: string;

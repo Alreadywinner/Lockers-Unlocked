@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { deleteDoc, doc, getDoc, updateDoc } from 'firebase/firestore';
 import { db } from 'firebase';
 import { useLocalStorageDataContext } from '@context';
-import { ItemModalTypes, UserBidsArrayType } from './types';
+import { EmailResponseType, ItemModalTypes, UserBidsArrayType } from './types';
 
 export default function AdminItemModal({
   showItemModal,
@@ -14,6 +14,7 @@ export default function AdminItemModal({
   const [bidsData, setBidsData] = useState<Array<UserBidsArrayType | null>>();
   const [statusLoading, setStatusLoading] = useState(false);
   const [deleteLoading, setDeleteLoading] = useState(false);
+  const [sellLoading, setSellLoading] = useState(false);
   const [showDropDown, setShowDropDown] = useState(false);
   const [showToast, setShowToast] = useState({
     visible: false,
@@ -85,6 +86,60 @@ export default function AdminItemModal({
     } finally {
       setDeleteLoading(false);
       setShowItemModal(false);
+    }
+  };
+  const SellItemToBidder = async () => {
+    try {
+      setSellLoading(true);
+      const url =
+        'https://us-central1-lockers-unlocked.cloudfunctions.net/createPaymentLink'; // Replace with your API endpoint
+      if (bidsData && bidsData.length > 0) {
+        const data = {
+          amount: currentSelectedStatus?.currentBid,
+          description: currentSelectedStatus?.description,
+          productName: currentSelectedStatus?.title,
+          productImage: currentSelectedStatus?.fileSrc,
+          buyerEmail: bidsData[0]?.email,
+          buyerName: bidsData[0]?.name,
+        };
+        fetch(url, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            // Add any other headers if needed
+          },
+          body: JSON.stringify(data),
+        })
+          .then((response) => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then((response: EmailResponseType) => {
+            setShowToast({
+              text: `${response.msg}`,
+              visible: true,
+            });
+            setShowToast({
+              text: 'Email to the bidder sent successfully',
+              visible: true,
+            });
+          })
+          .catch((error) => {
+            setShowToast({
+              text: `found error ${error}`,
+              visible: true,
+            });
+          });
+      }
+    } catch (err) {
+      setShowToast({
+        text: `Unexpected Error Occurred ${err}`,
+        visible: true,
+      });
+    } finally {
+      setSellLoading(false);
     }
   };
   useEffect(() => {
@@ -236,6 +291,17 @@ export default function AdminItemModal({
                       }
                     >
                       {deleteLoading ? <Loader color="#000" /> : 'Delete Item'}
+                    </Button>
+                    <Button
+                      type="button"
+                      className="shadow-sm ring-1 ring-inset rounded px-3 py-2 text-black text-sm font-semibold hover:bg-red400 hover:text-white"
+                      onClick={() => SellItemToBidder()}
+                    >
+                      {sellLoading ? (
+                        <Loader color="#000" />
+                      ) : (
+                        'Sold Item to the highest bidder'
+                      )}
                     </Button>
                   </span>
                 </div>
