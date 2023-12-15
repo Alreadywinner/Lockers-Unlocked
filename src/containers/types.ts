@@ -18,4 +18,5 @@ export interface TeamsDataType {
   user_id: string;
   bids: Array<BidDataType>;
   user: UserDetailsType;
+  endDate: string;
 }
