@@ -46,5 +46,6 @@ Template.args = {
       name: 'Uploader',
       fileSrc: '',
     },
+    endDate: '2023-12-24',
   },
 };
