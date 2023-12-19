@@ -76,6 +76,8 @@ function AddNewItemsPage() {
   const handleUploadItem = async (e: FormEvent<HTMLFormElement>) => {
     setLoading(true);
     e.preventDefault();
+    const endTime = new Date(endDateRef.current?.value || '');
+    const isoString = endTime?.toISOString();
     const data = {
       title: titleRef.current?.value || '',
       startingBid: startingBidRef.current?.value || '',
@@ -85,6 +87,7 @@ function AddNewItemsPage() {
       fileSrc: '',
       user_id: localStorageData?.id || '',
       endDate: endDateRef.current?.value || '',
+      endTime: isoString,
     };
     try {
       if (validateData(data)) {
@@ -98,7 +101,6 @@ function AddNewItemsPage() {
           const downloadURL = await getDownloadURL(snapshot.ref);
           const { fileData: dataFileData, ...dataWithoutFileData } = data;
           dataWithoutFileData.fileSrc = downloadURL;
-
           await addDoc(collection(db, 'items'), {
             ...dataWithoutFileData,
             status: 'live',
