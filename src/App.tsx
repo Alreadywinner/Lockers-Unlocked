@@ -10,6 +10,7 @@ import {
   PrivateRoute,
   Profile,
   AdminPage,
+  PaymentPage,
 } from '@containers';
 import { Footer, NavBar } from 'components';
 import React from 'react';
@@ -29,6 +30,9 @@ function App() {
         <Route path="/college-teams" element={<CollegeTeamsPage />} />
         <Route path="" element={<PrivateRoute />}>
           <Route path="/add-new" element={<AddNewItemsPage />} />
+        </Route>
+        <Route path="" element={<PrivateRoute />}>
+          <Route path="/payment" element={<PaymentPage />} />
         </Route>
         <Route path="" element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />} />
