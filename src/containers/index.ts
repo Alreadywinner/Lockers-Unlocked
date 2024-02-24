@@ -13,6 +13,7 @@ import SellerDetailPage from './SellerDetailPage';
 import AdminPage from './AdminPage';
 import AdminDashboard from './AdminDashboard';
 import PaymentPage from './PaymentPage';
+import CompletionPage from './PaymentPage/CompletionPage';
 
 export {
   HomePage,
@@ -30,4 +31,5 @@ export {
   AdminPage,
   AdminDashboard,
   PaymentPage,
+  CompletionPage,
 };

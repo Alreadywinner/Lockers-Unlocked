@@ -11,6 +11,7 @@ import {
   Profile,
   AdminPage,
   PaymentPage,
+  CompletionPage,
 } from '@containers';
 import { Footer, NavBar } from 'components';
 import React from 'react';
@@ -33,6 +34,9 @@ function App() {
         </Route>
         <Route path="" element={<PrivateRoute />}>
           <Route path="/payment" element={<PaymentPage />} />
+        </Route>
+        <Route path="" element={<PrivateRoute />}>
+          <Route path="/completion" element={<CompletionPage />} />
         </Route>
         <Route path="" element={<PrivateRoute />}>
           <Route path="/profile" element={<Profile />} />
