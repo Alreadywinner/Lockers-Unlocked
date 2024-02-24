@@ -18,6 +18,7 @@ import AdminLoginForm from './AdminLoginForm';
 import AdminItemModal from './AdminItemModal';
 import BidsTable from './BidsTable';
 import ProfileCard from './ProfileCard';
+import CheckoutForm from './CheckoutForm';
 
 export {
   Button,
@@ -40,4 +41,5 @@ export {
   AdminItemModal,
   BidsTable,
   ProfileCard,
+  CheckoutForm,
 };
