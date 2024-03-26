@@ -10,11 +10,11 @@ export default function HomePage() {
     },
     {
       src: 'https://upload.wikimedia.org/wikipedia/commons/thumb/7/72/Basketball_Clipart.svg/300px-Basketball_Clipart.svg.png',
-      key: 2,
       text: 'NBA Trunk',
+      key: 2,
     },
     {
-      src: 'https://cdn.shopify.com/s/files/1/0414/2111/1457/collections/1200px-Clemson_Tigers_logo.svg_b780f06f-762a-4c15-9ebe-289cdafe6d69_360x.png?v=1617919028',
+      src: 'https://yt3.googleusercontent.com/ytc/AIdro_m9ulChYI8NMMq56BXoFNw6MAMbVX7RnTujZf4Xcg=s900-c-k-c0x00ffffff-no-rj',
       text: 'Clemson',
       key: 3,
     },

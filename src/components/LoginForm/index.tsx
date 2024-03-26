@@ -114,6 +114,7 @@ function LoginForm({
           setVisible={setShowToast}
         />
       )}
+
       <div className="font-gilroy">
         <h1 className="text-3xl font-bold text-center md:p-0 p-3 md:mt-0 mt-5">
           Login

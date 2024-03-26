@@ -42,9 +42,13 @@ function NFLPageUI({
           })
         ) : (
           <div>
-            <p className="md:text-3xl text-2xl md:mt-0 mt-6 font-bold text-center">
+            {/* <p className="md:text-3xl text-2xl md:mt-0 mt-6 font-bold text-center">
               No Items Found Please Add New
-            </p>
+            </p> */}
+            <img
+              src="https://img.freepik.com/free-vector/hand-drawn-no-data-concept_52683-127823.jpg?size=626&ext=jpg&ga=GA1.1.1395880969.1709856000&semt=ais"
+              alt="No Items Found"
+            />
           </div>
         )}
       </div>

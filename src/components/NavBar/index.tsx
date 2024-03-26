@@ -4,6 +4,7 @@ import useLocalStorage from '@hooks';
 import { useLocalStorageDataContext } from '@context';
 import React, { useState, useEffect } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
+import mainLogo from '../../assets/images/main-logo.png';
 
 type NavLinkItem = {
   name: string;
@@ -35,7 +36,7 @@ function NavLinksRender({
             to={element.routeName}
             key={element.key}
             onClick={() => setIsOpen(false)}
-            className="md:ml-0 ml-4 px-3 py-2 rounded-md md:text-sm sm:text-base md:font-bold sm:font-medium text-black hover:text-gray hover:bg-gray-50 md:flex sm:block"
+            className="md:ml-0 ml-4 px-3 py-2 rounded-md md:text-base sm:text-base md:font-bold sm:font-bold text-black hover:text-red500 hover:bg-gray-50 md:flex sm:block hover:shadow-md"
           >
             {element.name}
           </Link>
@@ -53,14 +54,14 @@ function NavLinksRender({
       )}
       {!userData ? (
         <Button
-          className="md:ml-0 ml-4 px-3 py-2 rounded-md md:text-sm sm:text-base md:font-bold sm:font-medium text-black hover:text-gray hover:bg-gray-50 md:flex sm:block hover:cursor-pointer"
+          className="inline-block rounded-full border border-red500 px-12 py-3 text-sm font-medium text-red500 hover:bg-red500 hover:text-white focus:outline-none focus:ring-red400 active:bg-red400"
           onClick={onButtonPress}
         >
           Login
         </Button>
       ) : (
         <Button
-          className="md:ml-0 ml-4 px-3 py-2 rounded-md md:text-sm sm:text-base md:font-bold sm:font-medium text-black hover:text-gray hover:bg-gray-50 md:flex sm:block hover:cursor-pointer"
+          className="inline-block rounded-full border border-red500 px-12 py-3 text-sm font-medium bg text-red500 hover:bg-red500 hover:text-white focus:outline-none focus:ring-red400 active:bg-red400"
           onClick={onLogoutClick}
         >
           Logout
@@ -138,11 +139,12 @@ export default function NavBar() {
       {auth && <Auth />}
       <nav className="sticky top-0 bg-white shadow-md font-gilroy z-10">
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex md:items-center md:justify-center justify-between h-16">
-            <div className="md:hidden flex items-center justify-center">
-              <p className="font-extrabold text-red text-2xl">
+          <div className="flex lg:justify-between md:items-center md:justify-between justify-between h-16">
+            <div className="sm:justify-start flex items-center justify-center cursor-pointer">
+              <img src={mainLogo} alt="Logo" className="h-20 invert" />
+              {/* <p className="font-extrabold text-red text-2xl">
                 Lockers Unlocked
-              </p>
+              </p> */}
             </div>
             <div className="flex items-center">
               <div className="hidden md:block sm:block sm:ml-6">
@@ -157,17 +159,17 @@ export default function NavBar() {
                 </div>
               </div>
             </div>
-            <div className="mr-2 flex items-center sm:hidden">
+            <div className="mr-2 flex items-center sm:hidden p-2 rounded-lg hover:bg-lightGray">
               <button
                 onClick={toggleMenu}
                 type="button"
-                className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                className="inline-flex items-center justify-center p-2 rounded-md text-gray-700 hover:text-gray-900 hover:bg-gray-500"
               >
                 <span className="sr-only">Open main menu</span>
                 {isOpen ? (
-                  <CrossIcon color="" aria-hidden="true" />
+                  <CrossIcon color="#EF4444" aria-hidden="true" />
                 ) : (
-                  <BurgerIcon color="#DC2626" aria-hidden="true" width={25} />
+                  <BurgerIcon color="#EF4444" aria-hidden="true" width={25} />
                 )}
               </button>
             </div>
