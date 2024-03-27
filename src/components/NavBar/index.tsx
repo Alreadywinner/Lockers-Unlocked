@@ -142,9 +142,6 @@ export default function NavBar() {
           <div className="flex lg:justify-between md:items-center md:justify-between justify-between h-16">
             <div className="sm:justify-start flex items-center justify-center cursor-pointer">
               <img src={mainLogo} alt="Logo" className="h-20 invert" />
-              {/* <p className="font-extrabold text-red text-2xl">
-                Lockers Unlocked
-              </p> */}
             </div>
             <div className="flex items-center">
               <div className="hidden md:block sm:block sm:ml-6">

@@ -32,7 +32,10 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
         setCountdownValueMin(59); // Reset minutes to 59
         setCountdownValueSec(59); // Reset seconds to 59
       } else {
-        clearInterval(interval); // Stop the countdown when all values are 0
+        setCountdownValueDay(6); // Set initial value for days
+        setCountdownValueHour(23);
+        setCountdownValueMin(59);
+        setCountdownValueSec(59); // Stop the countdown when all values are 0
       }
     }, 1000);
 
@@ -47,33 +50,19 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
   const [currentDay, setCurrentDay] = useState('');
 
   useEffect(() => {
-    const daysOfWeek = [
-      'Sunday',
-      'Monday',
-      'Tuesday',
-      'Wednesday',
-      'Thursday',
-      'Friday',
-      'Saturday',
-    ];
+    const totalMilliseconds =
+      countdownValueDay * 24 * 60 * 60 * 1000 +
+      countdownValueHour * 60 * 60 * 1000 +
+      countdownValueMin * 60 * 1000 +
+      countdownValueSec * 1000;
+
     const today = new Date();
-    const dayIndex = today.getDay(); // 0 for Sunday, 1 for Monday, and so on
-    const expectedDayIndex = (dayIndex + countdownValueDay) % 7;
-    const formattedDay = daysOfWeek[expectedDayIndex];
+    const nextDate = new Date(today.getTime() + totalMilliseconds);
+    const formattedDay = nextDate.toLocaleDateString(undefined, {
+      weekday: 'long',
+    });
     setCurrentDay(formattedDay);
-  }, []);
-
-  // const [currentTime, setCurrentTime] = useState(new Date());
-
-  // useEffect(() => {
-  //   const interval = setInterval(() => {
-  //     setCurrentTime(new Date()); // Update currentTime every second
-  //   }, 1000);
-
-  //   return () => clearInterval(interval); // Cleanup interval on unmount
-  // }, []); // Empty dependency array to run effect only once
-
-  // const formattedTime = currentTime.toLocaleTimeString();
+  }, [countdownValueDay, countdownValueHour, countdownValueMin]);
 
   const settings = {
     dots: true,
@@ -192,6 +181,7 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
         </div>
       </section>
 
+      {/* Next Trunk Drops */}
       <section className="py-8 bg-red400 m-10 rounded-md bg-gradient md:py-16">
         <div className="box-content max-w-5xl px-5 mx-auto">
           <div className="flex flex-col items-center -mx-5 md:flex-row">
@@ -200,15 +190,9 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
                 <span className="text-xl sm:text-3xl">Next</span>
                 Trunk Drops
               </h4>
-              {/* <h6 className="text-xs font-semibold text-indigo-800 uppercase md:text-base dark:text-gray-100">
-                Next Trunk Drops
-              </h6> */}
               <h3 className="text-2xl font-bold text-white font-heading md:text-4xl">
                 {currentDay}
               </h3>
-              {/* <h3 className="text-lg font-bold leading-tight text-white font-heading md:text-xl">
-                @ {DropTime}:00 AM
-              </h3> */}
               <div className="w-full mt-4 md:w-44">
                 <button
                   type="button"
@@ -252,7 +236,7 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
         </div>
       </section>
 
-      {/* featured trunks */}
+      {/* Featured Trunks */}
       <section className="flex flex-col font-gilroy object-contain mb-10">
         <p className="uppercase md:mt-5 mb-10 mt-10 font-black md:text-3xl text-2xl text-center">
           <strong>Featured Trunks</strong>
