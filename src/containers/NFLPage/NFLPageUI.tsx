@@ -17,11 +17,11 @@ function NFLPageUI({
     <div className="font-gilroy mt-8 flex flex-col">
       <div>
         <Button
-          className="bg-red text-white p-3 rounded float-right hover:bg-red500 mr-3 md:mb-0 sm:mb-10"
+          className="bg-red500 hover:bg-red400 shadow-md text-white p-3 rounded float-right mr-3 md:mb-0 sm:mb-10"
           type="button"
           onClick={handleAddNewClick}
         >
-          Add a New Item
+          Add New Item
         </Button>
       </div>
       <h1 className="md:text-4xl text-3xl md:mt-0 mt-6 font-bold text-center">

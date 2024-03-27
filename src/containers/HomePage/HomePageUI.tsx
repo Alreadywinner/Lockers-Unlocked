@@ -135,7 +135,7 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
             <h2 className="text-3xl font-extrabold text-black sm:text-4xl">
               <span className="block">Welcome to Lockers Unlocked</span>
             </h2>
-            <p className="text-md mt-4 text-gray-400">
+            <p className="text-md mt-4 text-black">
               You get full access to your favorite professional and college
               players stache! Here at Lockers Unlocked, players will be able to
               post their own items such as game worn attire, personal branding,
@@ -146,8 +146,8 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
               some of their locker. Explore your favorite teams and players and
               Your Gear!
             </p>
-            <div className="lg:mt-0 lg:flex-shrink-0">
-              <div className="mt-12 inline-flex rounded-md shadow">
+            <div className="lg:mt-0 lg:flex-shrink-0 flex items-center items-stretch justify-center md:items-start md:justify-start">
+              <div className="mt-12 w-full mt-4 md:w-auto inline-flex rounded-md shadow">
                 <button
                   type="button"
                   className="py-2 px-4  bg-red400 hover:bg-red500 focus:ring-red400 focus:ring-offset-none text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
