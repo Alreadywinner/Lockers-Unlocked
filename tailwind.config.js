@@ -16,6 +16,10 @@ export default {
       red500: '#EF4444',
       lightPurple: '#d22756',
       lightPurpleHover: '#db5277',
+      lightSky: '#3b82f6',
+      lightSkyHover: '#1d4ed8',
+      indigo600: '#4f46e5',
+      indigo500: '#6366f1',
     },
     fontFamily: {
       gilroy: ['Gilroy', 'sans-serif'],
@@ -23,6 +27,7 @@ export default {
     extend: {
       backgroundImage: {
         texture: "url('./src/assets/icons/swirl.svg')",
+        homeBackground: "url('./src/assets/images/HomeBackground.jpg')",
       },
     },
   },
