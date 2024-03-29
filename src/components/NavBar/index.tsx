@@ -47,7 +47,7 @@ function NavLinksRender({
           to={profileRoute.routeName}
           key={profileRoute.key}
           onClick={() => setIsOpen(false)}
-          className="md:ml-0 ml-4 px-3 py-2 rounded-md md:text-sm sm:text-base md:font-bold sm:font-medium text-black hover:text-gray hover:bg-gray-50 md:flex sm:block"
+          className="md:ml-0 ml-4 px-3 py-2 rounded-md md:text-base sm:text-base md:font-bold sm:font-bold text-black hover:text-red500 hover:bg-gray-50 md:flex sm:block hover:shadow-md"
         >
           {profileRoute.name}
         </Link>

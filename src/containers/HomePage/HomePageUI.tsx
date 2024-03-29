@@ -6,63 +6,11 @@ import { HomePageType } from './types';
 import NBAImg from '../../assets/images/NBAImage.png';
 import NFLImg from '../../assets/images/NFLImage.jpg';
 import MLBImg from '../../assets/images/MLBImage.jpg';
+import trunkDropImg from '../../assets/images/TrunkDropsImage.jpg';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 export default function HomePageUI({ featured_trunks }: HomePageType) {
-  const [countdownValueDay, setCountdownValueDay] = useState<number>(6);
-  const [countdownValueHour, setCountdownValueHour] = useState<number>(23);
-  const [countdownValueMin, setCountdownValueMin] = useState<number>(59);
-  const [countdownValueSec, setCountdownValueSec] = useState<number>(59);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      if (countdownValueSec > 0) {
-        setCountdownValueSec(countdownValueSec - 1);
-      } else if (countdownValueMin > 0) {
-        setCountdownValueMin(countdownValueMin - 1);
-        setCountdownValueSec(59); // Reset seconds to 59
-      } else if (countdownValueHour > 0) {
-        setCountdownValueHour(countdownValueHour - 1);
-        setCountdownValueMin(59); // Reset minutes to 59
-        setCountdownValueSec(59); // Reset seconds to 59
-      } else if (countdownValueDay > 0) {
-        setCountdownValueDay(countdownValueDay - 1);
-        setCountdownValueHour(23); // Reset hours to 23
-        setCountdownValueMin(59); // Reset minutes to 59
-        setCountdownValueSec(59); // Reset seconds to 59
-      } else {
-        setCountdownValueDay(6); // Set initial value for days
-        setCountdownValueHour(23);
-        setCountdownValueMin(59);
-        setCountdownValueSec(59); // Stop the countdown when all values are 0
-      }
-    }, 1000);
-
-    return () => clearInterval(interval);
-  }, [
-    countdownValueDay,
-    countdownValueHour,
-    countdownValueMin,
-    countdownValueSec,
-  ]);
-
-  const [currentDay, setCurrentDay] = useState('');
-
-  useEffect(() => {
-    const totalMilliseconds =
-      countdownValueDay * 24 * 60 * 60 * 1000 +
-      countdownValueHour * 60 * 60 * 1000 +
-      countdownValueMin * 60 * 1000 +
-      countdownValueSec * 1000;
-
-    const today = new Date();
-    const nextDate = new Date(today.getTime() + totalMilliseconds);
-    const formattedDay = nextDate.toLocaleDateString(undefined, {
-      weekday: 'long',
-    });
-    setCurrentDay(formattedDay);
-  }, [countdownValueDay, countdownValueHour, countdownValueMin]);
 
   const settings = {
     dots: true,
@@ -114,14 +62,18 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
                 href="/"
                 className="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-red400 hover:bg-red500 focus:shadow-outline focus:outline-none"
               >
-                Get started
+                <Link to="/contact">
+                  Get in Touch
+                </Link>
               </a>
               <a
                 href="/"
                 aria-label=""
-                className="inline-flex items-center font-bold text-black transition-colors duration-200 hover:text-red500"
+                className="inline-flex items-center font-bold text-black transition-colors duration-200 hover:text-red500 hover:underline"
               >
-                Learn more
+                <Link to="/about">
+                  Learn more
+                </Link>
               </a>
             </div>
           </div>
@@ -152,7 +104,9 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
                   type="button"
                   className="py-2 px-4  bg-red400 hover:bg-red500 focus:ring-red400 focus:ring-offset-none text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
                 >
-                  About Us
+                  <Link to="/about">
+                    About Us
+                  </Link>
                 </button>
               </div>
             </div>
@@ -182,58 +136,27 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
       </section>
 
       {/* Next Trunk Drops */}
-      <section className="py-8 bg-red400 m-10 rounded-md bg-gradient md:py-16">
-        <div className="box-content max-w-5xl px-5 mx-auto">
-          <div className="flex flex-col items-center -mx-5 md:flex-row">
-            <div className="w-full px-5 mb-5 text-center md:mb-0 md:text-left">
-              <h4 className="flex flex-col text-2xl font-black leading-none text-gray-800 uppercase font-bebas-neue sm:text-8xl dark:text-white">
-                <span className="text-xl sm:text-3xl">Next</span>
+      <section className="overflow-hidden bg-red400 m-10 rounded-md bg-gradient-to-r from-red400 to-red500 sm:grid sm:grid-cols-2">
+        <div className="p-8 md:p-12 lg:px-16 lg:py-24">
+          <div className="mx-auto max-w-xl text-center items-center ltr:sm:text-left rtl:sm:text-right">
+              <h4 className="flex flex-col mt-6 text-2xl font-black leading-none text-gray-800 uppercase font-bebas-neue sm:text-6xl dark:text-white">
+                <span className="text-xl sm:text-3xl mb-2">Next</span>
                 Trunk Drops
               </h4>
+
+            <div className="mt-4 md:mt-8">
               <h3 className="text-2xl font-bold text-white font-heading md:text-4xl">
-                {currentDay}
+                Coming Soon
               </h3>
-              <div className="w-full mt-4 md:w-44">
-                <button
-                  type="button"
-                  className="py-2 px-4  bg-white hover:bg-red500 hover:text-white focus:ring-red400 focus:ring-offset-indigo-200 text-red400 w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
-                >
-                  Enter Here
-                </button>
-              </div>
-            </div>
-            <div className="w-full px-5 md:w-auto">
-              <div className="flex justify-center text-center text-white">
-                <div className="w-20 py-3 mx-2 border rounded-lg md:w-24 border-light-300 bg-light-100 md:py-4">
-                  <div className="text-2xl font-semibold md:text-3xl">
-                    {countdownValueDay.toString().padStart(2, '0')}
-                  </div>
-                  <div className="mt-3 text-xs uppercase opacity-75">Day</div>
-                </div>
-                <div className="w-20 py-3 mx-2 border rounded-lg md:w-24 border-light-300 bg-light-100 md:py-4">
-                  <div className="text-2xl font-semibold md:text-3xl">
-                    {countdownValueHour.toString().padStart(2, '0')}
-                  </div>
-                  <div className="mt-3 text-xs uppercase opacity-75 ">Hour</div>
-                </div>
-                <div className="w-20 py-3 mx-2 border rounded-lg md:w-24 border-light-300 bg-light-100 md:py-4">
-                  <div className="text-2xl font-semibold md:text-3xl">
-                    {countdownValueMin.toString().padStart(2, '0')}
-                  </div>
-                  <div className="mt-3 text-xs uppercase opacity-75 ">Min</div>
-                </div>
-                <div className="w-20 py-3 mx-2 border rounded-lg md:w-24 border-light-300 bg-light-100 md:py-4">
-                  <div className="text-2xl font-semibold md:text-3xl">
-                    {countdownValueSec.toString().padStart(2, '0')}
-                  </div>
-                  <div className="mt-3 text-xs uppercase opacity-75 ">
-                    Second
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
         </div>
+
+        <img
+          alt=""
+          src={trunkDropImg}
+          className="h-56 w-full object-cover sm:h-full md:w-auto"
+        />
       </section>
 
       {/* Featured Trunks */}

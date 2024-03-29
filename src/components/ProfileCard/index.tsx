@@ -117,11 +117,11 @@ function Edit({ onSubmit, children }: EditProfilePropType) {
     <div className="card">
       <form
         onSubmit={onSubmit}
-        className="w-full flex flex-col gap-5 items-center justify-center"
+        className="w-full flex flex-col gap-4 items-center justify-center"
       >
         {children}
         <button type="submit" className="save form-button">
-          Edit{' '}
+          Edit{/* Edit{' '} */}
         </button>
       </form>
     </div>
