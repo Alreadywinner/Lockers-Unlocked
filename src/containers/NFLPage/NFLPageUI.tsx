@@ -13,6 +13,29 @@ function NFLPageUI({
   handleItemPress,
   handleAddNewClick,
 }: NFLTeamsProps) {
+  // async function sendExpiredEmail(item: TeamsDataType) {
+  //   const backendUrl = import.meta.env.VITE_BACKEND_URL;
+  //   const buyerName = item.bids;
+  //   try {
+  //     const response = await fetch(`${backendUrl}/winner-email`, {
+  //       method: 'POST',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //       },
+  //       body: JSON.stringify({}),
+  //     });
+
+  //     if (!response.ok) {
+  //       const errorData = await response.json();
+  //       throw new Error(errorData.error.message || 'Unexpected Error occurred');
+  //     }
+
+  //     const responseData = await response.json();
+  //     console.log(responseData.msg);
+  //   } catch (error) {
+  //     console.error('Error:', error.message);
+  //   }
+  // }
   return (
     <div className="font-gilroy mt-8 flex flex-col">
       <div>
@@ -37,6 +60,7 @@ function NFLPageUI({
                 onClick={() => {
                   handleItemPress(element);
                 }}
+                // sendExpiredEmail={() => sendExpiredEmail(element)}
               />
             );
           })

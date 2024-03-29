@@ -95,6 +95,35 @@ app.get('/config', (req, res) => {
   });
 });
 
+app.post('/winner-email', async (req, res) => {
+  try {
+    const { buyerName, buyerEmail, paymentLinkUrl } = req.body;
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.NODE_MAILER_EMAIL,
+        pass: process.env.NODE_MAILER_PASSWORD,
+      },
+    });
+    let info = await transporter.sendMail({
+      from: '"Locker Unlocked" <lockersunlocked@gmail.com>', // sender address
+      to: `${buyerEmail}`, // list of receivers
+      subject: 'Buy your Product', // Subject line
+      text: 'Congratulations! Now you can Buy your product', // plain text body
+      html: EmailTemplate(buyerName, buyerEmail, paymentLinkUrl), // html body
+    });
+    res.json({ msg: `Message sent successfully ${info.messageId}` });
+  } catch (e) {
+    return res.status(400).send({
+      error: {
+        message: e.message || 'Unexpected Error occurred',
+      },
+    });
+  }
+});
+
 app.post('/create-payment-intent', async (req, res) => {
   try {
     const paymentIntent = await stripe.paymentIntents.create({

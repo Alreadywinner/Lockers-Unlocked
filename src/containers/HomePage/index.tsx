@@ -14,7 +14,7 @@ export default function HomePage() {
       text: 'NBA Trunk',
     },
     {
-      src: 'https://cdn.shopify.com/s/files/1/0414/2111/1457/collections/1200px-Clemson_Tigers_logo.svg_b780f06f-762a-4c15-9ebe-289cdafe6d69_360x.png?v=1617919028',
+      src: 'https://www.si.com/.image/ar_4:3%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTc3MjMxODQ4Mjg2NDYzMTM3/clemson-tigers-mens-track-and-field-program.jpg',
       text: 'Clemson',
       key: 3,
     },

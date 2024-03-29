@@ -20,4 +20,5 @@ export interface TeamsDataType {
   user: UserDetailsType;
   endDate: string;
   endTime: string;
+  emailSent?: string;
 }

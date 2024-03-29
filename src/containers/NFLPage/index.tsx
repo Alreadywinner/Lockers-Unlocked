@@ -1,15 +1,26 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { TeamsDataType } from '@types';
 import { Toast } from '@components';
 import { DetailPage } from '@containers';
 import { useLocalStorageDataContext } from '@context';
 import { useNavigate } from 'react-router-dom';
+import { isEndDateReached } from 'utils/ItemExpiryUtils';
 import NFLPageUI from './NFLPageUI';
 
 function NFLPage() {
   const navigate = useNavigate();
   const { AllNFLItems: NFLTeamsData, localStorageData } =
     useLocalStorageDataContext();
+  const [currentTeamsData, setCurrentTeamsData] =
+    useState<Array<TeamsDataType> | null>(null);
+  useEffect(() => {
+    if (NFLTeamsData && NFLTeamsData.length > 0) {
+      const filterTeamsData = NFLTeamsData.filter(
+        (element) => !isEndDateReached(element.endDate) && element,
+      );
+      setCurrentTeamsData(filterTeamsData);
+    }
+  }, []);
   const [toast, setToast] = useState({
     visible: false,
     text: '',
@@ -54,7 +65,7 @@ function NFLPage() {
         />
       )}
       <NFLPageUI
-        NFLTeamsData={NFLTeamsData}
+        NFLTeamsData={currentTeamsData}
         handleItemPress={handleItemPress}
         handleAddNewClick={handleAddNewClick}
       />
