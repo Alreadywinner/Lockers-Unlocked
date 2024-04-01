@@ -19,7 +19,7 @@ import { Routes, Route } from 'react-router-dom';
 
 function App() {
   return (
-    <div className="max-w-full overflow-x-hidden">
+    <>
       <NavBar />
       <Routes>
         <Route path="/" element={<HomePage />} />
@@ -46,7 +46,7 @@ function App() {
         </Route>
       </Routes>
       <Footer />
-    </div>
+    </>
   );
 }
 

@@ -2,16 +2,13 @@ import { ScrollToTop } from '@components';
 import React from 'react';
 import Slider from 'react-slick';
 import { Link } from 'react-router-dom';
+import { HomeHeroHeaderImg, NFLImg, MLBImg, TrunkDropImg } from '@Images';
 import { HomePageType } from './types';
-import NFLImg from '../../assets/images/NFLImage.jpg';
-import MLBImg from '../../assets/images/MLBImage.jpg';
-import trunkDropImg from '../../assets/images/TrunkDropsImage.jpg';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 export default function HomePageUI({ featured_trunks }: HomePageType) {
   const settings = {
-    dots: true,
     infinite: true,
     speed: 500,
     slidesToShow: 3,
@@ -35,7 +32,7 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
           </svg>
           <img
             className="object-cover w-full h-56 rounded shadow-lg lg:rounded-none lg:shadow-none md:h-96 lg:h-full"
-            src="https://www.betus.com.pa/wp-content/uploads/2023/10/sports-equinox-there-are-nfl-mlb-mls-nhl-and-nba-games-today-10-30-2023-min.jpg"
+            src={HomeHeroHeaderImg}
             alt=""
           />
         </div>
@@ -137,7 +134,7 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
         </div>
         <img
           alt=""
-          src={trunkDropImg}
+          src={TrunkDropImg}
           className="h-56 w-full object-cover sm:h-full md:w-auto"
         />
       </section>
@@ -147,7 +144,7 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
         <p className="uppercase md:mt-5 mb-10 mt-10 font-black md:text-3xl text-2xl text-center">
           <strong>Featured Trunks</strong>
         </p>
-        <div className="container mx-auto object-contain">
+        <div className="container mx-auto object-contain overflow-hidden px-3">
           <Slider {...settings}>
             {featured_trunks &&
               featured_trunks?.map((element) => {

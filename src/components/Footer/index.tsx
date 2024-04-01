@@ -1,7 +1,7 @@
 import { FacebookIcon, InstagramIcon, TwitterIcon } from '@Icon';
 import React from 'react';
 import { Link } from 'react-router-dom';
-import MainBlackLogoImg from '@Images';
+import MainBlackLogoImg from 'assets/images';
 
 export default function Footer() {
   return (
