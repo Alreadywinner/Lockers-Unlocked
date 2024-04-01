@@ -1,25 +1,26 @@
 .main-profile-div {
   color: #054231;
+  /* color: #000; */
   display: flex;
   justify-content: center;
 }
 
 .card {
   width: 100%;
-  height: 627px;
+  height: auto;
   padding: 15px;
   border-radius: 25px;
   display: flex;
   justify-content: center;
   box-shadow: 15px 10px 25px 0px #3fa1a9;
   background: #fff;
-  background-image: url('https://github.com/OlgaKoplik/CodePen/blob/master/leaf2.png?raw=true'),
-    url('https://github.com/OlgaKoplik/CodePen/blob/master/leaf.png?raw=true');
+  background-image: url('https://github.com/OlgaKoplik/CodePen/blob/master/leaf.png?raw=true');
   background-repeat: no-repeat, no-repeat;
   background-position: 120% -5%, 200% -40%;
   background-size: 40%, 80%;
   animation: open 0.5s;
 }
+
 @keyframes open {
   0% {
     background-position: 166% -25%, 220% -69%;
@@ -28,6 +29,7 @@
     background-position: 120% -5%, 200% -40%;
   }
 }
+
 .profile-form {
   display: flex;
   flex-direction: column;
@@ -50,8 +52,16 @@
   position: relative;
   padding: 6px;
   cursor: pointer;
-  background: linear-gradient(270deg, #3fa1a9, #79f1a4);
+  /* background: linear-gradient(270deg, #3fa1a9, #79f1a4); */
+  /* background: linear-gradient(270deg, #EF4444, #F77171); */
+  background: #676767;
   margin-bottom: 25px;
+}
+
+.profile-label {
+  text-transform: uppercase;
+  font-weight: 500;
+  color: #676767;
 }
 
 .img-wrap {
@@ -70,7 +80,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  color: #63d3a6;
+  /* color: #63d3a6; */
+  color: #F77171;
   width: 200px;
   height: 200px;
   border-radius: 50%;
@@ -85,12 +96,6 @@
   width: 100%;
   height: 100%;
   overflow: hidden;
-}
-
-.profile-label {
-  text-transform: uppercase;
-  font-weight: 700;
-  color: #676767;
 }
 
 .form-input {

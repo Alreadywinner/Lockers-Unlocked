@@ -73,7 +73,7 @@ function Card({ item, onClick }: CardProps) {
   if (!isEndDateReached(endDate)) {
     return (
       <div
-        className="lg:w-80 lg:h-[35rem] w-96 h-96 rounded overflow-hidden shadow-lg transition-transform duration-300 md:hover:-translate-y-2 flex flex-col justify-between"
+        className="lg:w-80 lg:h-[35rem] w-96 h-96 pb-2 rounded overflow-hidden shadow-lg transition-transform duration-300 md:hover:-translate-y-2 flex flex-col justify-between"
         onClick={onClick}
         role="button"
         tabIndex={0}
@@ -122,7 +122,7 @@ function Card({ item, onClick }: CardProps) {
   }
   return (
     <div
-      className="lg:w-80 lg:h-[35rem] w-96 h-96 rounded overflow-hidden shadow-lg transition-transform duration-300 md:hover:-translate-y-2 flex flex-col justify-between"
+      className="lg:w-80 lg:h-[35rem] w-96 h-96 pb-2 rounded overflow-auto shadow-lg transition-transform duration-300 md:hover:-translate-y-2 flex flex-col justify-between"
       onClick={onClick}
       role="button"
       tabIndex={0}
@@ -137,32 +137,35 @@ function Card({ item, onClick }: CardProps) {
           width="24rem"
         />
       </div>
-      <div className="h-2/5 px-6 py-4 flex flex-col justify-evenly">
+      <div className="h-2/5 px-6 py-2 flex flex-col justify-evenly">
         <div className="font-bold text-xl mb-2">{title}</div>
         <p className="text-gray-700 text-base mb-1.5 overflow-hidden whitespace-nowrap overflow-ellipsis">
           {description}
         </p>
         <div>
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-1.5">
-            Current Bid: {currentBid} $
-          </span>
-          <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-1">
-            Starting Bid: {startingBid} $
-          </span>
+          <div className="flex flex-row md:flex-col">
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-1.5">
+              Current Bid: {currentBid} $
+            </span>
+            <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2 mb-1">
+              Starting Bid: {startingBid} $
+            </span>
+          </div>
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
             Time Left: Expired
           </span>
         </div>
         <div className="flex items-center">
-          <div className="flex flex-row items-center justify-around">
+          <div className="flex flex-row items-center justify-around ml-1">
+            <span className="text-sm font-semibold ml-2 mr-4">
+              Uploaded By:
+            </span>
             <img
               alt="user_pic"
               src={item.user.fileSrc}
               className="w-8 h-8 rounded-full object-cover"
             />
-            <span className="text-sm font-semibold ml-2">
-              Uploaded By: {item.user.name}
-            </span>
+            <span className="text-sm font-semibold ml-2">{item.user.name}</span>
           </div>
         </div>
       </div>

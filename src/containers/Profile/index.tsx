@@ -44,9 +44,9 @@ function Profile() {
     }
   };
   return (
-    <div className="font-gilroy p-4">
+    <div className="font-gilroy p-0">
       <ScrollToTop />
-      <div className="flex md:flex-row flex-col gap-4 mt-10">
+      <div className="flex md:flex-row flex-col gap-1 mt-0">
         <div className="md:w-1/5 w-100 bg-white-500 shadow-lg shadow-white-500/50 rounded h-full">
           <SidePanel
             sidePanelItems={sidePanelItems}
@@ -55,7 +55,7 @@ function Profile() {
           />
         </div>
 
-        <div className="md:w-4/5 w-100">
+        <div className="md:w-4/5 w-100 overflow-auto">
           <StatusList
             listItems={selectedStatusList}
             personalInfo={personalInfo.current}

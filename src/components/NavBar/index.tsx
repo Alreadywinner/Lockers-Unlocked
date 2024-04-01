@@ -61,7 +61,7 @@ function NavLinksRender({
         </Button>
       ) : (
         <Button
-          className="inline-block rounded-full border border-red500 px-12 py-3 text-sm font-medium bg text-red500 hover:bg-red500 hover:text-white focus:outline-none focus:ring-red400 active:bg-red400"
+          className="inline-block rounded-full border border-red500 px-12 py-3 text-sm font-medium text-red500 hover:bg-red500 hover:text-white focus:outline-none focus:ring-red400 active:bg-red400"
           onClick={onLogoutClick}
         >
           Logout
@@ -137,7 +137,7 @@ export default function NavBar() {
   return (
     <>
       {auth && <Auth />}
-      <nav className="sticky top-0 bg-white shadow-md font-gilroy z-10">
+      <nav className="sticky top-0 bg-white drop-shadow-md font-gilroy z-10">
         <div className="mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex lg:justify-between md:items-center md:justify-between justify-between h-16">
             <div className="sm:justify-start flex items-center justify-center cursor-pointer">
@@ -156,7 +156,7 @@ export default function NavBar() {
                 </div>
               </div>
             </div>
-            <div className="mr-2 flex items-center sm:hidden p-2 rounded-lg hover:bg-lightGray">
+            <div className="flex items-center sm:hidden p-2 rounded-lg hover:bg-lightGray">
               <button
                 onClick={toggleMenu}
                 type="button"

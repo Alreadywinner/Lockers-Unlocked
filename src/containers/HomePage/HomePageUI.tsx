@@ -1,9 +1,8 @@
 import { ScrollToTop } from '@components';
-import React, { useState, useEffect } from 'react';
+import React from 'react';
 import Slider from 'react-slick';
 import { Link } from 'react-router-dom';
 import { HomePageType } from './types';
-import NBAImg from '../../assets/images/NBAImage.png';
 import NFLImg from '../../assets/images/NFLImage.jpg';
 import MLBImg from '../../assets/images/MLBImage.jpg';
 import trunkDropImg from '../../assets/images/TrunkDropsImage.jpg';
@@ -11,7 +10,6 @@ import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
 
 export default function HomePageUI({ featured_trunks }: HomePageType) {
-
   const settings = {
     dots: true,
     infinite: true,
@@ -19,7 +17,7 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
     slidesToShow: 3,
     slidesToScroll: 1,
     autoplay: true,
-    autoplaySpeed: 3000,
+    autoplaySpeed: 2000,
   };
 
   return (
@@ -62,18 +60,14 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
                 href="/"
                 className="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-red400 hover:bg-red500 focus:shadow-outline focus:outline-none"
               >
-                <Link to="/contact">
-                  Get in Touch
-                </Link>
+                <Link to="/contact">Get in Touch</Link>
               </a>
               <a
                 href="/"
                 aria-label=""
                 className="inline-flex items-center font-bold text-black transition-colors duration-200 hover:text-red500 hover:underline"
               >
-                <Link to="/about">
-                  Learn more
-                </Link>
+                <Link to="/about">Learn more</Link>
               </a>
             </div>
           </div>
@@ -98,36 +92,27 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
               some of their locker. Explore your favorite teams and players and
               Your Gear!
             </p>
-            <div className="lg:mt-0 lg:flex-shrink-0 flex items-center items-stretch justify-center md:items-start md:justify-start">
-              <div className="mt-12 w-full mt-4 md:w-auto inline-flex rounded-md shadow">
+            <div className="lg:mt-0 lg:flex-shrink-0 flex items-center justify-center md:items-start md:justify-start">
+              <div className="mt-12 w-full md:w-auto inline-flex rounded-md shadow">
                 <button
                   type="button"
                   className="py-2 px-4  bg-red400 hover:bg-red500 focus:ring-red400 focus:ring-offset-none text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg "
                 >
-                  <Link to="/about">
-                    About Us
-                  </Link>
+                  <Link to="/about">About Us</Link>
                 </button>
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-8 p-8 lg:p-24">
-            <div className="w-[120%]">
-              <img
-                src={NBAImg}
-                className="w-full h-full rounded-lg object-contain drop-shadow-2xl"
-                alt="NBA"
-              />
-            </div>
+          <div className="flex relative flex-col items-center justify-center w-full gap-8 p-8 lg:p-24 md:p-14">
             <div>
               <img
                 src={NFLImg}
-                className="mb-8 rounded-lg object-contain drop-shadow-2xl"
+                className="mb-8 rounded-lg object-contain relative drop-shadow-2xl"
                 alt="NFL"
               />
               <img
                 src={MLBImg}
-                className="rounded-lg object-contain drop-shadow-2xl"
+                className="rounded-lg object-contain relative drop-shadow-2xl"
                 alt="MLB"
               />
             </div>
@@ -139,11 +124,10 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
       <section className="overflow-hidden bg-red400 m-10 rounded-md bg-gradient-to-r from-red400 to-red500 sm:grid sm:grid-cols-2">
         <div className="p-8 md:p-12 lg:px-16 lg:py-24">
           <div className="mx-auto max-w-xl text-center items-center ltr:sm:text-left rtl:sm:text-right">
-              <h4 className="flex flex-col mt-6 text-2xl font-black leading-none text-gray-800 uppercase font-bebas-neue sm:text-6xl dark:text-white">
-                <span className="text-xl sm:text-3xl mb-2">Next</span>
-                Trunk Drops
-              </h4>
-
+            <h4 className="flex flex-col mt-6 text-2xl font-black leading-none text-gray-800 uppercase font-bebas-neue sm:text-6xl dark:text-white">
+              <span className="text-xl sm:text-3xl mb-2">Next</span>
+              Trunk Drops
+            </h4>
             <div className="mt-4 md:mt-8">
               <h3 className="text-2xl font-bold text-white font-heading md:text-4xl">
                 Coming Soon
@@ -151,7 +135,6 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
             </div>
           </div>
         </div>
-
         <img
           alt=""
           src={trunkDropImg}
@@ -164,14 +147,6 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
         <p className="uppercase md:mt-5 mb-10 mt-10 font-black md:text-3xl text-2xl text-center">
           <strong>Featured Trunks</strong>
         </p>
-        <Link
-          to="/"
-          className="text-black underline-offset-1 mr-8 mb-2 font-extrabold text-base text-end"
-        >
-          <span className="py-2 px-4  bg-red400 hover:bg-red500 focus:ring-red400 focus:ring-offset-none text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2  rounded-lg ">
-            View All
-          </span>
-        </Link>
         <div className="container mx-auto object-contain">
           <Slider {...settings}>
             {featured_trunks &&

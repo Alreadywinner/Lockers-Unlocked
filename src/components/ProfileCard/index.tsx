@@ -98,7 +98,6 @@ function UserEmail({ email }: UserEmailPropType) {
         Email *
       </label>
       <Input
-        // ref={emailRef}
         value={email}
         type="text"
         name="email"
@@ -120,8 +119,11 @@ function Edit({ onSubmit, children }: EditProfilePropType) {
         className="w-full flex flex-col gap-4 items-center justify-center"
       >
         {children}
-        <button type="submit" className="save form-button">
-          Edit{/* Edit{' '} */}
+        <button
+          type="submit"
+          className="bg-red500 px-12 py-3 inline-block rounded-full text-white hover:bg-red400 cursor-pointer hover:text-white"
+        >
+          Edit
         </button>
       </form>
     </div>

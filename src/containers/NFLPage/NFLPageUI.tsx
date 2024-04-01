@@ -27,7 +27,7 @@ function NFLPageUI({
       <h1 className="md:text-4xl text-3xl md:mt-0 mt-6 font-bold text-center">
         NFL Teams Items
       </h1>
-      <div className="mt-14 mb-5 ml-2 mr-2 flex gap-5 flex-wrap justify-center h-screen">
+      <div className="mt-14 mb-10 ml-2 mr-2 flex flex-col md:flex-row gap-4 flex-wrap justify-center">
         {NFLTeamsData && NFLTeamsData.length > 0 ? (
           NFLTeamsData.map((element) => {
             return (

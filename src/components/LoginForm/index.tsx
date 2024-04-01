@@ -116,7 +116,7 @@ function LoginForm({
       )}
 
       <div className="font-gilroy">
-        <h1 className="text-3xl font-bold text-center md:p-0 p-3 md:mt-0 mt-5">
+        <h1 className="text-3xl text-center font-extrabold md:p-0 p-3 md:mt-0 mt-5">
           Login
         </h1>
         <form
@@ -145,7 +145,7 @@ function LoginForm({
             <Input
               id="password2"
               type="password"
-              placeholder="Enter Password"
+              placeholder="&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;&bull;"
               ref={passwordRef}
               required
               className="h-9 border-solid border-2 border-red rounded pl-2 md:w-9/12 md:self-center w-full"
@@ -157,7 +157,7 @@ function LoginForm({
               <label htmlFor="select_team">User Type *</label>
             </div>
             <select
-              className="h-9 border-solid border-2 border-red rounded pl-2 md:w-9/12 md:self-center w-full"
+              className="h-9 border-solid border-2 border-red focus:border-black rounded pl-2 md:w-9/12 md:self-center w-full"
               name="select_team"
               ref={userTypeRef}
             >
@@ -166,17 +166,8 @@ function LoginForm({
                 <option key={element.id}>{element.name}</option>
               ))}
             </select>
-            <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
-              <svg
-                className="fill-current h-4 w-4"
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 20 20"
-              >
-                <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z" />
-              </svg>
-            </div>
           </div>
-          <div className="flex justify-center mt-5">
+          <div className="flex justify-center mt-5 p-3">
             <Button
               type="submit"
               className="bg-red400 text-white hover:bg-red500 md:w-3/12 w-full rounded p-2"
@@ -186,11 +177,11 @@ function LoginForm({
             </Button>
           </div>
         </form>
-        <div className="flex flex-col justify-center items-center p-3">
-          <p>Don&apos;t have an account ?</p>
+        <div className="flex flex-col justify-center items-center md:px-16 p-3">
+          <p className="md:mr-8">Don&apos;t have an account ?</p>
           <Button
             type="button"
-            className="bg-red400 text-white hover:bg-red500 md:w-3/12 w-full rounded p-2"
+            className="bg-red400 text-white mt-1 hover:bg-red500 md:w-3/12 w-full rounded p-2"
             onClick={onSignUpClick}
             disabled={loading}
           >
