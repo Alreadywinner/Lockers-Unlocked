@@ -53,19 +53,19 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
               your favorite teams and players and Your Gear!
             </p>
             <div className="flex items-center">
-              <a
-                href="/"
+              <Link
+                to="/contact"
                 className="inline-flex items-center justify-center h-12 px-6 mr-6 font-medium tracking-wide text-white transition duration-200 rounded shadow-md bg-red400 hover:bg-red500 focus:shadow-outline focus:outline-none"
               >
-                <Link to="/contact">Get in Touch</Link>
-              </a>
-              <a
-                href="/"
+                Get in Touch
+              </Link>
+              <Link
+                to="/about"
                 aria-label=""
                 className="inline-flex items-center font-bold text-black transition-colors duration-200 hover:text-red500 hover:underline"
               >
-                <Link to="/about">Learn more</Link>
-              </a>
+                Learn more
+              </Link>
             </div>
           </div>
         </div>
@@ -152,17 +152,17 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
                   <Link
                     key={element.key}
                     to="/"
-                    className="flex-shrink-0 mb-8 bg-white shadow-lg rounded-full text-center p-3 cursor-pointer transition-transform duration-300 hover:-translate-y-2"
+                    className="flex-shrink-0 mb-8 bg-white shadow-lg rounded-full text-center p-3 cursor-pointer transition-transform duration-300 hover:-translate-y-2 h-52 w-52"
                   >
-                    <div className="flex md:flex-row flex-col items-center justify-center gap-5 ">
+                    <div className="flex md:flex-row flex-col items-center justify-center gap-5">
                       <span>
                         <img
                           src={element.src}
-                          className="h-40 w-40 rounded-full"
+                          className="md:h-40 md:w-40 h-28 w-28 rounded-full"
                           alt=""
                         />
                       </span>
-                      <span className="font-bold md:text-4xl text-xl">
+                      <span className="font-bold lg:text-4xl md:text-2xl text-lg">
                         {element.text}
                       </span>
                     </div>
