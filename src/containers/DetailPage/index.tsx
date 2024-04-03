@@ -31,17 +31,18 @@ function BidEntry({
       <CustomModal isOpen={bidEntry} onClose={onClose}>
         <div className="font-gilroy">
           <p className="text-center text-3xl font-bold mt-3 mb-10">
-            Register Your Bid:
+            Register Your Bid
           </p>
           <div className="flex md:flex-row flex-col">
             <form
               className="flex flex-col items-center justify-center w-full gap-4"
               onSubmit={submitBid}
             >
-              <p className="rounded-full bg-red400 text-white p-2 md:text-sm text-xs">
-                Current Bid: {currentItem.bid}$
+              {/* <p className="rounded-full bg-red400 text-white p-2 md:text-sm text-xs"> */}
+              <p className="rounded-xl bg-red400 text-white p-2 text-lg">
+                Current Bid: <strong> {currentItem.bid}$ </strong>
               </p>
-              <div className="w-full flex flex-col gap-4">
+              <div className="w-full flex flex-col gap-4 mt-8">
                 <label htmlFor="starting_bid">Update Current Bid *</label>
                 <Input
                   ref={newBidRef}
@@ -53,16 +54,16 @@ function BidEntry({
                   required
                 />
               </div>
-              <div className="flex justify-center gap-5 mt-10 w-full">
+              <div className="flex flex-col w-full md:flex-row justify-center gap-5 mt-10">
                 <Button
                   type="submit"
-                  className="bg-red400 text-white hover:bg-red500 md:w-3/12 w-1/2 rounded p-2"
+                  className="bg-red400 text-white hover:bg-red500 md:w-3/12 w-full rounded p-2"
                   disabled={loading}
                 >
                   {loading ? <Loader /> : 'Submit Bid'}
                 </Button>
                 <Button
-                  className="bg-black text-white md:w-3/12 w-1/2 rounded p-2"
+                  className="bg-red400 text-white hover:bg-red500 md:w-3/12 w-full rounded p-2"
                   onClick={onClose}
                   disabled={loading}
                 >

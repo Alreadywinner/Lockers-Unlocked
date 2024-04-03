@@ -15,7 +15,7 @@ function DetailPageUI({
   return (
     <div className="font-gilroy w-full h-full">
       <p className="text-center text-3xl font-bold mt-3 mb-10">
-        Product Details:
+        Product Details
       </p>
       <div className="flex md:flex-row flex-col">
         <img
@@ -25,42 +25,46 @@ function DetailPageUI({
           width={650}
           height={650}
         />
-        <div className="flex flex-col md:w-1/2 w-full md:ml-5">
+        <div className="flex flex-col justify-normal sm:justify-between md:w-1/2 w-full md:ml-5">
           <div>
-            <p className="text-4xl md:mt-0 mt-5">{item?.title}</p>
-            <p className="text-gray500 mt-5 mb-5">{item?.description}</p>
-            <span className="flex md:justify-normal justify-center md:gap-6 gap-2 mt-2 mb-5">
-              <p className="rounded-full bg-red400 text-white p-2 md:text-sm text-xs">
-                Starting Bid: {item?.startingBid}$
-              </p>
-              <p className="rounded-full bg-red400 text-white p-2 md:text-sm text-xs">
-                Current Bid: {item?.currentBid}$
-              </p>
-            </span>
+            <p className="text-4xl font-medium md:mt-0 mt-5">{item?.title}</p>
+            <p className="text-black mt-5 mb-5 w-full h-48 md:h-40 overflow-y-auto">
+              {item?.description}
+            </p>
+            <div className="flex flex-row justify-center">
+              <span className="flex md:justify-normal justify-center md:gap-6 gap-2 mt-2 mb-5">
+                <p className="rounded-xl bg-red400 text-white p-2 md:text-base">
+                  Current Bid: <strong> {item?.currentBid}$ </strong>
+                </p>
+                <p className="rounded-xl bg-red400 text-white p-2 md:text-base">
+                  Starting Bid: <strong> {item?.startingBid}$ </strong>
+                </p>
+              </span>
+            </div>
           </div>
-          <div className="flex gap-5 justify-center mt-10 mb-3">
+          <div className="flex flex-col md:flex-row rounded-lg gap-5 justify-center mt-4 mb-3">
+            {/* Withdraw Bid Button */}
             <Button
               type="button"
               onClick={onWithdrawClick}
               disabled={withdrawLoading}
-              className="bg-black text-white lg:w-3/12 w-1/2 rounded p-2"
+              className="bg-red400 text-white lg:w-3/12 md:w-1/2 w-full hover:bg-red500 rounded p-2"
             >
               {withdrawLoading ? <Loader /> : 'Withdraw Bid'}
             </Button>
+            {/* Make Bid Button */}
             <Button
               type="button"
               onClick={onBidClick}
               disabled={withdrawLoading}
-              className="bg-red400 text-white lg:w-3/12 w-1/2 hover:bg-red500 rounded p-2"
+              className="bg-red400 text-white lg:w-3/12 md:w-1/2 w-full hover:bg-red500 rounded p-2"
             >
               Make Bid
             </Button>
-          </div>
-          {/* About Seller */}
-          <div className="flex justify-center gap-3 mt-5">
+            {/* About Seller */}
             <Button
               type="button"
-              className="bg-red400 text-white lg:w-3/12 w-1/2 hover:bg-red500 rounded p-2"
+              className="bg-red400 text-white lg:w-3/12 md:w-1/2 w-full hover:bg-red500 rounded p-2"
               onClick={onSellerClick}
             >
               About Seller
