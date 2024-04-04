@@ -72,15 +72,18 @@
   border-radius: 50%;
 }
 .img-upload:before {
-  content: '\f093';
-  font-size: 90px;
+  content: '';
+  background-image: url('https://cdn4.iconfinder.com/data/icons/font-awesome-2/2048/f030-512.png');
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 30%;
+  font-family: FontAwesome;
   position: absolute;
   padding-top: 80px;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
   text-align: center;
-  /* color: #63d3a6; */
   color: #F77171;
   width: 200px;
   height: 200px;

@@ -38,7 +38,6 @@ function BidEntry({
               className="flex flex-col items-center justify-center w-full gap-4"
               onSubmit={submitBid}
             >
-              {/* <p className="rounded-full bg-red400 text-white p-2 md:text-sm text-xs"> */}
               <p className="rounded-xl bg-red400 text-white p-2 text-lg">
                 Current Bid: <strong> {currentItem.bid}$ </strong>
               </p>
