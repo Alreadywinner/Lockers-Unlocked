@@ -21,7 +21,7 @@ function DetailPageUI({
         <img
           src={item?.fileSrc}
           alt="item"
-          className="md:w-1/2 w-full h-96 object-cover"
+          className="md:w-1/2 w-full h-96 object-contain"
           width={650}
           height={650}
         />
@@ -116,7 +116,7 @@ function DetailPageUI({
             {canDeleteItem && (
               <Button
                 type="button"
-                className="bg-black text-white lg:w-3/12 w-1/2 hover:bg-red500 rounded p-2"
+                className="bg-red400 text-white lg:w-3/12 md:w-1/2 w-full hover:bg-red500 rounded p-2"
                 onClick={onDeleteClick}
               >
                 {deleteLoading ? <Loader /> : 'Delete Item'}
