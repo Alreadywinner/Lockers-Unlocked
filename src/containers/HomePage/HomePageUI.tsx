@@ -2,7 +2,7 @@ import { ScrollToTop } from '@components';
 import React from 'react';
 import Slider from 'react-slick';
 import { Link } from 'react-router-dom';
-import { HomeHeroHeaderImg, NFLImg, MLBImg, TrunkDropImg } from '@Images';
+import { TrunkDropImg } from '@Images';
 import { HomePageType } from './types';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
@@ -32,13 +32,13 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
           </svg>
           <img
             className="object-cover w-full h-56 rounded shadow-lg lg:rounded-none lg:shadow-none md:h-96 lg:h-full"
-            src={HomeHeroHeaderImg}
+            src="https://images.unsplash.com/photo-1562711936-46f6760be439?q=80&w=1470&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt=""
           />
         </div>
         <div className="relative flex flex-col items-start w-full max-w-xl px-4 mx-auto md:px-0 lg:px-8 lg:max-w-screen-xl">
           <div className="mb-16 lg:my-40 lg:max-w-lg lg:pr-5">
-            <p className="inline-block px-3 py-px mb-4 text-xs font-semibold tracking-wider text-teal-900 uppercase rounded-full bg-teal-accent-400">
+            <p className="inline-block px-3 py-px mb-4 text-sm font-semibold tracking-wider text-black uppercase rounded-full bg-teal-accent-400">
               Lockers Unlocked
             </p>
             <h2 className="mb-5 font-sans text-3xl font-bold tracking-tight text-black sm:text-4xl sm:leading-none">
@@ -103,12 +103,12 @@ export default function HomePageUI({ featured_trunks }: HomePageType) {
           <div className="flex relative flex-col items-center justify-center w-full gap-8 p-8 lg:p-24 md:p-14">
             <div>
               <img
-                src={NFLImg}
+                src="https://images.unsplash.com/photo-1512144253214-d94e86cd9189?q=80&w=1631&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 className="mb-8 rounded-lg object-contain relative drop-shadow-2xl"
                 alt="NFL"
               />
               <img
-                src={MLBImg}
+                src="https://images.unsplash.com/photo-1519861531473-9200262188bf?q=80&w=1471&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
                 className="rounded-lg object-contain relative drop-shadow-2xl"
                 alt="MLB"
               />
