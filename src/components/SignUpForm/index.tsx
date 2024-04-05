@@ -225,10 +225,10 @@ function SignUpForm({
           </div>
           <div className="lg:w-1/2 lg:h-full w-full h-auto md:mt-5">
             <form
-              className="flex flex-col gap-3 font-gilroy px-4"
+              className="flex flex-col gap-3 mt-5 font-gilroy px-4"
               onSubmit={makeRequest}
             >
-              <h1 className="text-3xl font-bold text-center md:p-0 p-3 lg:mt-0 mt-5">
+              <h1 className="text-3xl font-bold text-center hidden md:block md:p-0 p-3 lg:mt-0 mt-5">
                 Sign Up
               </h1>
               {/* Your Name */}
@@ -360,11 +360,11 @@ function SignUpForm({
                   </Button>
                 )}
               </div>
-              <div className="flex flex-col justify-center items-center p-3 font-gilroy">
+              <div className="flex flex-col justify-center items-center w-full p-3 font-gilroy">
                 <p>Have an account already ?</p>
                 <Button
                   type="button"
-                  className="bg-red400 text-white hover:bg-red500 md:w-3/12 w-full rounded p-2"
+                  className="bg-red400 text-white hover:bg-red500 md:w-3/12 w-[105%] rounded p-2"
                   onClick={onLoginClick}
                   disabled={loading}
                 >

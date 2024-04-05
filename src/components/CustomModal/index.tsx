@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Modal from 'react-modal';
+import { CrossIcon } from '@Icon';
 import { CustomModalPropType } from './types';
 
 function CustomModal({ children, isOpen, onClose }: CustomModalPropType) {
@@ -30,6 +31,7 @@ function CustomModal({ children, isOpen, onClose }: CustomModalPropType) {
       border: 'none',
       color: '#000',
       cursor: 'pointer',
+      padding: '0.5rem',
     },
     overlay: { zIndex: 1000 },
   };
@@ -75,20 +77,7 @@ function CustomModal({ children, isOpen, onClose }: CustomModalPropType) {
       contentLabel="Example Modal"
     >
       <button onClick={onClose} type="button" style={customStyles.closeButton}>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="24"
-          height="24"
-          viewBox="0 0 24 24"
-          fill="none"
-          stroke="currentColor"
-          strokeWidth="2"
-          strokeLinecap="round"
-          strokeLinejoin="round"
-        >
-          <line x1="18" y1="6" x2="6" y2="18" />
-          <line x1="6" y1="6" x2="18" y2="18" />
-        </svg>
+        <CrossIcon color="#000000" aria-hidden="true" />
       </button>
       {children}
     </Modal>

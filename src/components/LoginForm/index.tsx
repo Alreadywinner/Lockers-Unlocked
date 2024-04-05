@@ -138,7 +138,7 @@ function LoginForm({
           </div>
         </div>
         <div className="lg:w-1/2 lg:h-full w-full h-auto md:mt-5">
-          <h1 className="text-3xl text-center font-extrabold md:p-0 p-3 md:mt-0 mt-5">
+          <h1 className="text-3xl text-center font-extrabold hidden md:block md:p-0 p-3 md:mt-0 mt-5">
             Login
           </h1>
           <form
