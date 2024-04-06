@@ -4,15 +4,16 @@ import { DetailPageUIPropType } from './types';
 
 function DetailPageUI({
   item,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   onBidClick,
   onWithdrawClick,
   withdrawLoading,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  onSellerClick,
   canDeleteItem,
   onDeleteClick,
   deleteLoading,
+  submitBid,
+  newBidRef,
+  updateLoading,
+  currentBid,
 }: DetailPageUIPropType) {
   return (
     <div className="font-gilroy w-full h-full">
@@ -80,7 +81,7 @@ function DetailPageUI({
             <div className="flex flex-row justify-center">
               <span className="flex md:justify-normal justify-center md:gap-6 gap-2 mt-2 mb-5">
                 <p className="rounded-xl bg-red400 text-white p-2 md:text-base">
-                  Current Bid: <strong> {item?.currentBid}$ </strong>
+                  Current Bid: <strong> {currentBid?.bid}$ </strong>
                 </p>
                 <p className="rounded-xl bg-red400 text-white p-2 md:text-base">
                   Starting Bid: <strong> {item?.startingBid}$ </strong>
@@ -88,59 +89,22 @@ function DetailPageUI({
               </span>
             </div>
           </div>
-          {/* <div className="flex flex-col md:flex-row rounded-lg gap-5 justify-center mt-4 mb-3">
-            Withdraw Bid Button
-            <Button
-              type="button"
-              onClick={onWithdrawClick}
-              disabled={withdrawLoading}
-              className="bg-red400 text-white lg:w-3/12 md:w-1/2 w-full hover:bg-red500 rounded p-2"
-            >
-              {withdrawLoading ? <Loader /> : 'Withdraw Bid'}
-            </Button>
-            Make Bid Button
-            <Button
-              type="button"
-              onClick={onBidClick}
-              disabled={withdrawLoading}
-              className="bg-red400 text-white lg:w-3/12 md:w-1/2 w-full hover:bg-red500 rounded p-2"
-            >
-              Make Bid
-            </Button>
-            About Seller
-            <Button
-              type="button"
-              className="bg-red400 text-white lg:w-3/12 md:w-1/2 w-full hover:bg-red500 rounded p-2"
-              onClick={onSellerClick}
-            >
-              About Seller
-            </Button>
-            {canDeleteItem && (
-              <Button
-                type="button"
-                className="bg-red400 text-white lg:w-3/12 md:w-1/2 w-full hover:bg-red500 rounded p-2"
-                onClick={onDeleteClick}
-              >
-                {deleteLoading ? <Loader /> : 'Delete Item'}
-              </Button>
-            )}
-          </div> */}
         </div>
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-4 gap-4 pb-2">
         <div className="bg-red400 p-4 text-white w-full rounded-lg flex flex-col md:items-center justify-between md:justify-center gap-2">
           <p className="text-xl">Seller Details</p>
           <p>
-            <span className="mr-2">Name:</span> Nauman Ahmed
+            <span className="mr-2">Name:</span> {item?.user.name}
           </p>
           <p>
-            <span className="mr-4">Type:</span> Buyer
+            <span className="mr-4">Type:</span> Seller
           </p>
         </div>
         <div className="bg-red400 text-white w-full rounded-lg p-4 col-span-3">
           <form
             className="flex flex-col items-center justify-center w-full gap-4"
-            // onSubmit={submitBid}
+            onSubmit={submitBid}
           >
             <label htmlFor="starting_bid" className="text-xl">
               Update Current Bid
@@ -148,6 +112,7 @@ function DetailPageUI({
             <input
               type="number"
               id="starting_bid"
+              ref={newBidRef}
               placeholder="Enter Number"
               className="h-9 text-fullBlack border-solid border-2 border-red rounded pl-2 w-full"
               required
@@ -155,8 +120,10 @@ function DetailPageUI({
             <button
               type="submit"
               className="bg-red500 text-white lg:w-3/12 md:w-1/2 w-full opacity-85 hover:opacity-100 rounded p-2"
+              onClick={onBidClick}
+              disabled={updateLoading}
             >
-              Update
+              {updateLoading ? <Loader /> : 'Update Bid'}
             </button>
             <Button
               type="button"
