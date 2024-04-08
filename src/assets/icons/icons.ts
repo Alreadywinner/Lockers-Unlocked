@@ -12,6 +12,8 @@ import { ReactComponent as LocationIcon } from './location.svg';
 import { ReactComponent as PhoneIcon } from './phone.svg';
 import { ReactComponent as MainLogoIcon } from './main-logo-white.svg';
 import { ReactComponent as AwardIcon } from './award.svg';
+import { ReactComponent as LockIcon } from './lock.svg';
+import { ReactComponent as PackageIcon } from './package.svg';
 
 export {
   UserIcon,
@@ -28,4 +30,6 @@ export {
   PhoneIcon,
   MainLogoIcon,
   AwardIcon,
+  LockIcon,
+  PackageIcon,
 };

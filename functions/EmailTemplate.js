@@ -24,7 +24,7 @@ const EmailTemplate = (buyerName, buyerEmail, paymentLinkUrl) => {
               <h1
                 style="color:#333;font-family:-apple-system, BlinkMacSystemFont, &#x27;Segoe UI&#x27;, &#x27;Roboto&#x27;, &#x27;Oxygen&#x27;, &#x27;Ubuntu&#x27;, &#x27;Cantarell&#x27;, &#x27;Fira Sans&#x27;, &#x27;Droid Sans&#x27;, &#x27;Helvetica Neue&#x27;, sans-serif;font-size:24px;font-weight:bold;margin:40px 0;padding:0"
               >
-              Pressing on this Payment Link will allow you to buy your product
+              Congratulations! You have won the Bid. Click the Payment Link to proceed.
               </h1>
               <code
                 style="
