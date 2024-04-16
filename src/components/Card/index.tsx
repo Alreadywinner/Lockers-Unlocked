@@ -70,6 +70,51 @@ function Card({ item, onClick }: CardProps) {
 
   const { days, hours, minutes, seconds } = timeLeft;
 
+  // eslint-disable-next-line @typescript-eslint/no-shadow
+  function sendEmails(item) {
+    // Perform backend call to firebase
+    // Makeup a post request and send full item to it
+    // Email: Item details plus lockers unlocked payment link (www.lockersunlocked.com/paymentlink/userId)
+    // Status: Pending, Successful, Declined
+    // Construct the payload to be sent to the backend
+    // const payload = {
+    //   item, // Full item details
+    // };
+
+    // Make an API call using fetch
+    fetch(
+      'https://us-central1-lockers-unlocked.cloudfunctions.net/app/send-email',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ item }),
+      },
+    )
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+        return response.json();
+      })
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      .then((data) => {
+        // console.log('Email sent successfully:', data);
+      })
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      .catch((error) => {
+        // console.error('Error sending email:', error);
+      });
+  }
+
+  useEffect(() => {
+    if (isEndDateReached(endDate)) {
+      // Perform actions when timer expires (send emails)
+      // sendEmails(item);
+    }
+  }, [endDate]);
+
   if (!isEndDateReached(endDate)) {
     return (
       <div
@@ -154,6 +199,9 @@ function Card({ item, onClick }: CardProps) {
           <span className="inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 mr-2">
             Time Left: Expired
           </span>
+          <button type="button" onClick={() => sendEmails(item)}>
+            Test
+          </button>
         </div>
         <div className="flex items-center">
           <div className="flex flex-row items-center justify-around ml-1">

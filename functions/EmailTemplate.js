@@ -1,71 +1,95 @@
-const EmailTemplate = (buyerName, buyerEmail, paymentLinkUrl) => {
+const EmailTemplate = (buyerName, itemName, itemImgSrc, winningBid, paymentLinkUrl) => {
   return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <meta http-equiv="Content-Type" content="text/html charset=UTF-8" />
     <html lang="en">
-      <head></head>
-    
-      <body style="background-color: #ffffff">
-        <table
-          align="center"
-          role="presentation"
-          cellspacing="0"
-          cellpadding="0"
-          border="0"
-          width="100%"
-          style="
-            max-width: 37.5em;
-            padding-left: 12px;
-            padding-right: 12px;
+      <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Congratulations! You Won the Auction!</title>
+        <style>
+          body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+          }
+      
+          .container {
+            width: 600px;
+            margin: 50px auto;
+            text-align: center;
+            padding: 30px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+          }
+      
+          .bg-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            position: absolute;
+            top: -50px;
+            left: 0;
+            z-index: -1;
+            padding-bottom: 28px;
+          }
+      
+          h1 {
+            font-size: 24px;
+            margin-bottom: 15px;
+          }
+      
+          p {
+            font-size: 16px;
+            line-height: 1.5;
+            margin-bottom: 10px;
+          }
+      
+          .item-image {
+            width: 300px;
+            height: 200px;
+            object-fit: cover;
             margin: 0 auto;
-          "
-        >
-          <tr style="width: 100%">
-            <td>
-              <h1
-                style="color:#333;font-family:-apple-system, BlinkMacSystemFont, &#x27;Segoe UI&#x27;, &#x27;Roboto&#x27;, &#x27;Oxygen&#x27;, &#x27;Ubuntu&#x27;, &#x27;Cantarell&#x27;, &#x27;Fira Sans&#x27;, &#x27;Droid Sans&#x27;, &#x27;Helvetica Neue&#x27;, sans-serif;font-size:24px;font-weight:bold;margin:40px 0;padding:0"
-              >
-              Congratulations! You have won the Bid. Click the Payment Link to proceed.
-              </h1>
-              <code
-                style="
-                  display: inline-block;
-                  padding: 16px 4.5%;
-                  width: 90.5%;
-                  background-color: #f4f4f4;
-                  border-radius: 5px;
-                  border: 1px solid #eee;
-                  color: #333;
-                "
-              >Name : ${buyerName}</code
-              >
+            display: block;
+            margin-top: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+          }
+      
+          .payment-button {
+            background-color: #F77171; /* Red */
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            margin: 20px auto;
+            cursor: pointer;
+            border-radius: 5px;
+          }
+      
+          .payment-button:hover {
+            background-color: #EF4444; /* Red hover */
+          }
+        </style>
+      </head>
     
-              <code
-                style="
-                  display: inline-block;
-                  padding: 16px 4.5%;
-                  width: 90.5%;
-                  background-color: #f4f4f4;
-                  border-radius: 5px;
-                  border: 1px solid #eee;
-                  color: #333;
-                "
-              >Email : ${buyerEmail}</code
-              >
-              <code
-                style="
-                  display: inline-block;
-                  padding: 16px 4.5%;
-                  width: 90.5%;
-                  background-color: #f4f4f4;
-                  border-radius: 5px;
-                  border: 1px solid #eee;
-                  color: #333;
-                "
-              >Buying Link : ${paymentLinkUrl}</code
-              >
-            </td>
-          </tr>
-        </table>
+      <body>
+        <div class="container">
+          <img src="https://images.unsplash.com/photo-1674397167590-e8133e1c0b09?q=80&w=1480&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" class="bg-img">
+          <h1>Congratulations, ${buyerName}!</h1>
+          <p>You are the winning bidder for the ${itemName}!</p>
+          <img src="${itemImgSrc}" alt="${itemName} image" class="item-image">
+          <p>Your final bid of $${winningBid} has secured this amazing item.</p>
+          <p>We're thrilled you won and can't wait for you to enjoy it!</p>
+          <a href="${paymentLinkUrl}" class="payment-button">Complete Payment</a>
+          <p>If you have any questions, please don't hesitate to contact us at lockersunlocked@support.com or (+92) - 303 005 854.</p>
+          <p>Thank you for choosing us! We hope you have a wonderful experience.</p>
+          <p>Sincerely,</p>
+          <p>Lockers Unlocked Team</p>
+        </div>
       </body>
     </html>
     `;
