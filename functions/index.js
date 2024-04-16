@@ -18,6 +18,8 @@ const corsOptions = {
     'https://lockers-unlocked.web.app',
     'https://lockersunlocked.com',
     'https://www.lockersunlocked.com',
+    'http://192.168.175.158:5173',
+    'http://192.168.175.158',
   ],
   methods: 'GET,HEAD,PUT,PATCH,POST,DELETE',
   credentials: true,
@@ -113,6 +115,39 @@ app.post('/create-payment-intent', async (req, res) => {
         message: e.message,
       },
     });
+  }
+});
+
+app.post('/send-email', async (req, res) => {
+  try {
+    const { item } = req.body;
+    const transporter = nodemailer.createTransport({
+      host: 'smtp.gmail.com',
+      port: 465,
+      secure: true,
+      auth: {
+        user: process.env.NODE_MAILER_EMAIL,
+        pass: process.env.NODE_MAILER_PASSWORD,
+      },
+    });
+    let info = await transporter.sendMail({
+      from: '"Locker Unlocked" <lockersunlocked@gmail.com>', // sender address
+      // to: `${item.user.name}`, // list of receivers
+      to: 'naumanahmed254@gmail.com',
+      subject: 'Buy your Product', // Subject line
+      text: 'Congratulations! Now you can Buy your product', // plain text body
+      html: EmailTemplate(
+        item.user.name,
+        'test@gmail.com',
+        'The payment link will go here',
+      ), // html body
+    });
+    res
+      .status(200)
+      .json({ msg: `Message sent successfully ${info.messageId}`, data: item });
+  } catch (err) {
+    console.error('Error:', err);
+    res.status(500).send('Internal Server Error');
   }
 });
 
