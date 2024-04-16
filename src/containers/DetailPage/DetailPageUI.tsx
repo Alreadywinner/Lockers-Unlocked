@@ -1,5 +1,6 @@
 import React from 'react';
 import { Button, Loader } from '@components';
+import { LockIcon, PackageIcon } from '@Icon';
 import { DetailPageUIPropType } from './types';
 
 function DetailPageUI({
@@ -34,48 +35,12 @@ function DetailPageUI({
             <p className="text-black mt-5 mb-5 w-full h-48 md:h-40 overflow-y-auto">
               {item?.description}
             </p>
-            <div className="flex flex-row items-center gap-4 p-2 font-bold">
-              <svg
-                aria-hidden="true"
-                focusable="false"
-                role="presentation"
-                className="icon icon-package size-8 fill-none stroke-black stroke-2"
-                viewBox="0 0 64 64"
-              >
-                <path
-                  className="cls-1"
-                  d="M32 56L9.05 42.88V22.12L32 9l22.95 13.12v20.76L32 56z"
-                />
-                <path
-                  className="cls-1"
-                  d="M32 56V35.23l22.95-13.11M32 35.23L9.05 22.12M42.13 14.79L20.52 28.67v8.75"
-                />
-              </svg>
+            <div className="flex flex-row items-center gap-0 p-0 font-black">
+              <PackageIcon color="#000000" aria-hidden="true" />
               <span>Fast Shipping</span>
             </div>
-            <div className="flex flex-row items-center gap-4 p-2 mb-2 font-bold">
-              <svg
-                aria-hidden="true"
-                focusable="false"
-                role="presentation"
-                className="icon icon-lock size-8 fill-none stroke-black stroke-2"
-                viewBox="0 0 64 64"
-              >
-                <path
-                  id="svg_2"
-                  data-name="svg 2"
-                  className="cls-1"
-                  d="M20.48 24v-3c0-6.6 5.52-11 11.76-11C39 10 44 15.13 44 21v3"
-                />
-                <path
-                  id="svg_4"
-                  data-name="svg 4"
-                  className="cls-1"
-                  d="M11.62 24h41.25v29.77H11.62z"
-                />
-                <path className="cls-1" d="M32.24 37v7" />
-                <circle className="cls-1" cx="32.24" cy="35.5" r="1.5" />
-              </svg>
+            <div className="flex flex-row items-center gap-0 p-0 mb-2 font-black">
+              <LockIcon color="#000000" aria-hidden="true" />
               <span>Secure Payments</span>
             </div>
             <div className="flex flex-row justify-center">
