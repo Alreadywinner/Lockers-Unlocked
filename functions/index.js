@@ -126,8 +126,8 @@ app.post('/send-email', async (req, res) => {
       port: 465,
       secure: true,
       auth: {
-        user: 'smashorn@gmail.com',
-        pass: 'ofiuseiueurrlxza',
+        user: process.env.NODE_MAILER_EMAIL,
+        pass: process.env.NODE_MAILER_PASSWORD,
       },
     });
     let info = await transporter.sendMail({
