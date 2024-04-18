@@ -34,6 +34,8 @@ function DetailPage({ detailModal, setDetailModal, item }: DetailPagePropType) {
       const newBidValue = {
         id: currentBid.id,
         bid: newBidRef.current?.value || currentBid.bid,
+        name: localStorageData?.name,
+        email: localStorageData?.email,
       };
       currentBidRef.current = currentBid;
       setCurrentEnteredBid(newBidValue);

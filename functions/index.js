@@ -120,7 +120,7 @@ app.post('/create-payment-intent', async (req, res) => {
 
 app.post('/send-email', async (req, res) => {
   try {
-    const { item } = req.body;
+    const { expiredItem } = req.body;
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       port: 465,
@@ -132,19 +132,21 @@ app.post('/send-email', async (req, res) => {
     });
     let info = await transporter.sendMail({
       from: '"Locker Unlocked" <lockersunlocked@gmail.com>', // sender address
-      // to: `${item.user.name}`, // list of receivers
-      to: 'naumanahmed254@gmail.com',
+      to: expiredItem.user.email, // list of receivers
       subject: 'Buy your Product', // Subject line
       text: 'Congratulations! Now you can Buy your product', // plain text body
       html: EmailTemplate(
-        item.user.name,
-        'test@gmail.com',
-        'The payment link will go here',
+        expiredItem.user.name,
+        expiredItem.title,
+        expiredItem.fileSrc,
+        expiredItem.currentBid,
+        `https://lockersunlocked.com/`,
       ), // html body
     });
-    res
-      .status(200)
-      .json({ msg: `Message sent successfully ${info.messageId}`, data: item });
+    res.status(200).json({
+      msg: `Message sent successfully ${info.messageId}`,
+      data: expiredItem,
+    });
   } catch (err) {
     console.error('Error:', err);
     res.status(500).send('Internal Server Error');

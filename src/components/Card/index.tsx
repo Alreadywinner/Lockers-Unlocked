@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { TeamsDataType } from 'containers/types';
 import { CardProps } from './types';
 
 const calculateTimeLeft = (endTime: string) => {
@@ -69,9 +70,7 @@ function Card({ item, onClick }: CardProps) {
   }, [endTime]);
 
   const { days, hours, minutes, seconds } = timeLeft;
-
-  // eslint-disable-next-line @typescript-eslint/no-shadow
-  function sendEmails(item) {
+  function sendEmails(expiredItem: TeamsDataType) {
     // Perform backend call to firebase
     // Makeup a post request and send full item to it
     // Email: Item details plus lockers unlocked payment link (www.lockersunlocked.com/paymentlink/userId)
@@ -80,7 +79,6 @@ function Card({ item, onClick }: CardProps) {
     // const payload = {
     //   item, // Full item details
     // };
-
     // Make an API call using fetch
     fetch(
       'https://us-central1-lockers-unlocked.cloudfunctions.net/app/send-email',
@@ -89,7 +87,7 @@ function Card({ item, onClick }: CardProps) {
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ item }),
+        body: JSON.stringify({ expiredItem }),
       },
     )
       .then((response) => {
@@ -98,13 +96,11 @@ function Card({ item, onClick }: CardProps) {
         }
         return response.json();
       })
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .then((data) => {
-        // console.log('Email sent successfully:', data);
+        console.log('Email sent successfully:', data);
       })
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .catch((error) => {
-        // console.error('Error sending email:', error);
+        console.error('Error sending email:', error);
       });
   }
 
