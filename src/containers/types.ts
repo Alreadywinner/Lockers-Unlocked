@@ -5,6 +5,7 @@ export type BidDataType = {
 export type UserDetailsType = {
   name: string;
   fileSrc: string;
+  email: string;
 };
 export interface TeamsDataType {
   currentBid: string;

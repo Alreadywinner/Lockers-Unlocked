@@ -87,6 +87,7 @@ export default function LocalStorageDataProvider({
       return {
         name: userDoc.data().name,
         fileSrc: userDoc.data().fileSrc,
+        email: userDoc.data().email,
       };
     }
 
@@ -94,6 +95,7 @@ export default function LocalStorageDataProvider({
     return {
       name: '',
       fileSrc: '',
+      email: '',
     };
   }
 
