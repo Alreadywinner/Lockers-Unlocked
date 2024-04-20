@@ -118,9 +118,47 @@ app.post('/create-payment-intent', async (req, res) => {
   }
 });
 
+// Fetch users with id matching buyerId
+async function fetchUsersByBuyerId(buyerId) {
+  try {
+    const usersRef = admin.firestore().collection('users');
+    // Query users collection where the ID field matches buyerId
+    const querySnapshot = await usersRef.get();
+    // Array to store matching users
+    const matchingUsers = [];
+
+    // Loop through each document in the query snapshot
+    querySnapshot.forEach((doc) => {
+      // Extract user data
+      if (doc.id === buyerId) {
+        const userData = doc.data();
+        // Add user ID to the userData
+        userData.id = doc.id;
+        // Add user data to the array
+        matchingUsers.push(userData);
+      }
+    });
+    return matchingUsers;
+  } catch (error) {
+    console.error('Error fetching users by buyerId:', error);
+    throw error; // Rethrow the error for handling elsewhere
+  }
+}
+
 app.post('/send-email', async (req, res) => {
   try {
     const { expiredItem } = req.body;
+    const buyerId = expiredItem.bids[0].id;
+    let fetchedUser = null;
+    fetchUsersByBuyerId(buyerId)
+      .then((matchingUsers) => {
+        if (matchingUsers.length > 0) {
+          fetchedUser = matchingUsers[0];
+        }
+      })
+      .catch((error) => {
+        console.error('Error fetching users by buyerId:', error);
+      });
     const transporter = nodemailer.createTransport({
       host: 'smtp.gmail.com',
       port: 465,
@@ -140,7 +178,7 @@ app.post('/send-email', async (req, res) => {
         expiredItem.title,
         expiredItem.fileSrc,
         expiredItem.currentBid,
-        `https://lockersunlocked.com/`,
+        `https://lockersunlocked.com/payment`,
       ), // html body
     });
     res.status(200).json({

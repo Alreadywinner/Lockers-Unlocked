@@ -1,4 +1,10 @@
-const EmailTemplate = (buyerName, itemName, itemImgSrc, winningBid, paymentLinkUrl) => {
+const EmailTemplate = (
+  buyerName,
+  itemName,
+  itemImgSrc,
+  winningBid,
+  paymentLinkUrl,
+) => {
   return `<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
     <meta http-equiv="Content-Type" content="text/html charset=UTF-8" />
     <html lang="en">
@@ -57,7 +63,7 @@ const EmailTemplate = (buyerName, itemName, itemImgSrc, winningBid, paymentLinkU
           }
       
           .payment-button {
-            background-color: #F77171; /* Red */
+            background-color: #f77171; /* Red */
             border: none;
             color: white;
             padding: 10px 20px;
@@ -69,9 +75,15 @@ const EmailTemplate = (buyerName, itemName, itemImgSrc, winningBid, paymentLinkU
             cursor: pointer;
             border-radius: 5px;
           }
-      
+          
           .payment-button:hover {
-            background-color: #EF4444; /* Red hover */
+            background-color: #ef4444; /* Red hover */
+            color: white;
+          }
+          
+          .payment-button:link,
+          .payment-button:visited {
+            color: white; /* Set default text color */
           }
         </style>
       </head>
