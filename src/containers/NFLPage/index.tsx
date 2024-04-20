@@ -28,11 +28,15 @@ function NFLPage() {
     }
   };
   const handleAddNewClick = (): void => {
-    if (localStorageData && localStorageData.id !== '') {
+    if (
+      localStorageData &&
+      localStorageData.id !== '' &&
+      localStorageData.userType === 'seller'
+    ) {
       navigate('/add-new');
     } else {
       setToast({
-        text: 'Please Login to continue',
+        text: 'Please Login to continue or register yourself as seller',
         visible: true,
       });
     }

@@ -96,13 +96,11 @@ function Card({ item, onClick }: CardProps) {
         }
         return response.json();
       })
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .then((data) => {
-        // console.log('Email sent successfully:', data);
+        console.log('Email sent successfully:', data);
       })
-      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .catch((error) => {
-        // console.error('Error sending email:', error);
+        console.error('Error sending email:', error);
       });
   }
 

@@ -29,6 +29,13 @@ function DetailPage({ detailModal, setDetailModal, item }: DetailPagePropType) {
     item?.user_id === localStorageData.id;
 
   const onBidClick = () => {
+    if (localStorageData?.userType === 'seller') {
+      setShowToast({
+        text: 'Please register yourself as buyer to bid',
+        visible: true,
+      });
+      return;
+    }
     const currentBid = item?.bids.slice(-1)[0];
     if (currentBid) {
       const newBidValue = {
@@ -77,6 +84,13 @@ function DetailPage({ detailModal, setDetailModal, item }: DetailPagePropType) {
     }
   };
   const onWithdrawClick = async () => {
+    if (localStorageData?.userType === 'seller') {
+      setShowToast({
+        text: 'Please register yourself as buyer to bid',
+        visible: true,
+      });
+      return;
+    }
     setWithdrawLoading(true);
     try {
       if (item?.bids && item.bids.length > 1) {

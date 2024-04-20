@@ -45,6 +45,7 @@ Template.args = {
     user: {
       name: 'Uploader',
       fileSrc: '',
+      email: 'test@gmail.com',
     },
     endDate: '2023-12-24',
     endTime: '2023-12-27T00:00:00.000Z',
